@@ -11,6 +11,8 @@ package daw;
 public class DawFoodDanielVictor {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        //Probando si funciona la clase TPV, SE PUEDE BORRAR
+        TPV estepona = new TPV("Estepona");
+        System.out.println(estepona);
     }
 }
