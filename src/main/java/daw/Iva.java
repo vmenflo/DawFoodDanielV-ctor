@@ -13,7 +13,7 @@ public enum Iva {
     IVA_ALCOHOL(0.21),
     IVA_COMIDA(0.1), 
     IVA_POSTRES(0.1), 
-    IVA_RESTOBEBIDA0(0.1);
+    IVA_RESTOBEBIDAS(0.1);
     
     //Creación de atributo encapsulado
     private double cantidadIva;
