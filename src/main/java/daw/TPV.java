@@ -163,43 +163,22 @@ public class TPV {
         }
     }
     
-    //METODOS PARA ARRANCAR EL PROGRAMA
-    public static ArrayList<TPV> cargaDatos(){
-        TPV estepona = new TPV("Estepona");
-        TPV sanPedro = new TPV("San Pedro");
-        TPV laLinea = new TPV("La línea");
-        ArrayList<TPV> listaTpv = new ArrayList<>();
-        listaTpv.add(estepona);
-        listaTpv.add(sanPedro);
-        listaTpv.add(laLinea);
-        return listaTpv;
-    }
-    //Método para preguntar que TPV quiere acceder
-    public static String preguntarTpv() {
-        
-       return JOptionPane.showInputDialog("¿Cual es el ID de tu TPV?");
-    }
-    //Metodo contraseña
-    public static String preguntarContraseñaTpv() {
-        return JOptionPane.showInputDialog("¿Cual es la contraseña?");
-    }
-    
     //PROGRAMA PRINCIPAL
     public static void encender(){
-        ArrayList <TPV>tpvs = cargaDatos();
+        ArrayList <TPV>tpvs = MetodosTPV.cargaDatos();
         System.out.println(tpvs.toString());
         
         //Bucle para controlar el acceso a la TPV
         boolean validoTPV = false;
         do{
-            String elegirTPV = preguntarTpv();
-            String password = preguntarContraseñaTpv();
-            if(password.equals(tpvs.get(1).getContraseña())){
-                validoTPV=true;
-            }
+            int elegirTPV = MetodosTPV.preguntarTpv();
+            String password = MetodosTPV.preguntarContraseñaTpv();
+            if(password.equals(tpvs.get(elegirTPV).getContraseña())){
+               validoTPV=true;
+           }
             
             
-        }while(false);
+        }while(!validoTPV);
         System.out.println("Has entrado");
     }
 }
