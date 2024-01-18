@@ -176,9 +176,17 @@ public class TPV {
             if(password.equals(tpvs.get(elegirTPV).getContraseña())){
                validoTPV=true;
            }
-            
-            
         }while(!validoTPV);
-        System.out.println("Has entrado");
+        //LLamo al método para preguntar en que modo quiere iniciar el programa
+        int opcion = MetodosTPV.seleccionarModo();
+        switch(opcion){
+            case 0->{
+                System.out.println("Opcion modo punto de venta");
+            }
+            case 1->{
+                System.out.println("Modo Administrador");
+            }
+        }
+        
     }
 }

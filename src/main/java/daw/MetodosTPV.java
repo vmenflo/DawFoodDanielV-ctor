@@ -24,7 +24,7 @@ public class MetodosTPV {
         listaTpv.add(laLinea);
         return listaTpv;
     }
-
+    
     //Método para preguntar que TPV quiere acceder
     public static int preguntarTpv() {
 
@@ -49,5 +49,23 @@ public class MetodosTPV {
     public static String preguntarContraseñaTpv() {
         //Pregunta la contraseña
         return JOptionPane.showInputDialog("¿Cual es la contraseña?");
+    }
+    
+    //Preguntar en que modo quiere entrar el usuario
+    
+    public static int seleccionarModo(){
+        String[] modo ={"Modo punto de venta", "Modo Administrador"};
+        
+        int opcion =JOptionPane.showOptionDialog(
+                null,
+                "¿Cómo quieres accede al programa?",
+                "Elige modo",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                modo,
+                modo[0]);
+        return opcion;
+    
     }
 }
