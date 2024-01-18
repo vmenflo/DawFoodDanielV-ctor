@@ -5,37 +5,37 @@
 package daw.productos;
 
 import daw.Iva;
-import daw.SubCategoriaComida;
+import daw.SubCategoriaBebida;
 import java.util.Objects;
 
 /**
  *
  * @author daniel
  */
-public class Comida {
-    //Creamos atributos encapsulados
+public class Bebida {
+    //Creación de atributos encapsulados
     private int id;
     private String descripcion;
-    private final SubCategoriaComida subComida;
+    private final SubCategoriaBebida subBebida;
     private double precio;
     private final Iva iva;
     private int stock = 0;
     
     //Creamos constructor parametrizado
-    public Comida(int id, String descripcion, SubCategoriaComida subComida, double precio, Iva iva, int stock) {
+    public Bebida(int id, String descripcion, SubCategoriaBebida subBebida, double precio, Iva iva, int stock) {
         this.id = id;
         this.descripcion = descripcion;
-        this.subComida = subComida;
+        this.subBebida = subBebida;
         this.precio = precio;
         this.iva = iva;
         this.stock = stock;
     }
     
-    //Creamos un constructor copia
-    public Comida(Comida origen){
+    //Creamos constructor copia
+    public Bebida(Bebida origen){
         this.id = origen.id;
         this.descripcion = origen.descripcion;
-        this.subComida = origen.subComida;
+        this.subBebida = origen.subBebida;
         this.precio = origen.precio;
         this.iva = origen.iva;
         //En el atributo encapsulado stock le sumamos uno al stock origen
@@ -43,13 +43,13 @@ public class Comida {
         this.stock = origen.stock+1;
     }
     
-    //Añadimos getter y setters
+    //Insertamos los getters y los setters
+
     public int getId() {
         return id;
     }
 
-    //No añadiremos el set del id ya que ninguno de los usuario podrá modificar
-    //este dato una vez creado
+    //Eliminamos el set del id porque nadie puede cambiar el id
 
     public String getDescripcion() {
         return descripcion;
@@ -79,10 +79,10 @@ public class Comida {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Comida{");
+        sb.append("Bebida{");
         sb.append("id=").append(id);
         sb.append(", descripcion=").append(descripcion);
-        sb.append(", subComida=").append(subComida);
+        sb.append(", subBebida=").append(subBebida);
         sb.append(", precio=").append(precio);
         sb.append(", iva=").append(iva);
         sb.append(", stock=").append(stock);
@@ -90,20 +90,20 @@ public class Comida {
         return sb.toString();
     }
     
-    //Insertamos el hashcode
+    //insertamos el hashcode
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 73 * hash + this.id;
-        hash = 73 * hash + Objects.hashCode(this.descripcion);
-        hash = 73 * hash + Objects.hashCode(this.subComida);
-        hash = 73 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
-        hash = 73 * hash + Objects.hashCode(this.iva);
-        hash = 73 * hash + this.stock;
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.descripcion);
+        hash = 53 * hash + Objects.hashCode(this.subBebida);
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.iva);
+        hash = 53 * hash + this.stock;
         return hash;
     }
 
-    //Insertamos el equals
+    //insertamos el equals
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -115,7 +115,7 @@ public class Comida {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Comida other = (Comida) obj;
+        final Bebida other = (Bebida) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -128,7 +128,7 @@ public class Comida {
         if (!Objects.equals(this.descripcion, other.descripcion)) {
             return false;
         }
-        if (this.subComida != other.subComida) {
+        if (this.subBebida != other.subBebida) {
             return false;
         }
         return this.iva == other.iva;
