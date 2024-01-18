@@ -3,9 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package daw.productos;
-
 import daw.Iva;
-import daw.SubCategoriaComida;
 import java.util.Objects;
 
 /**
