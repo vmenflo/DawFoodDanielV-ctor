@@ -125,21 +125,22 @@ public class TPV {
         StringBuilder contraseña = new StringBuilder();
 
         //Añadimos 2 de cada tipo de String
-        contraseña.append(generarCharAleatorio(LETRAS_MINUSCULAS, r));
-        contraseña.append(generarCharAleatorio(LETRAS_MAYUSCULAS, r));
-        contraseña.append(generarCharAleatorio(NUMEROS, r));
-        contraseña.append(generarCharAleatorio(CARACTERES_ESPECIALES, r));
-        contraseña.append(generarCharAleatorio(LETRAS_MINUSCULAS, r));
-        contraseña.append(generarCharAleatorio(LETRAS_MAYUSCULAS, r));
-        contraseña.append(generarCharAleatorio(NUMEROS, r));
-        contraseña.append(generarCharAleatorio(CARACTERES_ESPECIALES, r));
+        contraseña.append(generarCharAleatorio(LETRAS_MINUSCULAS));
+        contraseña.append(generarCharAleatorio(LETRAS_MAYUSCULAS));
+        contraseña.append(generarCharAleatorio(NUMEROS));
+        contraseña.append(generarCharAleatorio(CARACTERES_ESPECIALES));
+        contraseña.append(generarCharAleatorio(LETRAS_MINUSCULAS
+                +LETRAS_MAYUSCULAS+CARACTERES_ESPECIALES+NUMEROS));
+        contraseña.append(generarCharAleatorio(LETRAS_MINUSCULAS
+                +LETRAS_MAYUSCULAS+CARACTERES_ESPECIALES+NUMEROS));
+        
         //Llamamos al metodo para remover la contraseña
         revolver(contraseña);
         return contraseña.toString();
     }
 
     //Metodo para introducir char en el String
-    public char generarCharAleatorio(String letras, Random r) {
+    public char generarCharAleatorio(String letras) {
         Random v = new Random();
         int indice = v.nextInt(letras.length());
         return letras.charAt(indice);
