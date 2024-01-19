@@ -8,18 +8,17 @@ package daw.productos;
  *
  * @author daniel
  */
-public enum SubCategoria {
-    AGUA("Agua"), 
-    CERVEZA("Cerveza"), 
-    ZUMONARANJA("Zumo de naranja"),
+public enum SubCategoriaComida {
     POLLO("Pollo"), 
     TERNERA("Ternera"), 
     PESCADO("Pescado");
     
     private String subcategoria;
-    
+
     //Creación de constructor subcategoría
-    private SubCategoria(String subcategoria) {
+    private SubCategoriaComida(String subcategoria) {
         this.subcategoria = subcategoria;
     }
+    
+    
 }
