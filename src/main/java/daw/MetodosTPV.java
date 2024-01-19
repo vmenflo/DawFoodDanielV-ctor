@@ -48,7 +48,8 @@ public class MetodosTPV {
     //Metodo contraseña
     public static String preguntarContraseñaTpv() {
         //Pregunta la contraseña
-        return JOptionPane.showInputDialog("¿Cual es la contraseña?");
+        return JOptionPane.showInputDialog("Por favor, "
+                + "introduzca la contraseña");
     }
     
     //Preguntar en que modo quiere entrar el usuario
@@ -58,8 +59,8 @@ public class MetodosTPV {
         
         int opcion =JOptionPane.showOptionDialog(
                 null,
-                "¿Cómo quieres accede al programa?",
-                "Elige modo",
+                "Bienvenido ¿Cómo quieres accede al programa?",
+                "SELECCION MODO",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
@@ -67,5 +68,9 @@ public class MetodosTPV {
                 modo[0]);
         return opcion;
     
+    }
+    
+    public static void menuUsuario(){
+        
     }
 }

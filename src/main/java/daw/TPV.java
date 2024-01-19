@@ -4,6 +4,7 @@
  */
 package daw;
 
+import static daw.MetodosTPV.cargaDatos;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class TPV {
     // generar contraseña
     private static final String LETRAS_MINUSCULAS = "abcdefghijklmnopqrstuvwkyz";
     private static final String LETRAS_MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWKYZ";
-    private static final String NUMEROS ="0123456789";
-    private static final String CARACTERES_ESPECIALES ="#$%&()*+,-.:;<=>@";
+    private static final String NUMEROS = "0123456789";
+    private static final String CARACTERES_ESPECIALES = "#$%&()*+,-.:;<=>@";
 
     //Constructores
     public TPV(String ubicacion) {
@@ -71,6 +72,7 @@ public class TPV {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+
     //TO STRING
     @Override
     public String toString() {
@@ -83,8 +85,9 @@ public class TPV {
         sb.append('}');
         return sb.toString();
     }
+
     //EQUALS Y HASHCODE
-    @Override    
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + Objects.hashCode(this.identificador);
@@ -93,7 +96,8 @@ public class TPV {
         hash = 53 * hash + Objects.hashCode(this.contraseña);
         return hash;
     }
-    @Override    
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -131,10 +135,10 @@ public class TPV {
         contraseña.append(generarCharAleatorio(NUMEROS));
         contraseña.append(generarCharAleatorio(CARACTERES_ESPECIALES));
         contraseña.append(generarCharAleatorio(LETRAS_MINUSCULAS
-                +LETRAS_MAYUSCULAS+CARACTERES_ESPECIALES+NUMEROS));
+                + LETRAS_MAYUSCULAS + CARACTERES_ESPECIALES + NUMEROS));
         contraseña.append(generarCharAleatorio(LETRAS_MINUSCULAS
-                +LETRAS_MAYUSCULAS+CARACTERES_ESPECIALES+NUMEROS));
-        
+                + LETRAS_MAYUSCULAS + CARACTERES_ESPECIALES + NUMEROS));
+
         //Llamamos al metodo para remover la contraseña
         revolver(contraseña);
         return contraseña.toString();
@@ -162,31 +166,56 @@ public class TPV {
             contraseña.setCharAt(i, temporal);
         }
     }
-    
+
     //PROGRAMA PRINCIPAL
-    public static void encender(){
-        ArrayList <TPV>tpvs = MetodosTPV.cargaDatos();
+    public static void encender() {
+        ArrayList<TPV> tpvs = MetodosTPV.cargaDatos();
         System.out.println(tpvs.toString());
+        boolean terminar=false;
+        do{//Bucle general del programa
         
-        //Bucle para controlar el acceso a la TPV
-        boolean validoTPV = false;
-        do{
-            int elegirTPV = MetodosTPV.preguntarTpv();
-            String password = MetodosTPV.preguntarContraseñaTpv();
-            if(password.equals(tpvs.get(elegirTPV).getContraseña())){
-               validoTPV=true;
-           }
-        }while(!validoTPV);
         //LLamo al método para preguntar en que modo quiere iniciar el programa
         int opcion = MetodosTPV.seleccionarModo();
-        switch(opcion){
-            case 0->{
-                System.out.println("Opcion modo punto de venta");
+        switch (opcion) {
+            case 0 -> { //Modo Usuario
+                int eleccion = 0;
+                boolean salir = false;
+                do{
+                    //hacer metodo para mostrar menu desplegable
+                switch (eleccion) {
+                    case 1 -> { //Opcion Comidas
+                        System.out.println("Estas en comida");
+                    }
+                    case 2 -> { //Opcion Bebidas
+                        System.out.println("Estas en bebidas");
+                    }
+                    case 3 -> { //Opcion Postres
+                        System.out.println("Estas en postres");
+                    }
+                    case 4 -> { //Carrito
+                        System.out.println("Estas en carrito");
+                    }
+                    case 5 -> { //Salir
+                        salir=true;
+                    }
+                }
+                }while(!salir);
+
             }
-            case 1->{
-                System.out.println("Modo Administrador");
+            case 1 -> {//Modo Administrador
+
+                //Bucle para controlar el acceso modo administrador
+                boolean validoTPV = false;
+                do {
+                    int elegirTPV = MetodosTPV.preguntarTpv();
+                    String password = MetodosTPV.preguntarContraseñaTpv();
+                    if (password.equals(tpvs.get(elegirTPV).getContraseña())) {
+                        validoTPV = true;
+                    }
+                } while (!validoTPV);
             }
         }
-        
+     
+    }while(!terminar); //Bucle para no salir del programa
     }
 }
