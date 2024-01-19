@@ -3,51 +3,63 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package daw.productos;
+
 import daw.Iva;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  *
- * @author daniel
+ * @author danielnavasborjas
  */
-public class Bebida {
-    //Creación de atributos encapsulados
+public class Productos {
+
+    //Creamos atributos encapsulados
     private int id;
     private String descripcion;
-    private final SubCategoriaBebida subBebida;
+    private Categorias categoria;
+    private final SubCategoria subcategoria;
     private double precio;
     private final Iva iva;
     private int stock = 0;
-    
+
     //Creamos constructor parametrizado
-    public Bebida(int id, String descripcion, SubCategoriaBebida subBebida, double precio, Iva iva, int stock) {
+    public Productos(int id, String descripcion, Categorias categoria, 
+            SubCategoria subcategoria, double precio, Iva iva, int stock) {
         this.id = id;
         this.descripcion = descripcion;
-        this.subBebida = subBebida;
+        this.categoria = categoria;
+        this.subcategoria = subcategoria;
         this.precio = precio;
         this.iva = iva;
         this.stock = stock;
     }
     
-    //Creamos constructor copia
-    public Bebida(Bebida origen){
+    //Creamos constructor copia y hacemos que si se hace una copia el stock vaya
+    //en incremento
+
+    public Productos(Productos origen) {
         this.id = origen.id;
         this.descripcion = origen.descripcion;
-        this.subBebida = origen.subBebida;
+        this.categoria = origen.categoria;
+        this.subcategoria = origen.subcategoria;
         this.precio = origen.precio;
         this.iva = origen.iva;
-        //En el atributo encapsulado stock le sumamos uno al stock origen
-        //porque esto significaría de que estamos añadiendo un producto más
-        this.stock = origen.stock+1;
+        //Hacemos que el stock se sume uno por cada producto que copiemos 
+        //(ya que estamos añadiendo realmente uno por cada copia)
+        this.stock = origen.stock++;
     }
     
-    //Insertamos los getters y los setters
+    //Creamos getters y setters
 
     public int getId() {
         return id;
     }
 
-    //Eliminamos el set del id porque nadie puede cambiar el id
+    //Quitamos el setter del id ya que el administrador no va a poder modificar
+    //el id
 
     public String getDescripcion() {
         return descripcion;
@@ -55,6 +67,14 @@ public class Bebida {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Categorias getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categorias categoria) {
+        this.categoria = categoria;
     }
 
     public double getPrecio() {
@@ -73,14 +93,15 @@ public class Bebida {
         this.stock = stock;
     }
     
-    //Insertamos el toString
+    //Insertamos el toString()
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Bebida{");
+        sb.append("Productos{");
         sb.append("id=").append(id);
         sb.append(", descripcion=").append(descripcion);
-        sb.append(", subBebida=").append(subBebida);
+        sb.append(", categoria=").append(categoria);
+        sb.append(", subcategoria=").append(subcategoria);
         sb.append(", precio=").append(precio);
         sb.append(", iva=").append(iva);
         sb.append(", stock=").append(stock);
@@ -88,20 +109,21 @@ public class Bebida {
         return sb.toString();
     }
     
-    //insertamos el hashcode
+    //Insertamos el hashcode
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.descripcion);
-        hash = 53 * hash + Objects.hashCode(this.subBebida);
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
-        hash = 53 * hash + Objects.hashCode(this.iva);
-        hash = 53 * hash + this.stock;
+        int hash = 3;
+        hash = 47 * hash + this.id;
+        hash = 47 * hash + Objects.hashCode(this.descripcion);
+        hash = 47 * hash + Objects.hashCode(this.categoria);
+        hash = 47 * hash + Objects.hashCode(this.subcategoria);
+        hash = 47 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
+        hash = 47 * hash + Objects.hashCode(this.iva);
+        hash = 47 * hash + this.stock;
         return hash;
     }
 
-    //insertamos el equals
+    //Insertamos el equals
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -113,7 +135,7 @@ public class Bebida {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Bebida other = (Bebida) obj;
+        final Productos other = (Productos) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -126,12 +148,19 @@ public class Bebida {
         if (!Objects.equals(this.descripcion, other.descripcion)) {
             return false;
         }
-        if (this.subBebida != other.subBebida) {
+        if (this.categoria != other.categoria) {
+            return false;
+        }
+        if (this.subcategoria != other.subcategoria) {
             return false;
         }
         return this.iva == other.iva;
     }
     
-    
-    
+    public static List<Productos> filtradoPorCategoria(
+            ArrayList<Productos> listaDeProductos, Categorias categoriaABuscar){
+        return listaDeProductos.stream()
+                .filter(Productos->Productos.getCategoria() == categoriaABuscar)
+                .collect(Collectors.toList());
+    }
 }
