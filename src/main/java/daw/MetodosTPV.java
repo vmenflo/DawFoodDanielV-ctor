@@ -24,7 +24,7 @@ public class MetodosTPV {
         listaTpv.add(laLinea);
         return listaTpv;
     }
-    
+
     //Método para preguntar que TPV quiere acceder
     public static int preguntarTpv() {
 
@@ -32,7 +32,7 @@ public class MetodosTPV {
         //Con este String obtengo el nombre de los TPVS que hemos cargado antes
         String[] elegir = {tpvs.get(0).getUbicacion(),
             tpvs.get(1).getUbicacion(), tpvs.get(2).getUbicacion()};
-        int opcion =JOptionPane.showOptionDialog(
+        int opcion = JOptionPane.showOptionDialog(
                 null,
                 "¿Qué TPV quieres usar?",
                 "Elige TPV",
@@ -51,13 +51,12 @@ public class MetodosTPV {
         return JOptionPane.showInputDialog("Por favor, "
                 + "introduzca la contraseña");
     }
-    
+
     //Preguntar en que modo quiere entrar el usuario
-    
-    public static int seleccionarModo(){
-        String[] modo ={"Modo punto de venta", "Modo Administrador"};
-        
-        int opcion =JOptionPane.showOptionDialog(
+    public static int seleccionarModo() {
+        String[] modo = {"Modo punto de venta", "Modo Administrador", "Salir"};
+
+        int opcion = JOptionPane.showOptionDialog(
                 null,
                 "Bienvenido ¿Cómo quieres accede al programa?",
                 "SELECCION MODO",
@@ -67,10 +66,47 @@ public class MetodosTPV {
                 modo,
                 modo[0]);
         return opcion;
-    
+
     }
-    
-    public static void menuUsuario(){
-        
+
+    //MÉTODOS DE NAVEGABILIDAD
+    //Menu Usuario
+    //Método para elegir opciones del menu del usuario
+    public static String seleccionMenuUsuario() {
+        //Array de las opciones disponibles
+        String[] opciones = {"Comida", "Bebida", "Postre", "Carrito", "Salir"};
+        //Mostrar el mensaje con las opciones
+        String eleccion = (String) JOptionPane.showInputDialog(null,
+                "Por favor, elija una opción para ver", "Menu Usuario",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+        return eleccion;
+    }
+
+    //Menu Administrador
+    //Metodo para navegar por el menu Administrador
+    public static String seleccionMenuAdministrador() {
+        //Array de las opciones disponibles
+        String[] opciones = {"Modificar datos productos", "Crear producto",
+            "Borrar producto", "Consultar ventas", "Salir"};
+        //Mostrar el mensaje con las opciones
+        String eleccion = (String) JOptionPane.showInputDialog(null,
+                "¿Qué deseas hacer?", "Menu Mantenimiento",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+        return eleccion;
+    }
+
+    //Metodo para navegar por el menu consultar ventas
+    public static String seleccionConsultarVentas() {
+        //Array de las opciones disponibles
+        String[] opciones = {"Día concreto", "Fecha concreta",
+            "Todas las ventas", "Atrás"};
+        //Mostrar el mensaje con las opciones
+        String eleccion = (String) JOptionPane.showInputDialog(null,
+                "¿Cómo deseas realizar la búsqueda?", "Consultar Ventas",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+        return eleccion;
     }
 }

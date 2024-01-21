@@ -171,51 +171,95 @@ public class TPV {
     public static void encender() {
         ArrayList<TPV> tpvs = MetodosTPV.cargaDatos();
         System.out.println(tpvs.toString());
-        boolean terminar=false;
-        do{//Bucle general del programa
-        
-        //LLamo al método para preguntar en que modo quiere iniciar el programa
-        int opcion = MetodosTPV.seleccionarModo();
-        switch (opcion) {
-            case 0 -> { //Modo Usuario
-                int eleccion = 0;
-                boolean salir = false;
-                do{
-                    //hacer metodo para mostrar menu desplegable
-                switch (eleccion) {
-                    case 1 -> { //Opcion Comidas
-                        System.out.println("Estas en comida");
-                    }
-                    case 2 -> { //Opcion Bebidas
-                        System.out.println("Estas en bebidas");
-                    }
-                    case 3 -> { //Opcion Postres
-                        System.out.println("Estas en postres");
-                    }
-                    case 4 -> { //Carrito
-                        System.out.println("Estas en carrito");
-                    }
-                    case 5 -> { //Salir
-                        salir=true;
-                    }
+        boolean terminar = false;
+        do {//Bucle general del programa
+
+            //LLamo al método para preguntar en que modo quiere iniciar el programa
+            int opcion = MetodosTPV.seleccionarModo();
+            switch (opcion) {
+                case 0 -> { //Modo Usuario
+                    //Controlador bucle menu Usuario
+                    boolean salir = false;
+                    do {
+                        String eleccion = MetodosTPV.seleccionMenuUsuario();
+                        switch (eleccion) {
+                            case "Comida" -> { //Opcion Comidas
+                                System.out.println("Estas en comida");
+                            }
+                            case "Bebida" -> { //Opcion Bebidas
+                                System.out.println("Estas en bebidas");
+                            }
+                            case "Postre" -> { //Opcion Postres
+                                System.out.println("Estas en postres");
+                            }
+                            case "Carrito" -> { //Carrito
+                                System.out.println("Estas en carrito");
+                            }
+                            case "Salir" -> { //Salir
+                                salir = true;
+                            }
+                        }
+                    } while (!salir);
+
                 }
-                }while(!salir);
+                case 1 -> {//Modo Administrador
 
-            }
-            case 1 -> {//Modo Administrador
+                    //Bucle para controlar el acceso modo administrador
+                    boolean validoTPV = false;
+                    do {
+                        int elegirTPV = MetodosTPV.preguntarTpv();
+                        String password = MetodosTPV.preguntarContraseñaTpv();
+                        if (password.equals(tpvs.get(elegirTPV).getContraseña())) {
+                            validoTPV = true;
+                        }
+                    } while (!validoTPV);
+                    boolean salir = false;
+                    do {
+                        String eleccion = MetodosTPV.seleccionMenuAdministrador();
+                        switch (eleccion) {
+                            case "Modificar datos productos" -> {
 
-                //Bucle para controlar el acceso modo administrador
-                boolean validoTPV = false;
-                do {
-                    int elegirTPV = MetodosTPV.preguntarTpv();
-                    String password = MetodosTPV.preguntarContraseñaTpv();
-                    if (password.equals(tpvs.get(elegirTPV).getContraseña())) {
-                        validoTPV = true;
-                    }
-                } while (!validoTPV);
+                            }
+                            case "Crear producto" -> {
+
+                            }
+                            case "Borrar producto" -> {
+
+                            }
+                            case "Consultar ventas" -> {
+                                boolean atras = false;
+                                do {//Bucle para controlar el menu consultar fecha
+                                    String busqueda = MetodosTPV.seleccionConsultarVentas();
+                                    switch (busqueda) {
+                                        case "Día concreto" -> {//Por día
+
+                                        }
+                                        case "Fecha concreto" -> {//Enrte fechas
+
+                                        }
+                                        case "Todas las ventas" -> {//Sin filtro
+
+                                        }
+                                        case "Atrás" -> {
+                                            atras = true;
+                                        }
+                                    }
+                                } while (!atras);
+
+                            }
+                            case "Salir" -> { //Salir del menu Administrador
+                                salir = true;
+                            }
+                        }
+                    } while (!salir);
+                }
+                case 2 -> {// Opcion salir del programa
+                    terminar = true;
+                }
             }
-        }
-     
-    }while(!terminar); //Bucle para no salir del programa
+
+        } while (!terminar); //Bucle para no salir del programa
+        JOptionPane.showMessageDialog(null,
+                "Apagando el sistema.\nHasta pronto!");
     }
 }
