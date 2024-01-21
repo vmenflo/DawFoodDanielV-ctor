@@ -12,11 +12,12 @@ import javax.swing.JOptionPane;
  * @author danielnavasborjas
  */
 public class ListasProductos {
+
     //Creamos los atributos encapsulados de tipo ArrayList
     private ArrayList<Comida> listaComida;
     private ArrayList<Bebida> listaBebida;
     private ArrayList<Postres> listaPostres;
-    
+
     //Creamos constructor por defecto
     public ListasProductos() {
         this.listaComida = new ArrayList<>();
@@ -48,7 +49,7 @@ public class ListasProductos {
     public void setListaPostres(ArrayList<Postres> listaPostres) {
         this.listaPostres = listaPostres;
     }
-    
+
     //Insertamos el método toString
     @Override
     public String toString() {
@@ -60,23 +61,127 @@ public class ListasProductos {
         sb.append('}');
         return sb.toString();
     }
-    
+
     //Por ahora no metemos hashcode ni equals, porque no necesitamos comparar
     //estas listas, comentar con victor y llegar a un acuerdo 
-    
     //Insertamos los métodos que vamos a usar sobre estas listas para poder 
     //trabajar con ellas
-    
     //Hacemos 3 métodos para poder añadir productos a cada una de las lista:
-    public void añadirUnElemento(Comida comidaAGuardar){
+    public void añadirUnElemento(Comida comidaAGuardar) {
         listaComida.add(comidaAGuardar);
     }
-    
-    public void añadirUnElemento(Bebida bebidaAGuardar){
+
+    public void añadirUnElemento(Bebida bebidaAGuardar) {
         listaBebida.add(bebidaAGuardar);
     }
-    
-    public void añadirUnElemento(Postres postresAGuardar){
+
+    public void añadirUnElemento(Postres postresAGuardar) {
         listaPostres.add(postresAGuardar);
+    }
+
+    //Método para que elija que comida quiere modificar
+    public Comida elegirComida() {
+        //Convertimos la lista en un array y lo guardamos en una variable de
+        //tipo object
+        Object[] opciones = listaComida.toArray();
+
+        //Mostramos el cuadro de diálogo para que el usurio elija que elemento
+        //de la lista quiere modificar
+        Object seleccion = JOptionPane.showInputDialog(null, "Selecciona una comida a modificar:",
+                "Selección de comida", JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+
+        //Verificar si el usuario seleccionó algo o no y devolver el elemento seleccionado
+        if (seleccion != null) {
+            //Hacemos un casting para devolver un objeto de Comida
+            return (Comida) seleccion;
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningún elemento",
+                    "Ninguna Selección", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+    }
+
+    //Método para que elija que bebida quiere modificar
+    public Bebida elegirBebida() {
+        //Convertimos la lista en un array y lo guardamos en una variable de
+        //tipo object
+        Object[] opciones = listaBebida.toArray();
+
+        //Mostramos el cuadro de diálogo para que el usurio elija que elemento
+        //de la lista quiere modificar
+        Object seleccion = JOptionPane.showInputDialog(null, "Selecciona una bebida a modificar:",
+                "Selección de bebida", JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+
+        //Verificar si el usuario seleccionó algo o no y devolver el elemento seleccionado
+        if (seleccion != null) {
+            //Hacemos un casting para devolver un objeto de Bebida
+            return (Bebida) seleccion;
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningún elemento",
+                    "Ninguna Selección", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+    }
+
+    //Método para que elija que postre quiere modificar
+    public Postres elegirPostres() {
+        //Convertimos la lista en un array y lo guardamos en una variable de
+        //tipo object
+        Object[] opciones = listaBebida.toArray();
+
+        //Mostramos el cuadro de diálogo para que el usurio elija que elemento
+        //de la lista quiere modificar
+        Object seleccion = JOptionPane.showInputDialog(null,
+                "Selecciona un postre a modificar:",
+                "Selección de postres",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+
+        //Verificar si el usuario seleccionó algo o no y devolver el elemento seleccionado
+        if (seleccion != null) {
+            //Hacemos un casting para devolver un objeto de Postres
+            return (Postres) seleccion;
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningún elemento",
+                    "Ninguna Selección", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+    }
+
+    //Método para modificar una comida en concreto
+    public void editarComida(Comida comidaAModificar, String queCambiar) {
+        switch (queCambiar) {
+            case "Descripción" -> {
+                String descripcionNueva = JOptionPane.showInputDialog(
+                        "Introduce la nueva descripció");
+                comidaAModificar.setDescripcion(descripcionNueva);
+            }
+            case "Precio" -> {
+                double precioNuevo = 0;
+                try {
+                    precioNuevo = Double.parseDouble(JOptionPane.showInputDialog(
+                            "Introduce el nuevo precio"));
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debes Introducir el precio con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+                }
+
+                comidaAModificar.setPrecio(precioNuevo);
+            }
+            case "stock" -> {
+
+                int stockNuevo = 0;
+                try {
+                    stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
+                            "Introduce el nuevo stock"));
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debes Introducir el stock con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+                }
+                comidaAModificar.setStock(stockNuevo);
+            }
+        }
     }
 }
