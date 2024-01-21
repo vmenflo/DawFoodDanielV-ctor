@@ -27,18 +27,7 @@ public class Postres {
         this.iva = iva;
         this.stock = stock;
     }
-    
-    //Creamos constructor copia
-    public Postres(Postres origen){
-        this.id = origen.id;
-        this.descripcion = origen.descripcion;
-        this.precio = origen.precio;
-        this.iva = origen.iva;
-        //En el atributo encapsulado stock le sumamos uno al stock origen
-        //porque esto significaría de que estamos añadiendo un producto más
-        this.stock = origen.stock+1;
-    }
-    
+        
     //Insertamos los getter y los setters
     public int getId() {
         return id;
