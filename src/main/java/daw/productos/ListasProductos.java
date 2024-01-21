@@ -62,4 +62,20 @@ public class ListasProductos {
     
     //Por ahora no metemos hashcode ni equals, porque no necesitamos comparar
     //estas listas, comentar con victor y llegar a un acuerdo 
+    
+    //Insertamos los métodos que vamos a usar sobre estas listas para poder 
+    //trabajar con ellas
+    
+    //Hacemos 3 métodos para poder añadir productos a cada una de las lista:
+    public void añadirUnElemento(Comida comidaAGuardar){
+        listaComida.add(comidaAGuardar);
+    }
+    
+    public void añadirUnElemento(Bebida bebidaAGuardar){
+        listaBebida.add(bebidaAGuardar);
+    }
+    
+    public void añadirUnElemento(Postres postresAGuardar){
+        listaPostres.add(postresAGuardar);
+    }
 }
