@@ -13,10 +13,10 @@ import java.util.Objects;
  */
 public class Postres {
     //Creamos atributos encapsulados
-    private int id;
+    private final int id;
     private String descripcion;
     private double precio;
-    private final Iva iva;
+    private Iva iva;
     private int stock = 0;
 
     //Creamos constructor parametrizado
@@ -32,8 +32,6 @@ public class Postres {
     public int getId() {
         return id;
     }
-
-    //Eliminamos el set del id porque nadie puede cambiar el id
 
     public String getDescripcion() {
         return descripcion;
@@ -51,6 +49,14 @@ public class Postres {
         this.precio = precio;
     }
 
+    public Iva getIva() {
+        return iva;
+    }
+
+    public void setIva(Iva iva) {
+        this.iva = iva;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -58,7 +64,7 @@ public class Postres {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
+
     //Añadimos el método toString
     @Override
     public String toString() {

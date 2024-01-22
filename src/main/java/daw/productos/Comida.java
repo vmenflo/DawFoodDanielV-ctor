@@ -12,11 +12,11 @@ import java.util.Objects;
  */
 public class Comida {
     //Creamos atributos encapsulados
-    private int id;
+    private final int id;
     private String descripcion;
-    private final SubCategoriaComida subComida;
+    private SubCategoriaComida subComida;
     private double precio;
-    private final Iva iva;
+    private Iva iva;
     private int stock = 0;
     
     //Creamos constructor parametrizado
@@ -33,16 +33,21 @@ public class Comida {
     public int getId() {
         return id;
     }
-
-    //No añadiremos el set del id ya que ninguno de los usuario podrá modificar
-    //este dato una vez creado
-
+    
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public SubCategoriaComida getSubComida() {
+        return subComida;
+    }
+
+    public void setSubComida(SubCategoriaComida subComida) {
+        this.subComida = subComida;
     }
 
     public double getPrecio() {
@@ -53,6 +58,14 @@ public class Comida {
         this.precio = precio;
     }
 
+    public Iva getIva() {
+        return iva;
+    }
+
+    public void setIva(Iva iva) {
+        this.iva = iva;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -60,7 +73,7 @@ public class Comida {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
+
     //Insertamos el toString
     @Override
     public String toString() {
