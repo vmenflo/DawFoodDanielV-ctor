@@ -149,14 +149,17 @@ public class ListasProductos {
             return null;
         }
     }
-
+    
     //Método para modificar una comida en concreto
     public void editarComida(Comida comidaAModificar, String queCambiar) {
         switch (queCambiar) {
             case "Descripción" -> {
                 String descripcionNueva = JOptionPane.showInputDialog(
-                        "Introduce la nueva descripció");
+                        "Introduce la nueva descripción");
                 comidaAModificar.setDescripcion(descripcionNueva);
+            }
+            case "Subcategoría" -> {
+                
             }
             case "Precio" -> {
                 double precioNuevo = 0;
@@ -169,6 +172,9 @@ public class ListasProductos {
                 }
 
                 comidaAModificar.setPrecio(precioNuevo);
+            }
+            case "Iva" -> {
+                
             }
             case "stock" -> {
 

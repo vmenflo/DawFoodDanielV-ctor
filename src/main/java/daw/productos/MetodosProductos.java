@@ -16,7 +16,21 @@ public class MetodosProductos {
     public static String elegirQueCambiar(){
         //Creamos un array de String para hacer un desplegable y que elija qué
         //es lo que quiere cambiar
-        String [] opciones = {"Descripción", "Precio", "stock"};
+        String [] opciones = {"Descripción", "Subcategoría" ,"Precio", "Iva","stock"};
+        
+        String eleccion = (String) JOptionPane.showInputDialog(null, 
+                "Elige el campo que quiere modificar:", 
+                "Seleccione para modificar", 
+                JOptionPane.QUESTION_MESSAGE, null, 
+                opciones, opciones[0]);
+        return eleccion;
+    }
+    
+    //Método para mostrar un desplegable de subcategoría
+    public static String elegirSubCategoría(){
+        //Creamos un array de String para hacer un desplegable y que elija qué
+        //es lo que quiere cambiar
+        String [] opciones = {"Descripción", "Subcategoría" ,"Precio", "Iva","stock"};
         
         String eleccion = (String) JOptionPane.showInputDialog(null, 
                 "Elige el campo que quiere modificar:", 
