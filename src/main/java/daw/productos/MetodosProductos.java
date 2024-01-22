@@ -4,6 +4,7 @@
  */
 package daw.productos;
 
+import daw.Iva;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,15 +27,43 @@ public class MetodosProductos {
         return eleccion;
     }
     
-    //Método para mostrar un desplegable de subcategoría
-    public static String elegirSubCategoría(){
+    //Método para mostrar un desplegable de subcategoría comida
+    public static SubCategoriaComida elegirSubCategoríaComida(){
         //Creamos un array de String para hacer un desplegable y que elija qué
         //es lo que quiere cambiar
-        String [] opciones = {"Descripción", "Subcategoría" ,"Precio", "Iva","stock"};
+        Object [] opciones = SubCategoriaComida.values();
         
-        String eleccion = (String) JOptionPane.showInputDialog(null, 
-                "Elige el campo que quiere modificar:", 
-                "Seleccione para modificar", 
+        SubCategoriaComida eleccion = (SubCategoriaComida) JOptionPane.showInputDialog(null, 
+                "Elige la subcategoría", 
+                "Selección de subcategoría", 
+                JOptionPane.QUESTION_MESSAGE, null, 
+                opciones, opciones[0]);
+        return eleccion;
+    }
+    
+    //Método para mostrar un desplegable de subcategoría Bebida
+    public static SubCategoriaBebida elegirSubCategoríaBebida(){
+        //Creamos un array de String para hacer un desplegable y que elija qué
+        //es lo que quiere cambiar
+        Object [] opciones = SubCategoriaBebida.values();
+        
+        SubCategoriaBebida eleccion = (SubCategoriaBebida) JOptionPane.showInputDialog(null, 
+                "Elige la subcategoría", 
+                "Selección de subcategoría", 
+                JOptionPane.QUESTION_MESSAGE, null, 
+                opciones, opciones[0]);
+        return eleccion;
+    }
+    
+    //Método para mostrar un desplegable de Iva comida
+    public static Iva elegirIva(){
+        //Creamos un array de String para hacer un desplegable y que elija qué
+        //es lo que quiere cambiar
+        Iva [] opciones = Iva.values();
+        
+        Iva eleccion = (Iva) JOptionPane.showInputDialog(null, 
+                "Elige el IVA", 
+                "Selección de IVA", 
                 JOptionPane.QUESTION_MESSAGE, null, 
                 opciones, opciones[0]);
         return eleccion;

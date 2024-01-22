@@ -159,7 +159,7 @@ public class ListasProductos {
                 comidaAModificar.setDescripcion(descripcionNueva);
             }
             case "Subcategoría" -> {
-                
+                comidaAModificar.setSubComida(MetodosProductos.elegirSubCategoríaComida());
             }
             case "Precio" -> {
                 double precioNuevo = 0;
@@ -174,7 +174,7 @@ public class ListasProductos {
                 comidaAModificar.setPrecio(precioNuevo);
             }
             case "Iva" -> {
-                
+                comidaAModificar.setIva(MetodosProductos.elegirIva());
             }
             case "stock" -> {
 
