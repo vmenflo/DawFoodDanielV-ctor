@@ -190,4 +190,89 @@ public class ListasProductos {
             }
         }
     }
+    
+    //Método para modificar una bebida en concreto
+    public void editarBebida(Bebida bebidaAModificar, String queCambiar) {
+        switch (queCambiar) {
+            case "Descripción" -> {
+                String descripcionNueva = JOptionPane.showInputDialog(
+                        "Introduce la nueva descripción");
+                bebidaAModificar.setDescripcion(descripcionNueva);
+            }
+            case "Subcategoría" -> {
+                bebidaAModificar.setSubBebida(MetodosProductos.elegirSubCategoríaBebida());
+            }
+            case "Precio" -> {
+                double precioNuevo = 0;
+                try {
+                    precioNuevo = Double.parseDouble(JOptionPane.showInputDialog(
+                            "Introduce el nuevo precio"));
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debes Introducir el precio con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+                }
+
+                bebidaAModificar.setPrecio(precioNuevo);
+            }
+            case "Iva" -> {
+                bebidaAModificar.setIva(MetodosProductos.elegirIva());
+            }
+            case "stock" -> {
+
+                int stockNuevo = 0;
+                try {
+                    stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
+                            "Introduce el nuevo stock"));
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debes Introducir el stock con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+                }
+                bebidaAModificar.setStock(stockNuevo);
+            }
+        }
+    }
+    
+    //Método para modificar un postre en concreto
+    public void editarPostres(Postres postreAModificar, String queCambiar) {
+        switch (queCambiar) {
+            case "Descripción" -> {
+                String descripcionNueva = JOptionPane.showInputDialog(
+                        "Introduce la nueva descripción");
+                postreAModificar.setDescripcion(descripcionNueva);
+            }
+            case "Subcategoría" -> {
+                JOptionPane.showMessageDialog(null, 
+                        "No hay subcategoría de postres", 
+                        "NO EXISTE SUBCATEGORÍA", 
+                        JOptionPane.WARNING_MESSAGE);
+            }
+            case "Precio" -> {
+                double precioNuevo = 0;
+                try {
+                    precioNuevo = Double.parseDouble(JOptionPane.showInputDialog(
+                            "Introduce el nuevo precio"));
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debes Introducir el precio con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+                }
+
+                postreAModificar.setPrecio(precioNuevo);
+            }
+            case "Iva" -> {
+                postreAModificar.setIva(MetodosProductos.elegirIva());
+            }
+            case "stock" -> {
+
+                int stockNuevo = 0;
+                try {
+                    stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
+                            "Introduce el nuevo stock"));
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debes Introducir el stock con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+                }
+                postreAModificar.setStock(stockNuevo);
+            }
+        }
+    }
 }
