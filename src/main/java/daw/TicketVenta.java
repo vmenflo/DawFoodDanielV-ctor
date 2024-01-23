@@ -5,6 +5,7 @@
 package daw;
 
 import daw.productos.ListasProductos;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -27,7 +28,7 @@ public class TicketVenta {
     private UUID id;
     private int numeroPedido=0;
     private ArrayList<ListasProductos> productosComprados;
-    private LocalDateTime fechaHoraCompra;
+    private LocalDate fechaCompra;
     private double TotalImporte;
    
     //Constructor
@@ -35,7 +36,7 @@ public class TicketVenta {
         this.id = UUID.randomUUID();
         this.numeroPedido++;
         this.productosComprados=null;
-        this.fechaHoraCompra=null;
+        this.fechaCompra=null;
         this.TotalImporte=0;
     }
     
@@ -49,6 +50,11 @@ public class TicketVenta {
         return numeroPedido;
     }
 
+    public void setNumeroPedido(int numeroPedido) {
+        this.numeroPedido = numeroPedido;
+    }
+    
+
     public ArrayList<ListasProductos> getProductosComprados() {
         return productosComprados;
     }
@@ -57,12 +63,12 @@ public class TicketVenta {
         this.productosComprados = productosComprados;
     }
 
-    public LocalDateTime getFechaHoraCompra() {
-        return fechaHoraCompra;
+    public LocalDate getFechaHoraCompra() {
+        return fechaCompra;
     }
 
-    public void setFechaHoraCompra(LocalDateTime fechaHoraCompra) {
-        this.fechaHoraCompra = fechaHoraCompra;
+    public void setFechaHoraCompra(LocalDate fechaHoraCompra) {
+        this.fechaCompra = fechaCompra;
     }
 
     public double getTotalImporte() {
@@ -78,7 +84,7 @@ public class TicketVenta {
         sb.append("id=").append(id);
         sb.append(", numeroPedido=").append(numeroPedido);
         sb.append(", productosComprados=").append(productosComprados);
-        sb.append(", fechaHoraCompra=").append(fechaHoraCompra);
+        sb.append(", fechaHoraCompra=").append(fechaCompra);
         sb.append(", TotalImporte=").append(TotalImporte);
         sb.append('}');
         return sb.toString();
@@ -92,7 +98,7 @@ public class TicketVenta {
         hash = 97 * hash + Objects.hashCode(this.id);
         hash = 97 * hash + this.numeroPedido;
         hash = 97 * hash + Objects.hashCode(this.productosComprados);
-        hash = 97 * hash + Objects.hashCode(this.fechaHoraCompra);
+        hash = 97 * hash + Objects.hashCode(this.fechaCompra);
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.TotalImporte) ^ (Double.doubleToLongBits(this.TotalImporte) >>> 32));
         return hash;
     }
@@ -121,7 +127,7 @@ public class TicketVenta {
         if (!Objects.equals(this.productosComprados, other.productosComprados)) {
             return false;
         }
-        return Objects.equals(this.fechaHoraCompra, other.fechaHoraCompra);
+        return Objects.equals(this.fechaCompra, other.fechaCompra);
     }
     
     
