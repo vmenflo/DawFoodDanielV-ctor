@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class Postres {
     //Creamos atributos encapsulados
-    private final int id;
+    private int id;
     private String descripcion;
     private double precio;
     private Iva iva;
@@ -27,10 +27,19 @@ public class Postres {
         this.iva = iva;
         this.stock = stock;
     }
+    
+    //Creamos constructor vacío
+    public Postres() {
+    }
+    
         
     //Insertamos los getter y los setters
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescripcion() {

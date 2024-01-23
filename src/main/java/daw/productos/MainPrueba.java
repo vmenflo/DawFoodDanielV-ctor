@@ -57,8 +57,5 @@ public class MainPrueba {
         l1.editarComida(l1.elegirComida(), MetodosProductos.elegirQueCambiar());
         
         
-        System.out.println(l1.getListaComida().get(0));
-        
-        
     }
 }
