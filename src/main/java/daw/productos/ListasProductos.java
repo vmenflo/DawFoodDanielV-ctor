@@ -156,7 +156,7 @@ public class ListasProductos {
     //Método para modificar una comida en concreto
     public void editarComida(Comida comidaAModificar, String queCambiar) {
         //Hacemos una condición por si es null que no se edite la comida
-        if (comidaAModificar != null) {
+        if (comidaAModificar != null && queCambiar != null) {
             switch (queCambiar) {
                 case "Descripción" -> {
                     String descripcionNueva = JOptionPane.showInputDialog(
@@ -167,17 +167,28 @@ public class ListasProductos {
                     comidaAModificar.setSubComida(MetodosProductos.elegirSubCategoríaComida());
                 }
                 case "Precio" -> {
-                    double precioNuevo = 0;
+                    double precioNuevo;
                     try {
-                        precioNuevo = Double.parseDouble(JOptionPane.showInputDialog(
-                                "Introduce el nuevo precio"));
+                        //Le preguntamos al usuario en una variable String
+                        //para poder controlar la excepción
+                        String nuevo = JOptionPane.showInputDialog(
+                                "Introduce el nuevo precio");
+
+                        //Lógica para controlar excepción
+                        if (nuevo != null) {
+                            precioNuevo = Double.parseDouble(nuevo);
+                            //Modificamos el precio
+                            comidaAModificar.setPrecio(precioNuevo);
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Debes elegir entre las opciones", "Aviso",
+                                    JOptionPane.WARNING_MESSAGE, null);
+                        }
                     } catch (NumberFormatException e) {
                         JOptionPane.showMessageDialog(null,
                                 "Debes Introducir el precio con números",
                                 "Alerta", JOptionPane.WARNING_MESSAGE);
                     }
-
-                    comidaAModificar.setPrecio(precioNuevo);
                 }
                 case "Iva" -> {
                     comidaAModificar.setIva(MetodosProductos.elegirIva());
@@ -202,85 +213,112 @@ public class ListasProductos {
 
     //Método para modificar una bebida en concreto
     public void editarBebida(Bebida bebidaAModificar, String queCambiar) {
-        switch (queCambiar) {
-            case "Descripción" -> {
-                String descripcionNueva = JOptionPane.showInputDialog(
-                        "Introduce la nueva descripción");
-                bebidaAModificar.setDescripcion(descripcionNueva);
-            }
-            case "Subcategoría" -> {
-                bebidaAModificar.setSubBebida(MetodosProductos.elegirSubCategoríaBebida());
-            }
-            case "Precio" -> {
-                double precioNuevo = 0;
-                try {
-                    precioNuevo = Double.parseDouble(JOptionPane.showInputDialog(
-                            "Introduce el nuevo precio"));
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null,
-                            "Debes Introducir el precio con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+        //Hacemos una condición por si es null que no se edite la bebida
+        if (bebidaAModificar != null && queCambiar != null) {
+            switch (queCambiar) {
+                case "Descripción" -> {
+                    String descripcionNueva = JOptionPane.showInputDialog(
+                            "Introduce la nueva descripción");
+                    bebidaAModificar.setDescripcion(descripcionNueva);
                 }
-
-                bebidaAModificar.setPrecio(precioNuevo);
-            }
-            case "Iva" -> {
-                bebidaAModificar.setIva(MetodosProductos.elegirIva());
-            }
-            case "stock" -> {
-
-                int stockNuevo = 0;
-                try {
-                    stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
-                            "Introduce el nuevo stock"));
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null,
-                            "Debes Introducir el stock con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+                case "Subcategoría" -> {
+                    bebidaAModificar.setSubBebida(
+                            MetodosProductos.elegirSubCategoríaBebida());
                 }
-                bebidaAModificar.setStock(stockNuevo);
+                case "Precio" -> {
+                    double precioNuevo;
+                    try {
+                        //Le preguntamos al usuario en una variable String
+                        //para poder controlar la excepción
+                        String nuevo = JOptionPane.showInputDialog(
+                                "Introduce el nuevo precio");
+
+                        //Lógica para controlar excepción
+                        if (nuevo != null) {
+                            precioNuevo = Double.parseDouble(nuevo);
+                            //Modificamos el precio
+                            bebidaAModificar.setPrecio(precioNuevo);
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Debes elegir entre las opciones", "Aviso",
+                                    JOptionPane.WARNING_MESSAGE, null);
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null,
+                                "Debes Introducir el precio con números",
+                                "Alerta", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+                case "Iva" -> {
+                    bebidaAModificar.setIva(MetodosProductos.elegirIva());
+                }
+                case "stock" -> {
+
+                    int stockNuevo = 0;
+                    try {
+                        stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
+                                "Introduce el nuevo stock"));
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null,
+                                "Debes Introducir el stock con números",
+                                "Alerta", JOptionPane.WARNING_MESSAGE);
+                    }
+                    bebidaAModificar.setStock(stockNuevo);
+                }
             }
         }
     }
 
     //Método para modificar un postre en concreto
     public void editarPostres(Postres postreAModificar, String queCambiar) {
-        switch (queCambiar) {
-            case "Descripción" -> {
-                String descripcionNueva = JOptionPane.showInputDialog(
-                        "Introduce la nueva descripción");
-                postreAModificar.setDescripcion(descripcionNueva);
-            }
-            case "Subcategoría" -> {
-                JOptionPane.showMessageDialog(null,
-                        "No hay subcategoría de postres",
-                        "NO EXISTE SUBCATEGORÍA",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-            case "Precio" -> {
-                double precioNuevo = 0;
-                try {
-                    precioNuevo = Double.parseDouble(JOptionPane.showInputDialog(
-                            "Introduce el nuevo precio"));
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null,
-                            "Debes Introducir el precio con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+        //Hacemos una condición por si es null que no se edite el postre
+        if (postreAModificar != null && queCambiar != null) {
+            switch (queCambiar) {
+                case "Descripción" -> {
+                    String descripcionNueva = JOptionPane.showInputDialog(
+                            "Introduce la nueva descripción");
+                    postreAModificar.setDescripcion(descripcionNueva);
                 }
+                case "Precio" -> {
+                    double precioNuevo;
+                    try {
+                        //Le preguntamos al usuario en una variable String
+                        //para poder controlar la excepción
+                        String nuevo = JOptionPane.showInputDialog(
+                                "Introduce el nuevo precio");
 
-                postreAModificar.setPrecio(precioNuevo);
-            }
-            case "Iva" -> {
-                postreAModificar.setIva(MetodosProductos.elegirIva());
-            }
-            case "stock" -> {
-
-                int stockNuevo = 0;
-                try {
-                    stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
-                            "Introduce el nuevo stock"));
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null,
-                            "Debes Introducir el stock con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+                        //Lógica para controlar excepción
+                        if (nuevo != null) {
+                            precioNuevo = Double.parseDouble(nuevo);
+                            //Modificamos el precio
+                            postreAModificar.setPrecio(precioNuevo);
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Debes elegir entre las opciones", "Aviso",
+                                    JOptionPane.WARNING_MESSAGE, null);
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null,
+                                "Debes Introducir el precio con números",
+                                "Alerta", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
-                postreAModificar.setStock(stockNuevo);
+                case "Iva" -> {
+                    postreAModificar.setIva(MetodosProductos.elegirIva());
+                }
+                case "stock" -> {
+
+                    int stockNuevo = 0;
+                    try {
+                        stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
+                                "Introduce el nuevo stock"));
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null,
+                                "Debes Introducir el stock con números",
+                                "Alerta", JOptionPane.WARNING_MESSAGE);
+                    }
+                    postreAModificar.setStock(stockNuevo);
+                }
             }
         }
     }
@@ -312,22 +350,128 @@ public class ListasProductos {
     //Método para dar de altas nueva comida
     public void nuevaComida() {
         //Inicializamos variables
-        int id = comprobarIdUnico();
+        int id = 0;
+        String descripcion = "";
+        double precio = 0;
+        int stock = 0;
+        //esta variable es para que se repita el proceso hasta que
+        //ponga bien los datos
+        boolean repetir;
 
-        //Añadimos al nuevo producto nueva descripción
-        String descripcion = JOptionPane.showInputDialog(
-                "Introduce nueva descripción de comida");
+        //Bucle para que se repita el programa hasta ponga bien los datos
+        do {
+            //Controlamos las excepciones
+            try {
+                id = comprobarIdUnico();
+                
+                //Añadimos al nuevo producto nueva descripción
+                descripcion = JOptionPane.showInputDialog(
+                        "Introduce nueva descripción de comida");
 
-        //Añadimos un precio al producto nuevo
-        int precio = Integer.parseInt(JOptionPane.showInputDialog(
-                "Introduce un precio a la nueva comida"));
+                //Añadimos un precio al producto nuevo
+                precio = Double.parseDouble(JOptionPane.showInputDialog(
+                        "Introduce un precio a la nueva comida"));
 
-        //Añadimos un stock al nuevo producto
-        int stock = Integer.parseInt(JOptionPane.showInputDialog(
-                "Introduce el stock"));
+                //Añadimos un stock al nuevo producto
+                stock = Integer.parseInt(JOptionPane.showInputDialog(
+                        "Introduce el stock"));
+                repetir = false;
+            } catch (NumberFormatException j) {
+                JOptionPane.showMessageDialog(null,
+                        "Debes rellenar los campos bien", "Aviso",
+                        JOptionPane.WARNING_MESSAGE, null);
+                repetir = true;
+            }
+        } while (repetir);
 
+        //Añadimos el nuevo producto creado
         añadirUnElemento(new Comida(id, descripcion,
                 MetodosProductos.elegirSubCategoríaComida(), precio,
+                MetodosProductos.elegirIva(), stock));
+    }
+    
+    //Método para dar de altas nueva bebida
+    public void nuevaBebida() {
+        //Inicializamos variables
+        int id = 0;
+        String descripcion = "";
+        double precio = 0;
+        int stock = 0;
+        //esta variable es para que se repita el proceso hasta que
+        //ponga bien los datos
+        boolean repetir;
+
+        //Bucle para que se repita el programa hasta ponga bien los datos
+        do {
+            //Controlamos las excepciones
+            try {
+                id = comprobarIdUnico();
+                
+                //Añadimos al nuevo producto nueva descripción
+                descripcion = JOptionPane.showInputDialog(
+                        "Introduce nueva descripción de bebida");
+
+                //Añadimos un precio al producto nuevo
+                precio = Double.parseDouble(JOptionPane.showInputDialog(
+                        "Introduce un precio a la nueva bebida"));
+
+                //Añadimos un stock al nuevo producto
+                stock = Integer.parseInt(JOptionPane.showInputDialog(
+                        "Introduce el stock"));
+                repetir = false;
+            } catch (NumberFormatException j) {
+                JOptionPane.showMessageDialog(null,
+                        "Debes rellenar los campos bien", "Aviso",
+                        JOptionPane.WARNING_MESSAGE, null);
+                repetir = true;
+            }
+        } while (repetir);
+
+        //Añadimos el nuevo producto creado
+        añadirUnElemento(new Bebida(id, descripcion, 
+                MetodosProductos.elegirSubCategoríaBebida(), precio, 
+                MetodosProductos.elegirIva(), stock));
+    }
+    
+    //Método para dar de altas nuevos postres
+    public void nuevoPostre() {
+        //Inicializamos variables
+        int id = 0;
+        String descripcion = "";
+        double precio = 0;
+        int stock = 0;
+        //esta variable es para que se repita el proceso hasta que
+        //ponga bien los datos
+        boolean repetir;
+
+        //Bucle para que se repita el programa hasta ponga bien los datos
+        do {
+            //Controlamos las excepciones
+            try {
+                id = comprobarIdUnico();
+                
+                //Añadimos al nuevo producto nueva descripción
+                descripcion = JOptionPane.showInputDialog(
+                        "Introduce nueva descripción de postres");
+
+                //Añadimos un precio al producto nuevo
+                precio = Double.parseDouble(JOptionPane.showInputDialog(
+                        "Introduce un precio a el nuevo postre"));
+
+                //Añadimos un stock al nuevo producto
+                stock = Integer.parseInt(JOptionPane.showInputDialog(
+                        "Introduce el stock"));
+                repetir = false;
+            } catch (NumberFormatException j) {
+                JOptionPane.showMessageDialog(null,
+                        "Debes rellenar los campos bien", "Aviso",
+                        JOptionPane.WARNING_MESSAGE, null);
+                repetir = true;
+            }
+        } while (repetir);
+
+        //Añadimos el nuevo producto creado
+        añadirUnElemento(new Postres(id, descripcion, precio, 
                 MetodosProductos.elegirIva(), stock));
     }
 }
