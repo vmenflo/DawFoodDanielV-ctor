@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Comida {
     //Creamos atributos encapsulados
-    private final int id;
+    private int id;
     private String descripcion;
     private SubCategoriaComida subComida;
     private double precio;
@@ -28,10 +28,19 @@ public class Comida {
         this.iva = iva;
         this.stock = stock;
     }
+    
+    //Constructor vacío
+
+    public Comida() {
+    }
         
     //Añadimos getter y setters
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getDescripcion() {
