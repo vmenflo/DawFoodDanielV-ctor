@@ -18,12 +18,14 @@ import javax.swing.JOptionPane;
 public class Ventas {
     
     //Atributos
-    private ArrayList<TicketVenta> ventasTotales;
+    private ArrayList<TicketVenta> ventasTotales = new ArrayList<>();
     
     //Constructor
+
     public Ventas() {
-       
+        
     }
+    
     
     //GETTER AND SETTER
 
@@ -69,28 +71,41 @@ public class Ventas {
         final Ventas other = (Ventas) obj;
         return Objects.equals(this.ventasTotales, other.ventasTotales);
     }
-    
+    // Método para añadir
+    public void añadirTicket(TicketVenta ticket){
+        ventasTotales.add(ticket);
+    }
     //MÈTODOS PARA BUSCAR POR DÍA
     public ArrayList<TicketVenta> busquedaVentasDiaConcreto(){
-        ArrayList<TicketVenta> seleccionados=null;
-        //Pedir al usuario que día quiere obtener todos los tickets
-        String dia = String.valueOf(JOptionPane.showInputDialog("Introduce el dia"));
-        int d = Integer.parseInt(dia);
-
-        String mes = String.valueOf(JOptionPane.showInputDialog("Introduce el mes"));
-        int m = Integer.parseInt(mes);
-
-        String año = String.valueOf(JOptionPane.showInputDialog("Introduce el año")).trim();
-        int a = Integer.parseInt(año);
-        LocalDate fecha = LocalDate.of(d, m, a);
-       
+        ArrayList<TicketVenta> seleccionados= new ArrayList<>();
         
+       //Llamo al metodo preguntar fecha
+       LocalDate fecha=MetodosVentas.preguntarFecha();
         for(int i=0; i<ventasTotales.size();i++){
-            if(fecha.equals(ventasTotales.get(i).getFechaHoraCompra())){
+            if(fecha.equals(ventasTotales.get(i).getFechaCompra())){
                 seleccionados.add(ventasTotales.get(i));
             }
         }
         
+        
+       return seleccionados;
+    }
+    
+     //MÈTODOS PARA BUSCAR ENTRE FECHAS
+    public ArrayList<TicketVenta> busquedaEntreFechas(){
+        ArrayList<TicketVenta> seleccionados= new ArrayList<>();
+        //LLamo a lo métodos para tener las dos fechas
+        LocalDate fecha1 = MetodosVentas.preguntarFecha();
+        LocalDate fecha2 = MetodosVentas.preguntarFecha();
+       
+        LocalDate fechaVenta ;
+        for(int i=0; i<ventasTotales.size();i++){
+            fechaVenta = ventasTotales.get(i).getFechaCompra();
+            if((fechaVenta.isEqual(fecha1) || fechaVenta.isAfter(fecha1)) &&
+            (fechaVenta.isEqual(fecha2) || fechaVenta.isBefore(fecha2))){
+                seleccionados.add(ventasTotales.get(i));
+            }
+        }
        return seleccionados;
     }
     

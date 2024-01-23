@@ -25,8 +25,9 @@ import java.util.UUID;
  */
 public class TicketVenta {
     //Atributos
+    private static int contador=1;
     private UUID id;
-    private int numeroPedido=0;
+    private int numeroPedido;
     private ArrayList<ListasProductos> productosComprados;
     private LocalDate fechaCompra;
     private double TotalImporte;
@@ -34,9 +35,13 @@ public class TicketVenta {
     //Constructor
     public TicketVenta() {
         this.id = UUID.randomUUID();
-        this.numeroPedido++;
+        //Controlo que no pase de 100
+            if (contador > 99) {
+            contador = 1;
+            }
+        this.numeroPedido=contador++;
         this.productosComprados=null;
-        this.fechaCompra=null;
+        this.fechaCompra=LocalDate.now();
         this.TotalImporte=0;
     }
     
@@ -63,11 +68,11 @@ public class TicketVenta {
         this.productosComprados = productosComprados;
     }
 
-    public LocalDate getFechaHoraCompra() {
+    public LocalDate getFechaCompra() {
         return fechaCompra;
     }
 
-    public void setFechaHoraCompra(LocalDate fechaHoraCompra) {
+    public void setFechaCompra(LocalDate fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
 
