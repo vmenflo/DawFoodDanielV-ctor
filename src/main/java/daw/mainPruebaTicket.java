@@ -30,13 +30,13 @@ public class mainPruebaTicket {
         ventas.añadirTicket(ticket4);
         ventas.añadirTicket(ticket5);
         
-        System.out.println(ventas);
-        
+        ventas.mostrarVentas();
+        /*
         Ventas diaSeleccionado = new Ventas();
         diaSeleccionado.setVentasTotales(ventas.busquedaEntreFechas());
         
         System.out.println(diaSeleccionado);
-        
+        */
         
         
     }
