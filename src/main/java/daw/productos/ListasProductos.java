@@ -4,7 +4,10 @@
  */
 package daw.productos;
 
+import daw.Iva;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import javax.swing.JOptionPane;
 
 /**
@@ -149,48 +152,54 @@ public class ListasProductos {
             return null;
         }
     }
-    
+
     //Método para modificar una comida en concreto
     public void editarComida(Comida comidaAModificar, String queCambiar) {
-        switch (queCambiar) {
-            case "Descripción" -> {
-                String descripcionNueva = JOptionPane.showInputDialog(
-                        "Introduce la nueva descripción");
-                comidaAModificar.setDescripcion(descripcionNueva);
-            }
-            case "Subcategoría" -> {
-                comidaAModificar.setSubComida(MetodosProductos.elegirSubCategoríaComida());
-            }
-            case "Precio" -> {
-                double precioNuevo = 0;
-                try {
-                    precioNuevo = Double.parseDouble(JOptionPane.showInputDialog(
-                            "Introduce el nuevo precio"));
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null,
-                            "Debes Introducir el precio con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+        //Hacemos una condición por si es null que no se edite la comida
+        if (comidaAModificar != null) {
+            switch (queCambiar) {
+                case "Descripción" -> {
+                    String descripcionNueva = JOptionPane.showInputDialog(
+                            "Introduce la nueva descripción");
+                    comidaAModificar.setDescripcion(descripcionNueva);
                 }
-
-                comidaAModificar.setPrecio(precioNuevo);
-            }
-            case "Iva" -> {
-                comidaAModificar.setIva(MetodosProductos.elegirIva());
-            }
-            case "stock" -> {
-
-                int stockNuevo = 0;
-                try {
-                    stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
-                            "Introduce el nuevo stock"));
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null,
-                            "Debes Introducir el stock con números", "Alerta", JOptionPane.WARNING_MESSAGE);
+                case "Subcategoría" -> {
+                    comidaAModificar.setSubComida(MetodosProductos.elegirSubCategoríaComida());
                 }
-                comidaAModificar.setStock(stockNuevo);
+                case "Precio" -> {
+                    double precioNuevo = 0;
+                    try {
+                        precioNuevo = Double.parseDouble(JOptionPane.showInputDialog(
+                                "Introduce el nuevo precio"));
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null,
+                                "Debes Introducir el precio con números",
+                                "Alerta", JOptionPane.WARNING_MESSAGE);
+                    }
+
+                    comidaAModificar.setPrecio(precioNuevo);
+                }
+                case "Iva" -> {
+                    comidaAModificar.setIva(MetodosProductos.elegirIva());
+                }
+                case "stock" -> {
+
+                    int stockNuevo = 0;
+                    try {
+                        stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
+                                "Introduce el nuevo stock"));
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null,
+                                "Debes Introducir el stock con números",
+                                "Alerta", JOptionPane.WARNING_MESSAGE);
+                    }
+                    comidaAModificar.setStock(stockNuevo);
+                }
             }
         }
+
     }
-    
+
     //Método para modificar una bebida en concreto
     public void editarBebida(Bebida bebidaAModificar, String queCambiar) {
         switch (queCambiar) {
@@ -231,7 +240,7 @@ public class ListasProductos {
             }
         }
     }
-    
+
     //Método para modificar un postre en concreto
     public void editarPostres(Postres postreAModificar, String queCambiar) {
         switch (queCambiar) {
@@ -241,9 +250,9 @@ public class ListasProductos {
                 postreAModificar.setDescripcion(descripcionNueva);
             }
             case "Subcategoría" -> {
-                JOptionPane.showMessageDialog(null, 
-                        "No hay subcategoría de postres", 
-                        "NO EXISTE SUBCATEGORÍA", 
+                JOptionPane.showMessageDialog(null,
+                        "No hay subcategoría de postres",
+                        "NO EXISTE SUBCATEGORÍA",
                         JOptionPane.WARNING_MESSAGE);
             }
             case "Precio" -> {
@@ -274,5 +283,51 @@ public class ListasProductos {
                 postreAModificar.setStock(stockNuevo);
             }
         }
+    }
+
+    //Método para ver que un id no se repita
+    public int comprobarIdUnico() {
+        //Inicializamos variables
+        int id = 0;
+        int posicionABuscar = 0;
+        //ordenamos por id para luego hacer una búsqueda binaria, para que si
+        //encuentra dicho número, se repita
+        Collections.sort(listaComida, (e1, e2) -> e1.getId() - e2.getId());
+        do {
+            //le preguntamos al usuario que id quiere introducir
+            id = Integer.parseInt(JOptionPane.showInputDialog("Introduce el id"));
+
+            //Le indicamos qué buscar posteriormente con el binarySearch
+            Comida x = new Comida();
+            x.setId(id);
+
+            //Comprobamos y guardamos en una variable si ha encontrado 
+            // el id introducido
+            posicionABuscar = Collections.binarySearch(listaComida,
+                    x, (e1, e2) -> e1.getId() - e2.getId());
+        } while (posicionABuscar >= 0);
+        return id;
+    }
+
+    //Método para dar de altas nueva comida
+    public void nuevaComida() {
+        //Inicializamos variables
+        int id = comprobarIdUnico();
+
+        //Añadimos al nuevo producto nueva descripción
+        String descripcion = JOptionPane.showInputDialog(
+                "Introduce nueva descripción de comida");
+
+        //Añadimos un precio al producto nuevo
+        int precio = Integer.parseInt(JOptionPane.showInputDialog(
+                "Introduce un precio a la nueva comida"));
+
+        //Añadimos un stock al nuevo producto
+        int stock = Integer.parseInt(JOptionPane.showInputDialog(
+                "Introduce el stock"));
+
+        añadirUnElemento(new Comida(id, descripcion,
+                MetodosProductos.elegirSubCategoríaComida(), precio,
+                MetodosProductos.elegirIva(), stock));
     }
 }
