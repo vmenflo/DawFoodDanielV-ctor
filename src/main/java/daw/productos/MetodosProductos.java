@@ -68,4 +68,20 @@ public class MetodosProductos {
                 opciones, opciones[0]);
         return eleccion;
     }
+    
+    //Método para preguntar al usuario si es mayor de edad
+    public static int eresMayorA18(){
+        //Hago un array que tiene solo los valores "Si" y "No"
+        String[] elegir = {"Si","No"};
+        int mayorOMenorA18 = JOptionPane.showOptionDialog(
+                null,
+                "¿Eres Mayor de edad?",
+                "Restricción de edad",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                elegir,
+                elegir[1]);
+        return mayorOMenorA18;
+    }
 }
