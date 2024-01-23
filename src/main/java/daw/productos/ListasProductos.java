@@ -90,8 +90,9 @@ public class ListasProductos {
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
-        Object seleccion = JOptionPane.showInputDialog(null, "Selecciona una comida a modificar:",
-                "Selección de comida", JOptionPane.QUESTION_MESSAGE, null,
+        Object seleccion = JOptionPane.showInputDialog(null, 
+                "Selecciona una comida:","Selección de comida", 
+                JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
 
         //Verificar si el usuario seleccionó algo o no y devolver el elemento seleccionado
@@ -99,7 +100,8 @@ public class ListasProductos {
             //Hacemos un casting para devolver un objeto de Comida
             return (Comida) seleccion;
         } else {
-            JOptionPane.showMessageDialog(null, "No ha seleccionado ningún elemento",
+            JOptionPane.showMessageDialog(null, 
+                    "No ha seleccionado ningún elemento",
                     "Ninguna Selección", JOptionPane.WARNING_MESSAGE);
             return null;
         }
@@ -113,8 +115,9 @@ public class ListasProductos {
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
-        Object seleccion = JOptionPane.showInputDialog(null, "Selecciona una bebida a modificar:",
-                "Selección de bebida", JOptionPane.QUESTION_MESSAGE, null,
+        Object seleccion = JOptionPane.showInputDialog(null, 
+                "Selecciona una bebida:","Selección de bebida", 
+                JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
 
         //Verificar si el usuario seleccionó algo o no y devolver el elemento seleccionado
@@ -137,7 +140,7 @@ public class ListasProductos {
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
         Object seleccion = JOptionPane.showInputDialog(null,
-                "Selecciona un postre a modificar:",
+                "Selecciona un postre:",
                 "Selección de postres",
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
@@ -473,5 +476,29 @@ public class ListasProductos {
         //Añadimos el nuevo producto creado
         añadirUnElemento(new Postres(id, descripcion, precio, 
                 MetodosProductos.elegirIva(), stock));
+    }
+    
+    //Método para borrar productos existentes
+    public void borrarProductos(String elegirCategoria){
+        switch (elegirCategoria) {
+            case "Comida" -> {
+                //llamamos al metodo elegirComida para que nos muestre cuál
+                //quiere borrar
+                Comida comidaABorrar = elegirComida();
+                this.listaComida.remove(comidaABorrar);
+            }
+            case "Bebida" -> {
+                //llamamos al metodo elegirComida para que nos muestre cuál
+                //quiere borrar
+                Bebida bebidaABorrar = elegirBebida();
+                this.listaBebida.remove(bebidaABorrar);
+            }
+            case "Postres" -> {
+                //llamamos al metodo elegirComida para que nos muestre cuál
+                //quiere borrar
+                Postres postreABorrar = elegirPostres();
+                this.listaPostres.remove(postreABorrar);
+            }
+        }
     }
 }

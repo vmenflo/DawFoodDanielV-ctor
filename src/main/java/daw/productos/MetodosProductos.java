@@ -36,6 +36,28 @@ public class MetodosProductos {
 
         return eleccion;
     }
+    
+    //Método para que elija entre las categorías que hay
+    public static String elegirCategorias(){
+        //Creamos un array de String para hacer un desplegable y que elija 
+        //la categoría
+        String[] opciones = {"Comida", "Bebida", "Postres"};
+        
+        String eleccion = (String) JOptionPane.showInputDialog(null,
+                "Elige la categoría:",
+                "Seleccione Categoría",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+
+        if (eleccion == null) {
+            JOptionPane.showMessageDialog(null,
+                    "Debes elegir entre las opciones", "Aviso",
+                    JOptionPane.WARNING_MESSAGE, null);
+            return null;
+        }
+
+        return eleccion;
+    }
 
     //Método para mostrar un desplegable de subcategoría comida
     public static SubCategoriaComida elegirSubCategoríaComida() {
