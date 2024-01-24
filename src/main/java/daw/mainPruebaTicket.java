@@ -6,6 +6,7 @@ package daw;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,6 +14,7 @@ import java.time.Month;
  */
 public class mainPruebaTicket {
     public static void main(String[] args) {
+        /*
         TicketVenta ticket1 = new TicketVenta();
         TicketVenta ticket2 = new TicketVenta();
         TicketVenta ticket3 = new TicketVenta();
@@ -38,6 +40,14 @@ public class mainPruebaTicket {
         System.out.println(diaSeleccionado);
         */
         
-        
+        ArrayList<TarjetaBanco> tarjetas = MetodosTarjetaBanco.generarArrayTarjetas();
+        boolean valido = MetodosTarjetaBanco.tarjetaValida(tarjetas);
+        System.out.println(tarjetas.get(0));
+        System.out.println(valido);
+        if(valido){
+            System.out.println("Tarjeta valida");
+        }else{
+            System.out.println("No válida");
+        }
     }
 }

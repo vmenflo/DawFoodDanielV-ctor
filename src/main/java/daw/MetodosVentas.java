@@ -29,7 +29,7 @@ public class MetodosVentas {
                 } else {//Que no, indica que lo introduzca bien
                     JOptionPane.showMessageDialog(null,
                             "Por favor, introduce un día válido "
-                            + "(entre 1 y 31).");
+                            + "(entre 01 y 31).");
                 }
                 //Si salta excepcion lanza el mensaje
             } catch (NumberFormatException e) {
