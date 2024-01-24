@@ -5,6 +5,7 @@
 package daw;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -43,7 +44,9 @@ public class Ventas {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Ventas{");
-        sb.append("ventasTotales=").append(ventasTotales);
+        for(int i=0;i<ventasTotales.size();i++){
+        sb.append("ventasTotales=").append(ventasTotales.get(i));
+        }
         sb.append('}');
         return sb.toString();
     }
@@ -95,7 +98,11 @@ public class Ventas {
     public ArrayList<TicketVenta> busquedaEntreFechas(){
         ArrayList<TicketVenta> seleccionados= new ArrayList<>();
         //LLamo a lo métodos para tener las dos fechas
+        JOptionPane.showMessageDialog(null, 
+                "Ingrese primera fecha");
         LocalDate fecha1 = MetodosVentas.preguntarFecha();
+        JOptionPane.showMessageDialog(null, 
+                "Ingrese segunda fecha");
         LocalDate fecha2 = MetodosVentas.preguntarFecha();
        
         LocalDate fechaVenta ;
@@ -108,6 +115,10 @@ public class Ventas {
         }
        return seleccionados;
     }
-    
+    //Método para mostrar toda las ventas
+    public void mostrarVentas(){
+        JOptionPane.showMessageDialog(null, 
+                ventasTotales.toString());
+    }
     
 }
