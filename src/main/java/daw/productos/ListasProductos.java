@@ -326,8 +326,8 @@ public class ListasProductos {
         }
     }
 
-    //Método para ver que un id no se repita
-    public int comprobarIdUnico() {
+    //Método para ver que un id no se repita en una comida
+    public int comprobarIdUnicoComida() {
         //Inicializamos variables
         int id = 0;
         int posicionABuscar = 0;
@@ -349,6 +349,54 @@ public class ListasProductos {
         } while (posicionABuscar >= 0);
         return id;
     }
+    
+    //Método para ver que un id no se repita en una bebida
+    public int comprobarIdUnicoBebida() {
+        //Inicializamos variables
+        int id = 0;
+        int posicionABuscar = 0;
+        //ordenamos por id para luego hacer una búsqueda binaria, para que si
+        //encuentra dicho número, se repita
+        Collections.sort(listaBebida, (e1, e2) -> e1.getId() - e2.getId());
+        do {
+            //le preguntamos al usuario que id quiere introducir
+            id = Integer.parseInt(JOptionPane.showInputDialog("Introduce el id"));
+
+            //Le indicamos qué buscar posteriormente con el binarySearch
+            Bebida x = new Bebida();
+            x.setId(id);
+
+            //Comprobamos y guardamos en una variable si ha encontrado 
+            // el id introducido
+            posicionABuscar = Collections.binarySearch(listaBebida,
+                    x, (e1, e2) -> e1.getId() - e2.getId());
+        } while (posicionABuscar >= 0);
+        return id;
+    }
+    
+    //Método para ver que un id no se repita en una bebida
+    public int comprobarIdUnicoPostres() {
+        //Inicializamos variables
+        int id = 0;
+        int posicionABuscar = 0;
+        //ordenamos por id para luego hacer una búsqueda binaria, para que si
+        //encuentra dicho número, se repita
+        Collections.sort(listaPostres, (e1, e2) -> e1.getId() - e2.getId());
+        do {
+            //le preguntamos al usuario que id quiere introducir
+            id = Integer.parseInt(JOptionPane.showInputDialog("Introduce el id"));
+
+            //Le indicamos qué buscar posteriormente con el binarySearch
+            Postres x = new Postres();
+            x.setId(id);
+
+            //Comprobamos y guardamos en una variable si ha encontrado 
+            // el id introducido
+            posicionABuscar = Collections.binarySearch(listaPostres,
+                    x, (e1, e2) -> e1.getId() - e2.getId());
+        } while (posicionABuscar >= 0);
+        return id;
+    }
 
     //Método para dar de altas nueva comida
     public void nuevaComida() {
@@ -365,7 +413,7 @@ public class ListasProductos {
         do {
             //Controlamos las excepciones
             try {
-                id = comprobarIdUnico();
+                id = comprobarIdUnicoComida();
                 
                 //Añadimos al nuevo producto nueva descripción
                 descripcion = JOptionPane.showInputDialog(
@@ -408,7 +456,7 @@ public class ListasProductos {
         do {
             //Controlamos las excepciones
             try {
-                id = comprobarIdUnico();
+                id = comprobarIdUnicoBebida();
                 
                 //Añadimos al nuevo producto nueva descripción
                 descripcion = JOptionPane.showInputDialog(
@@ -451,7 +499,7 @@ public class ListasProductos {
         do {
             //Controlamos las excepciones
             try {
-                id = comprobarIdUnico();
+                id = comprobarIdUnicoPostres();
                 
                 //Añadimos al nuevo producto nueva descripción
                 descripcion = JOptionPane.showInputDialog(
