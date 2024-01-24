@@ -90,8 +90,8 @@ public class ListasProductos {
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
-        Object seleccion = JOptionPane.showInputDialog(null, 
-                "Selecciona una comida:","Selección de comida", 
+        Object seleccion = JOptionPane.showInputDialog(null,
+                "Selecciona una comida:", "Selección de comida",
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
 
@@ -100,23 +100,50 @@ public class ListasProductos {
             //Hacemos un casting para devolver un objeto de Comida
             return (Comida) seleccion;
         } else {
-            JOptionPane.showMessageDialog(null, 
+            JOptionPane.showMessageDialog(null,
                     "No ha seleccionado ningún elemento",
                     "Ninguna Selección", JOptionPane.WARNING_MESSAGE);
             return null;
         }
     }
+    
+    //Método para que dependiendo de si es mayor o menor de edad muestre o no
+    //todas las bebidas
+    public ArrayList<Bebida> bebidaFiltrada(int eresMayorA18){
+        //Hacemos lógica
+        if (eresMayorA18 == 0) {
+            return listaBebida;
+        } else {
+            //Creamos el array nuevo a devolver con solo las bebidas que son sin
+            //alcohol
+            ArrayList<Bebida> menorDeEdad = new ArrayList<>();
+            
+            //Creamos un for para ir recorriendo cada posición y vamos añadiendo
+            //si cumple la condición
+            for (int i = 0; i < listaBebida.size(); i++){
+                if (!listaBebida.get(i).getSubBebida().equals(
+                        SubCategoriaBebida.CERVEZA)){
+                    menorDeEdad.add(listaBebida.get(i));
+                }
+            }
+            
+            return menorDeEdad;
+        }
+    }
 
     //Método para que elija que bebida quiere modificar
     public Bebida elegirBebida() {
+        //Guardamos en una variable de tipo int el método de si es o no mayor de
+        //edad
+        int mayorOMenor = MetodosProductos.eresMayorA18();
         //Convertimos la lista en un array y lo guardamos en una variable de
         //tipo object
-        Object[] opciones = listaBebida.toArray();
+        Object[] opciones = bebidaFiltrada(mayorOMenor).toArray();
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
-        Object seleccion = JOptionPane.showInputDialog(null, 
-                "Selecciona una bebida:","Selección de bebida", 
+        Object seleccion = JOptionPane.showInputDialog(null,
+                "Selecciona una bebida:", "Selección de bebida",
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
 
@@ -349,7 +376,7 @@ public class ListasProductos {
         } while (posicionABuscar >= 0);
         return id;
     }
-    
+
     //Método para ver que un id no se repita en una bebida
     public int comprobarIdUnicoBebida() {
         //Inicializamos variables
@@ -373,7 +400,7 @@ public class ListasProductos {
         } while (posicionABuscar >= 0);
         return id;
     }
-    
+
     //Método para ver que un id no se repita en una bebida
     public int comprobarIdUnicoPostres() {
         //Inicializamos variables
@@ -414,7 +441,7 @@ public class ListasProductos {
             //Controlamos las excepciones
             try {
                 id = comprobarIdUnicoComida();
-                
+
                 //Añadimos al nuevo producto nueva descripción
                 descripcion = JOptionPane.showInputDialog(
                         "Introduce nueva descripción de comida");
@@ -440,7 +467,7 @@ public class ListasProductos {
                 MetodosProductos.elegirSubCategoríaComida(), precio,
                 MetodosProductos.elegirIva(), stock));
     }
-    
+
     //Método para dar de altas nueva bebida
     public void nuevaBebida() {
         //Inicializamos variables
@@ -457,7 +484,7 @@ public class ListasProductos {
             //Controlamos las excepciones
             try {
                 id = comprobarIdUnicoBebida();
-                
+
                 //Añadimos al nuevo producto nueva descripción
                 descripcion = JOptionPane.showInputDialog(
                         "Introduce nueva descripción de bebida");
@@ -479,11 +506,11 @@ public class ListasProductos {
         } while (repetir);
 
         //Añadimos el nuevo producto creado
-        añadirUnElemento(new Bebida(id, descripcion, 
-                MetodosProductos.elegirSubCategoríaBebida(), precio, 
+        añadirUnElemento(new Bebida(id, descripcion,
+                MetodosProductos.elegirSubCategoríaBebida(), precio,
                 MetodosProductos.elegirIva(), stock));
     }
-    
+
     //Método para dar de altas nuevos postres
     public void nuevoPostre() {
         //Inicializamos variables
@@ -500,7 +527,7 @@ public class ListasProductos {
             //Controlamos las excepciones
             try {
                 id = comprobarIdUnicoPostres();
-                
+
                 //Añadimos al nuevo producto nueva descripción
                 descripcion = JOptionPane.showInputDialog(
                         "Introduce nueva descripción de postres");
@@ -522,12 +549,12 @@ public class ListasProductos {
         } while (repetir);
 
         //Añadimos el nuevo producto creado
-        añadirUnElemento(new Postres(id, descripcion, precio, 
+        añadirUnElemento(new Postres(id, descripcion, precio,
                 MetodosProductos.elegirIva(), stock));
     }
-    
+
     //Método para borrar productos existentes
-    public void borrarProductos(String elegirCategoria){
+    public void borrarProductos(String elegirCategoria) {
         switch (elegirCategoria) {
             case "Comida" -> {
                 //llamamos al metodo elegirComida para que nos muestre cuál
