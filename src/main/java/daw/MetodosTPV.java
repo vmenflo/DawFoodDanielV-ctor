@@ -4,6 +4,7 @@
  */
 package daw;
 
+import daw.productos.ListasProductos;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -108,5 +109,40 @@ public class MetodosTPV {
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
         return eleccion;
+    }
+    
+    //Mostrar Menu Carrito en TPV
+    public static String seleccionOpcionesCarrito() {
+        //Array de las opciones disponibles
+        String[] opciones = {"Ver Carrito", "Borrar Carrito",
+            "Seguir Comprando", "Pagar"};
+        //Mostrar el mensaje con las opciones
+        String eleccion = (String) JOptionPane.showInputDialog(null,
+                "¿Qué deseas hacer?", "Carrito",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+        return eleccion;
+    }
+    //Método borrar carrito
+    public static void borrarCarrito(ListasProductos carrito){
+        //Si no hay nada en el carrito no hace nada
+        if(carrito.getListaComida().isEmpty()
+                &&carrito.getListaBebida().isEmpty()
+                &&carrito.getListaPostres().isEmpty()){
+            JOptionPane.showMessageDialog(null, 
+                    "No tienes nada en Carrito");
+        }else{
+            carrito.getListaComida().clear(); //Borra los elementos
+            carrito.getListaBebida().clear();//Borra los elementos
+            carrito.getListaPostres().clear();//Borra los elementos
+            JOptionPane.showMessageDialog(null, 
+                    "Ahora el Carrito esta vacío");
+        }
+    }
+    //Si el pago se ha efectuado se genera el ticket
+    public static TicketVenta generarTicket(ListasProductos carrito){
+    
+    TicketVenta ticket = new TicketVenta(carrito);
+    return ticket;
     }
 }

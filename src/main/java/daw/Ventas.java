@@ -79,7 +79,7 @@ public class Ventas {
         ventasTotales.add(ticket);
     }
     //MÈTODOS PARA BUSCAR POR DÍA
-    public ArrayList<TicketVenta> busquedaVentasDiaConcreto(){
+    public void busquedaVentasDiaConcreto(){
         ArrayList<TicketVenta> seleccionados= new ArrayList<>();
         
        //Llamo al metodo preguntar fecha
@@ -89,13 +89,11 @@ public class Ventas {
                 seleccionados.add(ventasTotales.get(i));
             }
         }
-        
-        
-       return seleccionados;
+        JOptionPane.showMessageDialog(null, seleccionados);
     }
     
      //MÈTODOS PARA BUSCAR ENTRE FECHAS
-    public ArrayList<TicketVenta> busquedaEntreFechas(){
+    public void busquedaEntreFechas(){
         ArrayList<TicketVenta> seleccionados= new ArrayList<>();
         //LLamo a lo métodos para tener las dos fechas
         JOptionPane.showMessageDialog(null, 
@@ -113,7 +111,7 @@ public class Ventas {
                 seleccionados.add(ventasTotales.get(i));
             }
         }
-       return seleccionados;
+       JOptionPane.showMessageDialog(null, seleccionados);
     }
     //Método para mostrar toda las ventas
     public void mostrarVentas(){
