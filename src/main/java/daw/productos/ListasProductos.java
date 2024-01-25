@@ -5,6 +5,9 @@
 package daw.productos;
 
 import daw.Iva;
+import static daw.productos.SubCategoriaComida.PESCADO;
+import static daw.productos.SubCategoriaComida.POLLO;
+import static daw.productos.SubCategoriaComida.TERNERA;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -82,11 +85,103 @@ public class ListasProductos {
         listaPostres.add(postresAGuardar);
     }
 
+    //Método para para que cuando escoja entre una de las categorias muestre dichas
+    public ArrayList<Comida> filtrarPorSubCategoriaComida(SubCategoriaComida elegirSub) {
+        //Creamos el ArrayList que vamos a devolver
+        ArrayList<Comida> comidaAMostrar = new ArrayList<>();
+
+        //Depende de la subcategoría se ejecutará una de estas lógicas
+        switch (elegirSub) {
+            case POLLO -> {
+                //Bucle para que vaya añadiendo las comidas de subcategoria pollo
+                for (int i = 0; i < listaComida.size(); i++) {
+                    //con esta lógica conseguimos que se vaya añadiendo
+                    //todos los elementos que tengan una subcategoria de pollo
+                    if (listaComida.get(i).getSubComida().equals(SubCategoriaComida.POLLO)) {
+                        comidaAMostrar.add(listaComida.get(i));
+                    }
+                }
+            }
+            case PESCADO -> {
+                //Bucle para que vaya añadiendo las comidas de subcategoria pescado
+                for (int i = 0; i < listaComida.size(); i++) {
+                    //con esta lógica conseguimos que se vaya añadiendo
+                    //todos los elementos que tengan una subcategoria de pescado
+                    if (listaComida.get(i).getSubComida().equals(SubCategoriaComida.PESCADO)) {
+                        comidaAMostrar.add(listaComida.get(i));
+                    }
+                }
+            }
+            case TERNERA -> {
+                //Bucle para que vaya añadiendo las comidas de subcategoria ternera
+                for (int i = 0; i < listaComida.size(); i++) {
+                    //con esta lógica conseguimos que se vaya añadiendo
+                    //todos los elementos que tengan una subcategoria de ternera
+                    if (listaComida.get(i).getSubComida().equals(SubCategoriaComida.TERNERA)) {
+                        comidaAMostrar.add(listaComida.get(i));
+                    }
+                }
+            }
+        }
+        return comidaAMostrar;
+    }
+
+    //Método para para que cuando escoja entre una de las categorias muestre dichas
+    public ArrayList<Bebida> filtrarPorSubCategoriaBebida(SubCategoriaBebida elegirSub, int eresMayorOMenor) {
+        //Creamos el ArrayList que vamos a devolver
+        ArrayList<Bebida> bebidaAMostrar = new ArrayList<>();
+
+        //Depende de la subcategoría se ejecutará una de estas lógicas
+        switch (elegirSub) {
+            case AGUA -> {
+                //Bucle para que vaya añadiendo las bebidas de subcategoria agua
+                for (int i = 0; i < listaComida.size(); i++) {
+                    //con esta lógica conseguimos que se vaya añadiendo
+                    //todos los elementos que tengan una subcategoria de agua
+                    if (listaBebida.get(i).getSubBebida().equals(SubCategoriaBebida.AGUA)) {
+                        bebidaAMostrar.add(listaBebida.get(i));
+                    }
+                }
+            }
+            case CERVEZA -> {
+                //Lógica para que si es mayor de edad (llamaremos al método a la
+                // hora de llamar al método) pueda elegir alguna bebida alcohólica
+                if (eresMayorOMenor == 0) {
+                    //Bucle para que vaya añadiendo las bebidas de subcategoria cerveza
+                    for (int i = 0; i < listaComida.size(); i++) {
+                        //con esta lógica conseguimos que se vaya añadiendo
+                        //todos los elementos que tengan una subcategoria de cerveza
+                        if (listaBebida.get(i).getSubBebida().equals(SubCategoriaBebida.CERVEZA)) {
+                            bebidaAMostrar.add(listaBebida.get(i));
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, 
+                            "Eres menor a 18, no puedes alcoholizarte", 
+                            "Menor a la vista", JOptionPane.WARNING_MESSAGE);
+                }
+
+            }
+            case ZUMONARANZA -> {
+                //Bucle para que vaya añadiendo las Bebidas de subcategoria zumo de naranja
+                for (int i = 0; i < listaComida.size(); i++) {
+                    //con esta lógica conseguimos que se vaya añadiendo
+                    //todos los elementos que tengan una subcategoria de zumo de naranja
+                    if (listaBebida.get(i).getSubBebida().equals(SubCategoriaBebida.ZUMONARANZA)) {
+                        bebidaAMostrar.add(listaBebida.get(i));
+                    }
+                }
+            }
+        }
+        return bebidaAMostrar;
+    }
+
     //Método para que elija que comida quiere modificar
     public Comida elegirComida() {
         //Convertimos la lista en un array y lo guardamos en una variable de
         //tipo object
-        Object[] opciones = listaComida.toArray();
+        Object[] opciones = filtrarPorSubCategoriaComida(
+                MetodosProductos.elegirSubCategoríaComida()).toArray();
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
@@ -106,39 +201,14 @@ public class ListasProductos {
             return null;
         }
     }
-    
-    //Método para que dependiendo de si es mayor o menor de edad muestre o no
-    //todas las bebidas
-    public ArrayList<Bebida> bebidaFiltrada(int eresMayorA18){
-        //Hacemos lógica
-        if (eresMayorA18 == 0) {
-            return listaBebida;
-        } else {
-            //Creamos el array nuevo a devolver con solo las bebidas que son sin
-            //alcohol
-            ArrayList<Bebida> menorDeEdad = new ArrayList<>();
-            
-            //Creamos un for para ir recorriendo cada posición y vamos añadiendo
-            //si cumple la condición
-            for (int i = 0; i < listaBebida.size(); i++){
-                if (!listaBebida.get(i).getSubBebida().equals(
-                        SubCategoriaBebida.CERVEZA)){
-                    menorDeEdad.add(listaBebida.get(i));
-                }
-            }
-            
-            return menorDeEdad;
-        }
-    }
 
     //Método para que elija que bebida quiere modificar
     public Bebida elegirBebida() {
-        //Guardamos en una variable de tipo int el método de si es o no mayor de
-        //edad
-        int mayorOMenor = MetodosProductos.eresMayorA18();
         //Convertimos la lista en un array y lo guardamos en una variable de
         //tipo object
-        Object[] opciones = bebidaFiltrada(mayorOMenor).toArray();
+        Object[] opciones = filtrarPorSubCategoriaBebida(
+                MetodosProductos.elegirSubCategoríaBebida(), 
+                MetodosProductos.eresMayorA18()).toArray();
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
