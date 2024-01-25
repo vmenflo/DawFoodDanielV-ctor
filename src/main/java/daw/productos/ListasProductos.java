@@ -162,7 +162,7 @@ public class ListasProductos {
     public Postres elegirPostres() {
         //Convertimos la lista en un array y lo guardamos en una variable de
         //tipo object
-        Object[] opciones = listaBebida.toArray();
+        Object[] opciones = listaPostres.toArray();
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar

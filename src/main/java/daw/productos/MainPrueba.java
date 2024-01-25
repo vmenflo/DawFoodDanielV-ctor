@@ -53,11 +53,6 @@ public class MainPrueba {
 //        
 //        l1.modificarProductos(pos, des, precio, stock);
 //        
-        l1.nuevaComida();
-        
-        l1.borrarProductos(MetodosProductos.elegirCategorias());
-        l1.toString();
-        l1.getListaComida().forEach(System.out::println);
-        
+          l1.elegirBebida();        
     }
 }

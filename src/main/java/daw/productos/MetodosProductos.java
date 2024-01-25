@@ -143,9 +143,9 @@ public class MetodosProductos {
         //Postres:
         Postres p1 = new Postres(1, "Milk Shake", 3.5, 
                 Iva.IVA_POSTRES, 100);
-        Postres p2 = new Postres(1, "Browni", 3, 
+        Postres p2 = new Postres(2, "Browni", 3, 
                 Iva.IVA_POSTRES, 300);
-        Postres p3 = new Postres(1, "Gofres", 3.8, 
+        Postres p3 = new Postres(3, "Gofres", 3.8, 
                 Iva.IVA_POSTRES, 178);
         
         //Instanciamos el objeto

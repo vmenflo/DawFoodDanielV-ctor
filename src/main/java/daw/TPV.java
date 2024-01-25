@@ -5,6 +5,10 @@
 package daw;
 
 import static daw.MetodosTPV.cargaDatos;
+import daw.productos.Comida;
+import daw.productos.ListasProductos;
+import daw.productos.MetodosProductos;
+import daw.productos.Postres;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -169,7 +173,16 @@ public class TPV {
 
     //PROGRAMA PRINCIPAL
     public static void encender() {
+        //Carga de datos TPV
         ArrayList<TPV> tpvs = MetodosTPV.cargaDatos();
+        //Carga de datos Productos
+        ListasProductos productos = MetodosProductos.datosProductos();
+        //Creación de carrito
+        ListasProductos carrito = new ListasProductos();
+        //Creación de Lista de ventas (Tickets)
+        ArrayList<TicketVenta> ventas = new ArrayList<>();
+        //Carga de datos de tarjetas
+        ArrayList<TarjetaBanco> tarjetasRegistradas = MetodosTarjetaBanco.generarArrayTarjetas();
         System.out.println(tpvs.toString());
         boolean terminar = false;
         do {//Bucle general del programa
@@ -184,16 +197,19 @@ public class TPV {
                         String eleccion = MetodosTPV.seleccionMenuUsuario();
                         switch (eleccion) {
                             case "Comida" -> { //Opcion Comidas
-                                System.out.println("Estas en comida");
+                                //Añadimos al carrito una comida
+                                carrito.añadirUnElemento(productos.elegirComida());
                             }
                             case "Bebida" -> { //Opcion Bebidas
-                                System.out.println("Estas en bebidas");
+                                //Añadimos al carrito una bebida
+                                carrito.añadirUnElemento(productos.elegirBebida());
                             }
                             case "Postre" -> { //Opcion Postres
-                                System.out.println("Estas en postres");
+                                //Añadimos al carrito un postre
+                                carrito.añadirUnElemento(productos.elegirPostres());
                             }
                             case "Carrito" -> { //Carrito
-                                System.out.println("Estas en carrito");
+                                System.out.println(carrito.toString());
                             }
                             case "Salir" -> { //Salir
                                 salir = true;
@@ -218,13 +234,49 @@ public class TPV {
                         String eleccion = MetodosTPV.seleccionMenuAdministrador();
                         switch (eleccion) {
                             case "Modificar datos productos" -> {
-
+                                String categoria = MetodosProductos.elegirCategorias();
+                                switch (categoria) {
+                                    case "Comida" -> {
+                                        //llamamos al método para que modifique
+                                        //alguna comida
+                                        productos.editarComida(productos.elegirComida(),
+                                                MetodosProductos.elegirQueCambiar());
+                                    }
+                                    case "Bebida" -> {
+                                        //llamamos al método para que modifique
+                                        //alguna bebida
+                                        productos.editarBebida(productos.elegirBebida(),
+                                                MetodosProductos.elegirQueCambiar());
+                                    }
+                                    case "Postres" -> {
+                                        //llamamos al método para que modifique
+                                        //algun postre
+                                        productos.editarPostres(productos.elegirPostres(),
+                                                MetodosProductos.elegirQueCambiar());
+                                    }
+                                }
                             }
                             case "Crear producto" -> {
+                                String categoria = MetodosProductos.elegirCategorias();
+                                switch (categoria) {
+                                    case "Comida" -> {
+                                        //llamamos al método para que cree una comida
+                                        productos.nuevaComida();
+                                    }
+                                    case "Bebida" -> {
+                                        //llamamos al método para que cree una bebida
+                                        productos.nuevaBebida();
+                                    }
+                                    case "Postres" -> {
+                                        //llamamos al método para que cree un postre
+                                        productos.nuevoPostre();
+                                    }
+                                }
 
                             }
                             case "Borrar producto" -> {
-
+                                String categoria = MetodosProductos.elegirCategorias();
+                                productos.borrarProductos(categoria);
                             }
                             case "Consultar ventas" -> {
                                 boolean atras = false;
@@ -232,6 +284,7 @@ public class TPV {
                                     String busqueda = MetodosTPV.seleccionConsultarVentas();
                                     switch (busqueda) {
                                         case "Día concreto" -> {//Por día
+                                            
 
                                         }
                                         case "Fecha concreto" -> {//Enrte fechas
