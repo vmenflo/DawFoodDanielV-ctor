@@ -180,7 +180,7 @@ public class TPV {
         //Creación de carrito
         ListasProductos carrito = new ListasProductos();
         //Creación de Lista de ventas (Tickets)
-        ArrayList<TicketVenta> ventas = new ArrayList<>();
+        Ventas ventas = new Ventas();
         //Carga de datos de tarjetas
         ArrayList<TarjetaBanco> tarjetasRegistradas = MetodosTarjetaBanco.generarArrayTarjetas();
         System.out.println(tpvs.toString());
@@ -209,7 +209,42 @@ public class TPV {
                                 carrito.añadirUnElemento(productos.elegirPostres());
                             }
                             case "Carrito" -> { //Carrito
-                                System.out.println(carrito.toString());
+                                boolean seguir = false;
+                                while (!seguir) {
+                                    String seleccion = MetodosTPV.seleccionOpcionesCarrito();
+                                    switch (seleccion) {
+                                        case "Ver Carrito" -> {
+                                            JOptionPane.showMessageDialog(
+                                                    null, carrito.toString());
+                                        }
+                                        case "Borrar Carrito" -> {
+                                            MetodosTPV.borrarCarrito(carrito);
+                                        }
+                                        case "Seguir Comprando" -> {
+                                            seguir = true;
+                                        }
+                                        case "Pagar" -> {
+                                            JOptionPane.showMessageDialog(null,
+                                                    "Para completar el pedido"
+                                                    + " introduzca la tarjeta.");
+                                            boolean ok = MetodosTarjetaBanco.tarjetaValida(
+                                                    tarjetasRegistradas);
+                                            if (ok) {
+                                                TicketVenta ticket
+                                                        = MetodosTPV.generarTicket(carrito);
+                                                //IMPORTANTE METODO PARA VACIAR CARRITO
+                                                ventas.añadirTicket(ticket);
+                                                JOptionPane.showMessageDialog(null, ticket);
+                                                break;
+                                            } else {
+                                                JOptionPane.showMessageDialog(null,
+                                                        "Se ha producido "
+                                                        + "un Error. "
+                                                        + "Intentelo de nuevo");
+                                            }
+                                        }
+                                    }
+                                }//Cierre del bucle del menu
                             }
                             case "Salir" -> { //Salir
                                 salir = true;
@@ -284,14 +319,13 @@ public class TPV {
                                     String busqueda = MetodosTPV.seleccionConsultarVentas();
                                     switch (busqueda) {
                                         case "Día concreto" -> {//Por día
-                                            
-
+                                            ventas.busquedaVentasDiaConcreto();
                                         }
                                         case "Fecha concreto" -> {//Enrte fechas
-
+                                            ventas.busquedaEntreFechas();
                                         }
                                         case "Todas las ventas" -> {//Sin filtro
-
+                                            ventas.mostrarVentas();
                                         }
                                         case "Atrás" -> {
                                             atras = true;

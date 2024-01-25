@@ -28,19 +28,19 @@ public class TicketVenta {
     private static int contador=1;
     private UUID id;
     private int numeroPedido;
-    private ArrayList<ListasProductos> productosComprados;
+    private ListasProductos productosComprados;
     private LocalDate fechaCompra;
     private double TotalImporte;
    
     //Constructor
-    public TicketVenta() {
+    public TicketVenta(ListasProductos productosComprados) {
         this.id = UUID.randomUUID();
         //Controlo que no pase de 100
             if (contador > 99) {
             contador = 1;
             }
         this.numeroPedido=contador++;
-        this.productosComprados=null;
+        this.productosComprados=productosComprados;
         this.fechaCompra=LocalDate.now();
         this.TotalImporte=0;
     }
@@ -60,11 +60,11 @@ public class TicketVenta {
     }
     
 
-    public ArrayList<ListasProductos> getProductosComprados() {
+    public ListasProductos getProductosComprados() {
         return productosComprados;
     }
 
-    public void setProductosComprados(ArrayList<ListasProductos> productosComprados) {
+    public void setProductosComprados(ListasProductos productosComprados) {
         this.productosComprados = productosComprados;
     }
 
