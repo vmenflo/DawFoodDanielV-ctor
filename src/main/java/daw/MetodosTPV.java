@@ -81,7 +81,16 @@ public class MetodosTPV {
                 "Por favor, elija una opción para ver", "Menu Usuario",
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
+        if (eleccion != null){
+            //Devuelve la eleccion
         return eleccion;
+        }
+        //Si se pulsa cancerlar
+        else{
+            //Se regirstra eleccion Salir
+            eleccion="Salir";
+            return eleccion;
+        }       
     }
 
     //Menu Administrador
