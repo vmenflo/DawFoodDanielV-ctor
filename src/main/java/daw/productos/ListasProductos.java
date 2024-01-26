@@ -156,8 +156,8 @@ public class ListasProductos {
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, 
-                            "Eres menor a 18, no puedes alcoholizarte", 
+                    JOptionPane.showMessageDialog(null,
+                            "Eres menor a 18, no puedes alcoholizarte",
                             "Menor a la vista", JOptionPane.WARNING_MESSAGE);
                 }
 
@@ -207,7 +207,7 @@ public class ListasProductos {
         //Convertimos la lista en un array y lo guardamos en una variable de
         //tipo object
         Object[] opciones = filtrarPorSubCategoriaBebida(
-                MetodosProductos.elegirSubCategoríaBebida(), 
+                MetodosProductos.elegirSubCategoríaBebida(),
                 MetodosProductos.eresMayorA18()).toArray();
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
@@ -625,25 +625,33 @@ public class ListasProductos {
 
     //Método para borrar productos existentes
     public void borrarProductos(String elegirCategoria) {
-        switch (elegirCategoria) {
-            case "Comida" -> {
-                //llamamos al metodo elegirComida para que nos muestre cuál
-                //quiere borrar
-                Comida comidaABorrar = elegirComida();
-                this.listaComida.remove(comidaABorrar);
+        boolean retroceso = false;
+
+        do {
+            switch (elegirCategoria) {
+                case "Comida" -> {
+                    //llamamos al metodo elegirComida para que nos muestre cuál
+                    //quiere borrar
+                    Comida comidaABorrar = elegirComida();
+                    this.listaComida.remove(comidaABorrar);
+                }
+                case "Bebida" -> {
+                    //llamamos al metodo elegirComida para que nos muestre cuál
+                    //quiere borrar
+                    Bebida bebidaABorrar = elegirBebida();
+                    this.listaBebida.remove(bebidaABorrar);
+                }
+                case "Postres" -> {
+                    //llamamos al metodo elegirComida para que nos muestre cuál
+                    //quiere borrar
+                    Postres postreABorrar = elegirPostres();
+                    this.listaPostres.remove(postreABorrar);
+                }
+                case "salir" -> {
+                    retroceso = true;
+                }
             }
-            case "Bebida" -> {
-                //llamamos al metodo elegirComida para que nos muestre cuál
-                //quiere borrar
-                Bebida bebidaABorrar = elegirBebida();
-                this.listaBebida.remove(bebidaABorrar);
-            }
-            case "Postres" -> {
-                //llamamos al metodo elegirComida para que nos muestre cuál
-                //quiere borrar
-                Postres postreABorrar = elegirPostres();
-                this.listaPostres.remove(postreABorrar);
-            }
-        }
+        } while (!retroceso);
+
     }
 }

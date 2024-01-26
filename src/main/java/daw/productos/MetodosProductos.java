@@ -50,14 +50,11 @@ public class MetodosProductos {
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
 
-        if (eleccion == null) {
-            JOptionPane.showMessageDialog(null,
-                    "Debes elegir entre las opciones", "Aviso",
-                    JOptionPane.WARNING_MESSAGE, null);
-            return null;
+        if (eleccion != null) {
+            return eleccion;
+        } else {
+            return eleccion = "salir";
         }
-
-        return eleccion;
     }
 
     //Método para mostrar un desplegable de subcategoría comida
@@ -71,6 +68,7 @@ public class MetodosProductos {
                 "Selección de subcategoría",
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
+       
         return eleccion;
     }
 

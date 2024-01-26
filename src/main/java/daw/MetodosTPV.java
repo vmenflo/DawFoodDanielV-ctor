@@ -95,7 +95,12 @@ public class MetodosTPV {
                 "¿Qué deseas hacer?", "Menu Mantenimiento",
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
-        return eleccion;
+        
+        if (eleccion != null) {
+            return eleccion;
+        } else {
+            return eleccion = "Salir";
+        }
     }
 
     //Metodo para navegar por el menu consultar ventas
@@ -108,7 +113,11 @@ public class MetodosTPV {
                 "¿Cómo deseas realizar la búsqueda?", "Consultar Ventas",
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
-        return eleccion;
+        if (eleccion != null) {
+            return eleccion;
+        } else {
+            return eleccion = "atras";
+        }
     }
     
     //Mostrar Menu Carrito en TPV

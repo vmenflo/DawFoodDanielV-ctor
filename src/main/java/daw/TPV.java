@@ -255,8 +255,12 @@ public class TPV {
                 }
                 case 1 -> {//Modo Administrador
 
-                    //Bucle para controlar el acceso modo administrador
+                    //Bucle que controla la selección de tpv
                     boolean validoTPV = false;
+                    //Bucle para controlar el acceso modo administrador
+                    boolean salir = false;
+                    //Bucle que controla el menú modificar un producto
+                    boolean retroceso = false;
                     do {
                         int elegirTPV = MetodosTPV.preguntarTpv();
                         String password = MetodosTPV.preguntarContraseñaTpv();
@@ -264,49 +268,62 @@ public class TPV {
                             validoTPV = true;
                         }
                     } while (!validoTPV);
-                    boolean salir = false;
+
                     do {
                         String eleccion = MetodosTPV.seleccionMenuAdministrador();
+
                         switch (eleccion) {
                             case "Modificar datos productos" -> {
-                                String categoria = MetodosProductos.elegirCategorias();
-                                switch (categoria) {
-                                    case "Comida" -> {
-                                        //llamamos al método para que modifique
-                                        //alguna comida
-                                        productos.editarComida(productos.elegirComida(),
-                                                MetodosProductos.elegirQueCambiar());
+                                do {
+                                    String categoria = MetodosProductos.elegirCategorias();
+                                    switch (categoria) {
+                                        case "Comida" -> {
+                                            //llamamos al método para que modifique
+                                            //alguna comida
+                                            productos.editarComida(productos.elegirComida(),
+                                                    MetodosProductos.elegirQueCambiar());
+                                        }
+                                        case "Bebida" -> {
+                                            //llamamos al método para que modifique
+                                            //alguna bebida
+                                            productos.editarBebida(productos.elegirBebida(),
+                                                    MetodosProductos.elegirQueCambiar());
+                                        }
+                                        case "Postres" -> {
+                                            //llamamos al método para que modifique
+                                            //algun postre
+                                            productos.editarPostres(productos.elegirPostres(),
+                                                    MetodosProductos.elegirQueCambiar());
+                                        }
+                                        case "salir" -> {
+                                            retroceso = true;
+                                        }
                                     }
-                                    case "Bebida" -> {
-                                        //llamamos al método para que modifique
-                                        //alguna bebida
-                                        productos.editarBebida(productos.elegirBebida(),
-                                                MetodosProductos.elegirQueCambiar());
-                                    }
-                                    case "Postres" -> {
-                                        //llamamos al método para que modifique
-                                        //algun postre
-                                        productos.editarPostres(productos.elegirPostres(),
-                                                MetodosProductos.elegirQueCambiar());
-                                    }
-                                }
+                                } while (!retroceso);
+
                             }
                             case "Crear producto" -> {
-                                String categoria = MetodosProductos.elegirCategorias();
-                                switch (categoria) {
-                                    case "Comida" -> {
-                                        //llamamos al método para que cree una comida
-                                        productos.nuevaComida();
+                                retroceso = false;
+                                do {
+                                    String categoria = MetodosProductos.elegirCategorias();
+                                    switch (categoria) {
+                                        case "Comida" -> {
+                                            //llamamos al método para que cree una comida
+                                            productos.nuevaComida();
+                                        }
+                                        case "Bebida" -> {
+                                            //llamamos al método para que cree una bebida
+                                            productos.nuevaBebida();
+                                        }
+                                        case "Postres" -> {
+                                            //llamamos al método para que cree un postre
+                                            productos.nuevoPostre();
+                                        }
+                                        case "salir" -> {
+                                            retroceso = true;
+                                        }
                                     }
-                                    case "Bebida" -> {
-                                        //llamamos al método para que cree una bebida
-                                        productos.nuevaBebida();
-                                    }
-                                    case "Postres" -> {
-                                        //llamamos al método para que cree un postre
-                                        productos.nuevoPostre();
-                                    }
-                                }
+                                } while (!retroceso);
 
                             }
                             case "Borrar producto" -> {
@@ -327,7 +344,7 @@ public class TPV {
                                         case "Todas las ventas" -> {//Sin filtro
                                             ventas.mostrarVentas();
                                         }
-                                        case "Atrás" -> {
+                                        case "atras" -> {
                                             atras = true;
                                         }
                                     }
@@ -341,6 +358,9 @@ public class TPV {
                     } while (!salir);
                 }
                 case 2 -> {// Opcion salir del programa
+                    terminar = true;
+                }
+                default -> {
                     terminar = true;
                 }
             }
