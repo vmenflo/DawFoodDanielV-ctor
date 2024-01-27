@@ -22,4 +22,9 @@ public enum Iva {
     private Iva(double cantidadIva) {
         this.cantidadIva = cantidadIva;
     }
+
+    public double getCantidadIva() {
+        return cantidadIva;
+    }
+    
 }

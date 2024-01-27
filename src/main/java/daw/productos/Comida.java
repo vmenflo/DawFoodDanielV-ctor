@@ -18,6 +18,7 @@ public class Comida {
     private double precio;
     private Iva iva;
     private int stock = 0;
+    private int cantidadPedida=0;
     
     //Creamos constructor parametrizado
     public Comida(int id, String descripcion, SubCategoriaComida subComida, double precio, Iva iva, int stock) {
@@ -35,6 +36,13 @@ public class Comida {
     }
         
     //Añadimos getter y setters
+     public int getCantidaPpedida() {
+        return cantidadPedida;
+    }
+
+    public void setCantidadPedida(int cantidadpedida) {
+        this.cantidadPedida = cantidadpedida;
+    }
     public int getId() {
         return id;
     }
@@ -91,8 +99,8 @@ public class Comida {
         sb.append("id=").append(id);
         sb.append(", descripcion=").append(descripcion);
         sb.append(", subComida=").append(subComida);
-        sb.append(", precio=").append(precio);
-        sb.append(", iva=").append(iva);
+        sb.append(", precio=").append(precio + " €");
+        sb.append(", iva=").append(iva.IVA_COMIDA.getCantidadIva());
         sb.append(", stock=").append(stock);
         sb.append('}');
         return sb.toString();
@@ -141,7 +149,7 @@ public class Comida {
         }
         return this.iva == other.iva;
     }
-    
-    
-    
+
+  
+      
 }

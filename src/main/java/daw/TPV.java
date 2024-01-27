@@ -5,6 +5,7 @@
 package daw;
 
 import static daw.MetodosTPV.cargaDatos;
+import daw.productos.Bebida;
 import daw.productos.Comida;
 import daw.productos.ListasProductos;
 import daw.productos.MetodosProductos;
@@ -198,15 +199,21 @@ public class TPV {
                         switch (eleccion) {
                             case "Comida" -> { //Opcion Comidas
                                 //Añadimos al carrito una comida
-                                carrito.añadirUnElemento(productos.elegirComida());
+                                Comida comidaElegida = productos.elegirComida();
+                                int cantidad = carrito.preguntarPorCantidadComidaCarrito(comidaElegida);
+                                carrito.añadirUnElementoCarrito(comidaElegida, cantidad);
                             }
                             case "Bebida" -> { //Opcion Bebidas
                                 //Añadimos al carrito una bebida
-                                carrito.añadirUnElemento(productos.elegirBebida());
+                                Bebida bebidaElegida = productos.elegirBebida();
+                                int cantidad = carrito.preguntarPorCantidadBebidaCarrito(bebidaElegida);
+                                carrito.añadirUnElementoCarrito(bebidaElegida, cantidad);
                             }
                             case "Postre" -> { //Opcion Postres
                                 //Añadimos al carrito un postre
-                                carrito.añadirUnElemento(productos.elegirPostres());
+                                Postres postreElegida = productos.elegirPostres();
+                                int cantidad = carrito.preguntarPorCantidadPostreCarrito(postreElegida);
+                                carrito.añadirUnElementoCarrito(postreElegida, cantidad);
                             }
                             case "Carrito" -> { //Carrito
                                 boolean seguir = false;
@@ -214,8 +221,7 @@ public class TPV {
                                     String seleccion = MetodosTPV.seleccionOpcionesCarrito();
                                     switch (seleccion) {
                                         case "Ver Carrito" -> {
-                                            JOptionPane.showMessageDialog(
-                                                    null, carrito.toString());
+                                            carrito.verCarrito();
                                         }
                                         case "Borrar Carrito" -> {
                                             MetodosTPV.borrarCarrito(carrito);

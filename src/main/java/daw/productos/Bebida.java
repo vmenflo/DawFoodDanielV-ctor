@@ -18,6 +18,7 @@ public class Bebida {
     private double precio;
     private Iva iva;
     private int stock = 0;
+    private int cantidadPedida=0;
     
     //Creamos constructor parametrizado
     public Bebida(int id, String descripcion, SubCategoriaBebida subBebida, double precio, Iva iva, int stock) {
@@ -35,7 +36,13 @@ public class Bebida {
     
         
     //Insertamos los getters y los setters
+     public int getCantidadPedida() {
+        return cantidadPedida;
+    }
 
+    public void setCantidadPedida(int cantidadPedida) {
+        this.cantidadPedida = cantidadPedida;
+    }
     public int getId() {
         return id;
     }
@@ -145,7 +152,7 @@ public class Bebida {
         }
         return this.iva == other.iva;
     }
-    
-    
+
+       
     
 }

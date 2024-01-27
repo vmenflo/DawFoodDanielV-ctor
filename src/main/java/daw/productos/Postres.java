@@ -6,6 +6,7 @@ package daw.productos;
 
 import daw.Iva;
 import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Postres {
     private double precio;
     private Iva iva;
     private int stock = 0;
+    private int cantidadPedida=0;
 
     //Creamos constructor parametrizado
     public Postres(int id, String descripcion, double precio, Iva iva, int stock) {
@@ -34,6 +36,18 @@ public class Postres {
     
         
     //Insertamos los getter y los setters
+     public int getCantidadPedida() {
+        return cantidadPedida;
+    }
+
+    public void setCantidadPedida(int cantidadPedida) {
+        if(cantidadPedida<stock){
+        this.cantidadPedida = cantidadPedida;
+        }else {JOptionPane.showMessageDialog(null, 
+                "Lo sentimos no podemos servirle cantidad. Nuestro stock es de: "+stock);}
+        
+    }
+    
     public int getId() {
         return id;
     }
