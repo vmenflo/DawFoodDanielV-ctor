@@ -61,7 +61,8 @@ public class MetodosTarjetaBanco {
         //condicional para parar y devolver true una vez que se cumple la condición
         if((cvc==cvcTemporal)
                 &&(numero.equals(ultimosCuatro))
-                &&(fecha.equals(fechaTemporal)&&fecha.isAfter(hoy))&&(totalCompra<=saldo)){
+                &&(fecha.equals(fechaTemporal)&&fecha.isAfter(hoy))
+                &&(totalCompra<=saldo)){
             correcto=true;
             break;
         }

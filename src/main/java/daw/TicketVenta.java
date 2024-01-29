@@ -30,19 +30,21 @@ public class TicketVenta {
     private int numeroPedido;
     private ListasProductos productosComprados;
     private LocalDate fechaCompra;
-    private double TotalImporte;
+    private double TotalImporte=0;
+    private double TotalIVA=0;
 
     //Constructor
-    public TicketVenta(ListasProductos productosComprados) {
+    public TicketVenta(ListasProductos productosCompradosOrigen) {
         this.id = UUID.randomUUID();
         //Controlo que no pase de 100
         if (contador > 99) {
             contador = 1;
         }
         this.numeroPedido = contador++;
-        this.productosComprados = productosComprados;
+        this.productosComprados = productosCompradosOrigen;
         this.fechaCompra = LocalDate.now();
-        this.TotalImporte = 0;
+        this.TotalImporte = calcularImporteTotal(productosCompradosOrigen);
+        this.TotalIVA=calcularIVATotal(productosCompradosOrigen);
     }
 
     //GETTER AND SETTER
@@ -85,32 +87,18 @@ public class TicketVenta {
         sb.append("\nTicket:  ").append(id);
         sb.append("\nNúmero de pedido=").append(numeroPedido);
         sb.append("\nFecha de la compra=").append(fechaCompra);
-        sb.append("\nProductos comprados=\n");
+        sb.append("\nProductos comprados:\n");
         for(int i=0;i<productosComprados.getListaComida().size();i++){
-            sb.append(productosComprados.getListaComida().get(i).getDescripcion())
-                    .append(" x ").append(productosComprados.getListaComida().get(i).getCantidaPpedida())
-                    .append(" - ")
-                    .append(productosComprados.getListaComida().get(i).getPrecio())
-                    .append(" €/unid\n");
+            sb.append(productosComprados.getListaComida().get(i).getDescripcion()).append(" x ").append(productosComprados.getListaComida().get(i).getCantidaPpedida()).append(" - ").append(productosComprados.getListaComida().get(i).getPrecio()).append(" €/unid\n");
         }
         for(int i=0;i<productosComprados.getListaBebida().size();i++){
-            sb.append(productosComprados.getListaBebida().get(i).getDescripcion())
-                    .append(" x ")
-                    .append(productosComprados.getListaBebida().get(i).getCantidadPedida())
-                    .append(" - ")
-                    .append(productosComprados.getListaBebida().get(i).getPrecio())
-                    .append(" €/unid\n");
+            sb.append(productosComprados.getListaBebida().get(i).getDescripcion()).append(" x ").append(productosComprados.getListaBebida().get(i).getCantidadPedida()).append(" - ").append(productosComprados.getListaBebida().get(i).getPrecio()).append(" €/unid\n");
         }
         for(int i=0;i<productosComprados.getListaPostres().size();i++){
-            sb.append(productosComprados.getListaPostres().get(i).getDescripcion())
-                    .append(" x ")
-                    .append(productosComprados.getListaPostres().get(i).getCantidadPedida())
-                    .append(" - ")
-                    .append(productosComprados.getListaPostres().get(i).getPrecio())
-                    .append(" €/unid\n");
+            sb.append(productosComprados.getListaPostres().get(i).getDescripcion()).append(" x ").append(productosComprados.getListaPostres().get(i).getCantidadPedida()).append(" - ").append(productosComprados.getListaPostres().get(i).getPrecio()).append(" €/unid\n");
         }
-        sb.append("\nTotal importe= ").append(calcularImporteTotal(productosComprados)).append(" €");
-        sb.append("\nTotal (IVA)= ").append(calcularIVATotal(productosComprados)).append(" €");
+        sb.append("\nTotal importe= ").append(TotalImporte).append(" €");
+        sb.append("\nTotal (IVA)= ").append(TotalIVA).append(" €");
         sb.append('}');
         return sb.toString();
     }

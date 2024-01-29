@@ -181,7 +181,9 @@ public class TPV {
         //Creación de carrito
         ListasProductos carrito = new ListasProductos();
         //Creación de Lista de ventas (Tickets)
-        Ventas ventas = new Ventas();
+        //Ventas ventas = new Ventas();
+        ArrayList<TicketVenta> ventas = new ArrayList<>();
+        ventasTotales ventasTotal = new ventasTotales(ventas);
         //Carga de datos de tarjetas
         ArrayList<TarjetaBanco> tarjetasRegistradas = MetodosTarjetaBanco.generarArrayTarjetas();
         System.out.println(tpvs.toString());
@@ -253,10 +255,10 @@ public class TPV {
                                                     tarjetasRegistradas, carrito);
                                             if (ok) {
                                                 TicketVenta ticket
-                                                        = MetodosTPV.generarTicket(carrito);
+                                                        = new TicketVenta(carrito);
                                                 MetodosTPV.vaciarCarrito(carrito);
-                                                ventas.añadirTicket(ticket);
-                                                JOptionPane.showMessageDialog(null, ticket);
+                                                ventas.add(ticket);
+                                                JOptionPane.showMessageDialog(null, ticket.toString());
                                                 break;
                                             } else {
                                                 JOptionPane.showMessageDialog(null,
@@ -359,16 +361,17 @@ public class TPV {
                                     String busqueda = MetodosTPV.seleccionConsultarVentas();
                                     switch (busqueda) {
                                         case "Día concreto" -> {//Por día
-                                            ventas.busquedaVentasDiaConcreto();
+                                            ventasTotal.busquedaVentasDiaConcreto();
                                         }
                                         case "Fecha concreto" -> {//Enrte fechas
-                                            ventas.busquedaEntreFechas();
+                                            ventasTotal.busquedaEntreFechas();
                                         }
                                         case "Todas las ventas" -> {//Sin filtro
-                                            ventas.mostrarVentas();
+                                            ventasTotal.ventasTotales();
                                         }
                                         case "atras" -> {
-                                            atras = true;
+                                            atras=true;
+                                            break;
                                         }
                                     }
                                 } while (!atras);

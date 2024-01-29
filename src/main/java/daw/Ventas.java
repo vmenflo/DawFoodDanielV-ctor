@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;
  *
  * @author victor
  */
-public class Ventas {
-    
+//public class Ventas {
+    /*
     //Atributos
     private ArrayList<TicketVenta> ventasTotales = new ArrayList<>();
     
@@ -90,10 +90,10 @@ public class Ventas {
             }
         }
         JOptionPane.showMessageDialog(null, seleccionados);
-    }
-    
+    }*/
+    /*
      //MÈTODOS PARA BUSCAR ENTRE FECHAS
-    public void busquedaEntreFechas(){
+    public static void busquedaEntreFechas(){
         ArrayList<TicketVenta> seleccionados= new ArrayList<>();
         //LLamo a lo métodos para tener las dos fechas
         JOptionPane.showMessageDialog(null, 
@@ -119,4 +119,4 @@ public class Ventas {
                 ventasTotales.toString());
     }
     
-}
+}*/
