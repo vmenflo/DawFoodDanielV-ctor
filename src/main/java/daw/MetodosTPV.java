@@ -55,11 +55,11 @@ public class MetodosTPV {
 
     //Preguntar en que modo quiere entrar el usuario
     public static int seleccionarModo() {
-        String[] modo = {"Modo punto de venta", "Modo Administrador", "Salir"};
+        String[] modo = {"Modo punto de venta", "Modo Administrador", "Apagar"};
 
         int opcion = JOptionPane.showOptionDialog(
                 null,
-                "Bienvenido ¿Cómo quieres accede al programa?",
+                "Bienvenido\n ¿Cómo quieres accede al programa?",
                 "SELECCION MODO",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -162,5 +162,14 @@ public class MetodosTPV {
     
     TicketVenta ticket = new TicketVenta(carrito);
     return ticket;
+    }
+    
+     //Método borrar carrito despues de comprar
+    public static void vaciarCarrito(ListasProductos carrito){
+        //Limpia todas las listas que contiene mi carrito
+        carrito.getListaComida().clear(); //Borra los elementos
+        carrito.getListaBebida().clear();//Borra los elementos
+        carrito.getListaPostres().clear();//Borra los elementos
+          
     }
 }

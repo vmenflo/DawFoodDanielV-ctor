@@ -745,7 +745,7 @@ public class ListasProductos {
 
     //Método para mostrar lista de carrito
     public void verCarrito() {
-
+        
         StringBuilder sb = new StringBuilder();
         sb.append("                    CARRITO\n");
         sb.append("\n");

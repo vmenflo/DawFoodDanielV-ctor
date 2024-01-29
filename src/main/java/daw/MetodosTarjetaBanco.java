@@ -4,6 +4,7 @@
  */
 package daw;
 
+import daw.productos.ListasProductos;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.YearMonth;
@@ -27,7 +28,7 @@ public class MetodosTarjetaBanco {
         TarjetaBanco tarjetaDos = new TarjetaBanco("ES98549623588745",
                 "DANIEL NAVAS BORJA", 2025, 11, 971, 1000);
         TarjetaBanco tarjetaTres = new TarjetaBanco("ES98549623583652",
-                "RAMÓN BENITEZ TIESO", 2025, 11, 856, 10);
+                "RAMÓN TIESO", 2025, 11, 856, 10);
         //Las añadimos
         tarjetas.add(tarjetaUno);
         tarjetas.add(tarjetaDos);
@@ -35,7 +36,7 @@ public class MetodosTarjetaBanco {
         return tarjetas;
     }
     //Método para pedir al usuario que introduzca datos tarjeta
-    public static boolean tarjetaValida(ArrayList<TarjetaBanco> tarjetas){
+    public static boolean tarjetaValida(ArrayList<TarjetaBanco> tarjetas, ListasProductos listas){
     boolean correcto=false;
     //Datos que pedimos al usuario con llamadas de métodos
     String numero =MetodosTarjetaBanco.pedirNumeroTarjeta();
@@ -47,16 +48,20 @@ public class MetodosTarjetaBanco {
     YearMonth fechaTemporal = null;
     YearMonth hoy = YearMonth.now();
     String ultimosCuatro=null;
+    double totalCompra=0;
+    double saldo=0;
     //Bucle para comparar
     for(int i=0;i<tarjetas.size();i++){
         cvcTemporal=tarjetas.get(i).getCvc();
         fechaTemporal=tarjetas.get(i).getCaducidad();
         numeroTemporal=tarjetas.get(i).getNumeroTarjeta();
         ultimosCuatro=numeroTemporal.substring(tarjetas.get(i).getNumeroTarjeta().length()-4);
+        totalCompra= TicketVenta.calcularImporteTotal(listas);
+        saldo=tarjetas.get(i).getSaldo();
         //condicional para parar y devolver true una vez que se cumple la condición
         if((cvc==cvcTemporal)
                 &&(numero.equals(ultimosCuatro))
-                &&(fecha.equals(fechaTemporal)&&fecha.isAfter(hoy))){
+                &&(fecha.equals(fechaTemporal)&&fecha.isAfter(hoy))&&(totalCompra<=saldo)){
             correcto=true;
             break;
         }

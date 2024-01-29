@@ -221,6 +221,14 @@ public class TPV {
                                     String seleccion = MetodosTPV.seleccionOpcionesCarrito();
                                     switch (seleccion) {
                                         case "Ver Carrito" -> {
+                                            //Controlar si el carrito está vacío
+                                            if(carrito.getListaComida().isEmpty()
+                                                    &&carrito.getListaBebida().isEmpty()
+                                                    &&carrito.getListaPostres().isEmpty()){
+                                            JOptionPane.showMessageDialog(null, 
+                                                    "El carrito está vacío");
+                                            break;
+                                            }
                                             carrito.verCarrito();
                                         }
                                         case "Borrar Carrito" -> {
@@ -230,15 +238,23 @@ public class TPV {
                                             seguir = true;
                                         }
                                         case "Pagar" -> {
+                                            //Controlar si el carrito está vacío
+                                            if(carrito.getListaComida().isEmpty()
+                                                    &&carrito.getListaBebida().isEmpty()
+                                                    &&carrito.getListaPostres().isEmpty()){
+                                            JOptionPane.showMessageDialog(null, 
+                                                    "El carrito está vacío");
+                                            break;
+                                            }
                                             JOptionPane.showMessageDialog(null,
                                                     "Para completar el pedido"
                                                     + " introduzca la tarjeta.");
                                             boolean ok = MetodosTarjetaBanco.tarjetaValida(
-                                                    tarjetasRegistradas);
+                                                    tarjetasRegistradas, carrito);
                                             if (ok) {
                                                 TicketVenta ticket
                                                         = MetodosTPV.generarTicket(carrito);
-                                                //IMPORTANTE METODO PARA VACIAR CARRITO
+                                                MetodosTPV.vaciarCarrito(carrito);
                                                 ventas.añadirTicket(ticket);
                                                 JOptionPane.showMessageDialog(null, ticket);
                                                 break;
@@ -247,6 +263,7 @@ public class TPV {
                                                         "Se ha producido "
                                                         + "un Error. "
                                                         + "Intentelo de nuevo");
+                                                break;
                                             }
                                         }
                                     }
