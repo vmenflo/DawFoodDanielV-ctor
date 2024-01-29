@@ -256,9 +256,10 @@ public class TPV {
                                             if (ok) {
                                                 TicketVenta ticket
                                                         = new TicketVenta(carrito);
-                                                MetodosTPV.vaciarCarrito(carrito);
+                                                
                                                 ventas.add(ticket);
                                                 JOptionPane.showMessageDialog(null, ticket.toString());
+                                                MetodosTPV.vaciarCarrito(carrito);
                                                 break;
                                             } else {
                                                 JOptionPane.showMessageDialog(null,
