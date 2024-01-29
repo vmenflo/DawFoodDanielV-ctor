@@ -774,7 +774,7 @@ public class ListasProductos {
             double importe = precio * cantidad;
             total += importe;
             double IVA = listaComida.get(i).getIva().getCantidadIva();
-            iva += importe * IVA;
+            iva += precio * IVA;
         }
         for (int i = 0; i < listaBebida.size(); i++) {
             double precio = listaBebida.get(i).getPrecio();
@@ -782,7 +782,7 @@ public class ListasProductos {
             double importe = precio * cantidad;
             total += importe;
             double IVA = listaBebida.get(i).getIva().getCantidadIva();
-            iva += importe * IVA;
+            iva += precio * IVA;
         }
         for (int i = 0; i < listaPostres.size(); i++) {
             double precio = listaPostres.get(i).getPrecio();
@@ -790,7 +790,7 @@ public class ListasProductos {
             double importe = precio * cantidad;
             total += importe;
             double IVA = listaPostres.get(i).getIva().getCantidadIva();
-            iva += importe * IVA;
+            iva += precio * IVA;
         }
         String texto = """
                       El importe total es de %.2f €
