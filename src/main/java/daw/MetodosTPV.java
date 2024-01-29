@@ -81,16 +81,15 @@ public class MetodosTPV {
                 "Por favor, elija una opción para ver", "Menu Usuario",
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
-        if (eleccion != null){
+        if (eleccion != null) {
             //Devuelve la eleccion
-        return eleccion;
-        }
-        //Si se pulsa cancerlar
-        else{
-            //Se regirstra eleccion Salir
-            eleccion="Salir";
             return eleccion;
-        }       
+        } //Si se pulsa cancerlar
+        else {
+            //Se regirstra eleccion Salir
+            eleccion = "Salir";
+            return eleccion;
+        }
     }
 
     //Menu Administrador
@@ -104,7 +103,7 @@ public class MetodosTPV {
                 "¿Qué deseas hacer?", "Menu Mantenimiento",
                 JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
-        
+
         if (eleccion != null) {
             return eleccion;
         } else {
@@ -125,10 +124,10 @@ public class MetodosTPV {
         if (eleccion != null) {
             return eleccion;
         } else {
-            return eleccion = "atras";
+            return eleccion = "Atrás";
         }
     }
-    
+
     //Mostrar Menu Carrito en TPV
     public static String seleccionOpcionesCarrito() {
         //Array de las opciones disponibles
@@ -141,35 +140,37 @@ public class MetodosTPV {
                 opciones, opciones[0]);
         return eleccion;
     }
+
     //Método borrar carrito
-    public static void borrarCarrito(ListasProductos carrito){
+    public static void borrarCarrito(ListasProductos carrito) {
         //Si no hay nada en el carrito no hace nada
-        if(carrito.getListaComida().isEmpty()
-                &&carrito.getListaBebida().isEmpty()
-                &&carrito.getListaPostres().isEmpty()){
-            JOptionPane.showMessageDialog(null, 
+        if (carrito.getListaComida().isEmpty()
+                && carrito.getListaBebida().isEmpty()
+                && carrito.getListaPostres().isEmpty()) {
+            JOptionPane.showMessageDialog(null,
                     "No tienes nada en Carrito");
-        }else{
+        } else {
             carrito.getListaComida().clear(); //Borra los elementos
             carrito.getListaBebida().clear();//Borra los elementos
             carrito.getListaPostres().clear();//Borra los elementos
-            JOptionPane.showMessageDialog(null, 
+            JOptionPane.showMessageDialog(null,
                     "Ahora el Carrito esta vacío");
         }
     }
+
     //Si el pago se ha efectuado se genera el ticket
-    public static TicketVenta generarTicket(ListasProductos carrito){
-    
-    TicketVenta ticket = new TicketVenta(carrito);
-    return ticket;
+    public static TicketVenta generarTicket(ListasProductos carrito) {
+
+        TicketVenta ticket = new TicketVenta(carrito);
+        return ticket;
     }
-    
-     //Método borrar carrito despues de comprar
-    public static void vaciarCarrito(ListasProductos carrito){
+
+    //Método borrar carrito despues de comprar
+    public static void vaciarCarrito(ListasProductos carrito) {
         //Limpia todas las listas que contiene mi carrito
         carrito.getListaComida().clear(); //Borra los elementos
         carrito.getListaBebida().clear();//Borra los elementos
         carrito.getListaPostres().clear();//Borra los elementos
-          
+
     }
 }

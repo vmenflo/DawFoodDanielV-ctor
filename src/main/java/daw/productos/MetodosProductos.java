@@ -62,12 +62,17 @@ public class MetodosProductos {
         //Creamos un array de String para hacer un desplegable y que elija qué
         //es lo que quiere cambiar
         Object[] opciones = SubCategoriaComida.values();
+        SubCategoriaComida eleccion;
 
-        SubCategoriaComida eleccion = (SubCategoriaComida) JOptionPane.showInputDialog(null,
-                "Elige la subcategoría",
-                "Selección de subcategoría",
-                JOptionPane.QUESTION_MESSAGE, null,
-                opciones, opciones[0]);
+        //Hacemos un bucle para que tenga que elegir sí o sí una subcategoría
+        do {
+            eleccion = (SubCategoriaComida) JOptionPane.showInputDialog(null,
+                    "Elige la subcategoría",
+                    "Selección de subcategoría",
+                    JOptionPane.QUESTION_MESSAGE, null,
+                    opciones, opciones[0]);
+        } while (eleccion == null);
+
         return eleccion;
     }
 
@@ -76,12 +81,17 @@ public class MetodosProductos {
         //Creamos un array de String para hacer un desplegable y que elija qué
         //es lo que quiere cambiar
         Object[] opciones = SubCategoriaBebida.values();
+        SubCategoriaBebida eleccion;
 
-        SubCategoriaBebida eleccion = (SubCategoriaBebida) JOptionPane.showInputDialog(null,
-                "Elige la subcategoría",
-                "Selección de subcategoría",
-                JOptionPane.QUESTION_MESSAGE, null,
-                opciones, opciones[0]);
+        //Hacemos un bucle para que tenga que elegir sí o sí una subcategoría
+        do {
+            eleccion = (SubCategoriaBebida) JOptionPane.showInputDialog(null,
+                    "Elige la subcategoría",
+                    "Selección de subcategoría",
+                    JOptionPane.QUESTION_MESSAGE, null,
+                    opciones, opciones[0]);
+        } while (eleccion == null);
+
         return eleccion;
     }
 

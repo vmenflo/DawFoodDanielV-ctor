@@ -122,7 +122,7 @@ public class TarjetaBanco {
         sb.append(", titular=").append(titular);
         sb.append(", caducidad=").append(caducidad);
         sb.append(", cvc=").append(cvc);
-        sb.append(", saldo=").append(saldo);
+        sb.append(", saldo=").append(saldo).append("\n");
         sb.append('}');
         return sb.toString();
     }

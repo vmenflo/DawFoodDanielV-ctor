@@ -202,74 +202,97 @@ public class TPV {
                             case "Comida" -> { //Opcion Comidas
                                 //Añadimos al carrito una comida
                                 Comida comidaElegida = productos.elegirComida();
-                                int cantidad = carrito.preguntarPorCantidadComidaCarrito(comidaElegida);
-                                carrito.añadirUnElementoCarrito(comidaElegida, cantidad);
+                                //Lógica para que si no ha elegido ninguna
+                                //comida se vuelva al inicio sin preguntar cantidad
+                                //ni añadiéndolo al carrito
+                                if (comidaElegida != null) {
+                                    int cantidad = carrito.preguntarPorCantidadComidaCarrito(comidaElegida);
+                                    carrito.añadirUnElementoCarrito(comidaElegida, cantidad);
+                                }
+
                             }
                             case "Bebida" -> { //Opcion Bebidas
                                 //Añadimos al carrito una bebida
                                 Bebida bebidaElegida = productos.elegirBebida();
-                                int cantidad = carrito.preguntarPorCantidadBebidaCarrito(bebidaElegida);
-                                carrito.añadirUnElementoCarrito(bebidaElegida, cantidad);
+                                
+                                //Lógica para que si no ha elegido ninguna
+                                //bebida se vuelva al inicio sin preguntar cantidad
+                                //ni añadiéndolo al carrito
+                                if (bebidaElegida != null) {
+                                    int cantidad = carrito.preguntarPorCantidadBebidaCarrito(bebidaElegida);
+                                    carrito.añadirUnElementoCarrito(bebidaElegida, cantidad);
+                                }
                             }
                             case "Postre" -> { //Opcion Postres
                                 //Añadimos al carrito un postre
                                 Postres postreElegida = productos.elegirPostres();
-                                int cantidad = carrito.preguntarPorCantidadPostreCarrito(postreElegida);
-                                carrito.añadirUnElementoCarrito(postreElegida, cantidad);
+                                //Lógica para que si no ha elegido ningún
+                                //postre se vuelva al inicio sin preguntar cantidad
+                                //ni añadiéndolo al carrito
+                                if (postreElegida != null) {
+                                    int cantidad = carrito.preguntarPorCantidadPostreCarrito(postreElegida);
+                                    carrito.añadirUnElementoCarrito(postreElegida, cantidad);
+                                }
+
                             }
                             case "Carrito" -> { //Carrito
                                 boolean seguir = false;
                                 while (!seguir) {
                                     String seleccion = MetodosTPV.seleccionOpcionesCarrito();
-                                    switch (seleccion) {
-                                        case "Ver Carrito" -> {
-                                            //Controlar si el carrito está vacío
-                                            if(carrito.getListaComida().isEmpty()
-                                                    &&carrito.getListaBebida().isEmpty()
-                                                    &&carrito.getListaPostres().isEmpty()){
-                                            JOptionPane.showMessageDialog(null, 
-                                                    "El carrito está vacío");
-                                            break;
+                                    if (seleccion != null) {
+                                        switch (seleccion) {
+                                            case "Ver Carrito" -> {
+                                                //Controlar si el carrito está vacío
+                                                if (carrito.getListaComida().isEmpty()
+                                                        && carrito.getListaBebida().isEmpty()
+                                                        && carrito.getListaPostres().isEmpty()) {
+                                                    JOptionPane.showMessageDialog(null,
+                                                            "El carrito está vacío");
+                                                    break;
+                                                }
+                                                carrito.verCarrito();
                                             }
-                                            carrito.verCarrito();
-                                        }
-                                        case "Borrar Carrito" -> {
-                                            MetodosTPV.borrarCarrito(carrito);
-                                        }
-                                        case "Seguir Comprando" -> {
-                                            seguir = true;
-                                        }
-                                        case "Pagar" -> {
-                                            //Controlar si el carrito está vacío
-                                            if(carrito.getListaComida().isEmpty()
-                                                    &&carrito.getListaBebida().isEmpty()
-                                                    &&carrito.getListaPostres().isEmpty()){
-                                            JOptionPane.showMessageDialog(null, 
-                                                    "El carrito está vacío");
-                                            break;
+                                            case "Borrar Carrito" -> {
+                                                MetodosTPV.borrarCarrito(carrito);
                                             }
-                                            JOptionPane.showMessageDialog(null,
-                                                    "Para completar el pedido"
-                                                    + " introduzca la tarjeta.");
-                                            boolean ok = MetodosTarjetaBanco.tarjetaValida(
-                                                    tarjetasRegistradas, carrito);
-                                            if (ok) {
-                                                TicketVenta ticket
-                                                        = new TicketVenta(carrito);
-                                                
-                                                ventas.add(ticket);
-                                                JOptionPane.showMessageDialog(null, ticket.toString());
-                                                MetodosTPV.vaciarCarrito(carrito);
-                                                break;
-                                            } else {
+                                            case "Seguir Comprando" -> {
+                                                seguir = true;
+                                            }
+                                            case "Pagar" -> {
+                                                //Controlar si el carrito está vacío
+                                                if (carrito.getListaComida().isEmpty()
+                                                        && carrito.getListaBebida().isEmpty()
+                                                        && carrito.getListaPostres().isEmpty()) {
+                                                    JOptionPane.showMessageDialog(null,
+                                                            "El carrito está vacío");
+                                                    break;
+                                                }
                                                 JOptionPane.showMessageDialog(null,
-                                                        "Se ha producido "
-                                                        + "un Error. "
-                                                        + "Intentelo de nuevo");
-                                                break;
+                                                        "Para completar el pedido"
+                                                        + " introduzca la tarjeta.");
+                                                boolean ok = MetodosTarjetaBanco.tarjetaValida(
+                                                        tarjetasRegistradas, carrito);
+                                                if (ok) {
+                                                    TicketVenta ticket
+                                                            = new TicketVenta(carrito);
+
+                                                    ventas.add(ticket);
+                                                    JOptionPane.showMessageDialog(null, ticket.toString());
+                                                    MetodosTPV.vaciarCarrito(carrito);
+                                                    break;
+                                                } else {
+                                                    //Avisa al usuario de que algo
+                                                    //salió mal
+                                                    JOptionPane.showMessageDialog(null,
+                                                            "Se ha producido "
+                                                            + "un Error. "
+                                                            + "Intentelo de nuevo");
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
+
                                 }//Cierre del bucle del menu
                             }
                             case "Salir" -> { //Salir
@@ -288,8 +311,24 @@ public class TPV {
                     //Bucle que controla el menú modificar un producto
                     boolean retroceso = false;
                     do {
-                        int elegirTPV = MetodosTPV.preguntarTpv();
-                        String password = MetodosTPV.preguntarContraseñaTpv();
+
+                        int elegirTPV = 0;
+                        String password = "";
+                        //bucle para que se repita hasta que elija un tpv
+                        do {
+                            elegirTPV = MetodosTPV.preguntarTpv();
+                        } while (elegirTPV < 0);
+                        
+                        //Mostramos contraseña para copiar más fácil
+                        JOptionPane.showMessageDialog(null, 
+                                "Contraseña " + 
+                                        tpvs.get(elegirTPV).getContraseña());
+                        //bucle para que se repita hasta que escriba una contraseña
+                        do {
+                            password = MetodosTPV.preguntarContraseñaTpv();
+                        } while (password == null);
+
+                        //condición para que se repita el bucle general
                         if (password.equals(tpvs.get(elegirTPV).getContraseña())) {
                             validoTPV = true;
                         }
@@ -364,14 +403,14 @@ public class TPV {
                                         case "Día concreto" -> {//Por día
                                             ventasTotal.busquedaVentasDiaConcreto();
                                         }
-                                        case "Fecha concreto" -> {//Enrte fechas
+                                        case "Fecha concreta" -> {//Enrte fechas
                                             ventasTotal.busquedaEntreFechas();
                                         }
                                         case "Todas las ventas" -> {//Sin filtro
-                                            ventasTotal.ventasTotales();
+                                            ventasTotal.mostrarVentas();
                                         }
-                                        case "atras" -> {
-                                            atras=true;
+                                        case "Atrás" -> {
+                                            atras = true;
                                             break;
                                         }
                                     }

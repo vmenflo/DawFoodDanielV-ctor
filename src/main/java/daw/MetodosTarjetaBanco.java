@@ -76,8 +76,9 @@ public class MetodosTarjetaBanco {
     boolean valido=false;
     while(!valido){
         try{
+            JOptionPane.showMessageDialog(null, generarArrayTarjetas());
             numero=JOptionPane.showInputDialog(
-                    "¿Intorduce los últimos 4 dígitos? ");
+                    "¿Intorduce los últimos 4 dígitos?");
             if(numero.length()<5){
                 valido=true;
             }else{
