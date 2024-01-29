@@ -95,14 +95,8 @@ public class Comida {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Comida{");
-        sb.append("id=").append(id);
-        sb.append(", descripcion=").append(descripcion);
-        sb.append(", subComida=").append(subComida);
-        sb.append(", precio=").append(precio + " €");
-        sb.append(", iva=").append(iva.IVA_COMIDA.getCantidadIva());
-        sb.append(", stock=").append(stock);
-        sb.append('}');
+        sb.append(descripcion);
+        sb.append("  ").append(precio + " €");
         return sb.toString();
     }
     

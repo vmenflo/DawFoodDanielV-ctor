@@ -98,14 +98,8 @@ public class Bebida {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Bebida{");
-        sb.append("id=").append(id);
-        sb.append(", descripcion=").append(descripcion);
-        sb.append(", subBebida=").append(subBebida);
-        sb.append(", precio=").append(precio);
-        sb.append(", iva=").append(iva);
-        sb.append(", stock=").append(stock);
-        sb.append('}');
+        sb.append(descripcion);
+        sb.append("  ").append(precio + " €");
         return sb.toString();
     }
     

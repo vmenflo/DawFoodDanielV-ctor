@@ -84,6 +84,7 @@ public class ListasProductos {
     public void añadirUnElemento(Postres postresAGuardar) {
         listaPostres.add(postresAGuardar);
     }
+
     //Hacemos 3 métodos para poder añadir productos a Carrito:
     public void añadirUnElementoCarrito(Comida comidaAGuardar, int cantidad) {
         comidaAGuardar.setCantidadPedida(cantidad);
@@ -142,7 +143,7 @@ public class ListasProductos {
     }
 
     //Método para para que cuando escoja entre una de las categorias muestre dichas
-    public ArrayList<Bebida> filtrarPorSubCategoriaBebida(SubCategoriaBebida elegirSub, int eresMayorOMenor) {
+    public ArrayList<Bebida> filtrarPorSubCategoriaBebida(SubCategoriaBebida elegirSub) {
         //Creamos el ArrayList que vamos a devolver
         ArrayList<Bebida> bebidaAMostrar = new ArrayList<>();
 
@@ -159,6 +160,7 @@ public class ListasProductos {
                 }
             }
             case CERVEZA -> {
+                int eresMayorOMenor = MetodosProductos.eresMayorA18();
                 //Lógica para que si es mayor de edad (llamaremos al método a la
                 // hora de llamar al método) pueda elegir alguna bebida alcohólica
                 if (eresMayorOMenor == 0) {
@@ -222,8 +224,7 @@ public class ListasProductos {
         //Convertimos la lista en un array y lo guardamos en una variable de
         //tipo object
         Object[] opciones = filtrarPorSubCategoriaBebida(
-                MetodosProductos.elegirSubCategoríaBebida(),
-                MetodosProductos.eresMayorA18()).toArray();
+                MetodosProductos.elegirSubCategoríaBebida()).toArray();
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
@@ -669,126 +670,132 @@ public class ListasProductos {
         } while (!retroceso);
 
     }
+
     //Método para preguntar qué cantidad quiere de comida
-    public int preguntarPorCantidadComidaCarrito(Comida comida){
-        boolean okey=false;
-        int cantidad=0;
-        do{
-        try{
-        cantidad = Integer.parseInt(JOptionPane.showInputDialog(
-            "¿Qué cantidad quieres añadir?"));
-        if(cantidad>0&&cantidad<=comida.getStock()){
-            okey=true;
-        }else{
-           JOptionPane.showMessageDialog(null, 
-                    "Los siento, nuestro stock es de " + comida.getStock()); 
-        }
-        
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, 
-                    "Error al introducir la cantidad" + e);
-        }
-        }while(!okey);
+    public int preguntarPorCantidadComidaCarrito(Comida comida) {
+        boolean okey = false;
+        int cantidad = 0;
+        do {
+            try {
+                cantidad = Integer.parseInt(JOptionPane.showInputDialog(
+                        "¿Qué cantidad quieres añadir?"));
+                if (cantidad > 0 && cantidad <= comida.getStock()) {
+                    okey = true;
+                    comida.setStock(comida.getStock()-cantidad);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Los siento, nuestro stock es de " + comida.getStock());
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,
+                        "Error al introducir la cantidad" + e);
+            }
+        } while (!okey);
         return cantidad;
     }
+
     //Método para preguntar qué cantidad quiere de comida
-    public int preguntarPorCantidadBebidaCarrito(Bebida bebida){
-        boolean okey=false;
-        int cantidad=0;
-        do{
-        try{
-        cantidad = Integer.parseInt(JOptionPane.showInputDialog(
-            "¿Qué cantidad quieres añadir?"));
-        if(cantidad>0&&cantidad<=bebida.getStock()){
-            okey=true;
-        }else{
-           JOptionPane.showMessageDialog(null, 
-                    "Los siento, nuestro stock es de " + bebida.getStock()); 
-        }
-        
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, 
-                    "Error al introducir la cantidad" + e);
-        }
-        }while(!okey);
+    public int preguntarPorCantidadBebidaCarrito(Bebida bebida) {
+        boolean okey = false;
+        int cantidad = 0;
+        do {
+            try {
+                cantidad = Integer.parseInt(JOptionPane.showInputDialog(
+                        "¿Qué cantidad quieres añadir?"));
+                if (cantidad > 0 && cantidad <= bebida.getStock()) {
+                    okey = true;
+                    bebida.setStock(bebida.getStock()-cantidad);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Los siento, nuestro stock es de " + bebida.getStock());
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,
+                        "Error al introducir la cantidad" + e);
+            }
+        } while (!okey);
         return cantidad;
     }
+
     //Método para preguntar qué cantidad quiere de Postres
-    public int preguntarPorCantidadPostreCarrito(Postres postre){
-        boolean okey=false;
-        int cantidad=0;
-        do{
-        try{
-        cantidad = Integer.parseInt(JOptionPane.showInputDialog(
-            "¿Qué cantidad quieres añadir?"));
-        if(cantidad>0&&cantidad<=postre.getStock()){
-            okey=true;
-        }else{
-           JOptionPane.showMessageDialog(null, 
-                    "Los siento, nuestro stock es de " + postre.getStock()); 
-        }
-        
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, 
-                    "Error al introducir la cantidad" + e);
-        }
-        }while(!okey);
+    public int preguntarPorCantidadPostreCarrito(Postres postre) {
+        boolean okey = false;
+        int cantidad = 0;
+        do {
+            try {
+                cantidad = Integer.parseInt(JOptionPane.showInputDialog(
+                        "¿Qué cantidad quieres añadir?"));
+                if (cantidad > 0 && cantidad <= postre.getStock()) {
+                    okey = true;
+                    postre.setStock(postre.getStock()-cantidad);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Los siento, nuestro stock es de " + postre.getStock());
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,
+                        "Error al introducir la cantidad" + e);
+            }
+        } while (!okey);
         return cantidad;
     }
-    
+
     //Método para mostrar lista de carrito
-    public void verCarrito(){
-        
+    public void verCarrito() {
+
         StringBuilder sb = new StringBuilder();
         sb.append("                    CARRITO\n");
         sb.append("\n");
-        for(int i=0; i<listaComida.size();i++){
-        sb.append("Producto: ").append(listaComida.get(i).getDescripcion()).append(" precio ").append(listaComida.get(i).getPrecio()).append(" € ").append(" x ").append(listaComida.get(i).getCantidaPpedida()).append("\n");
+        for (int i = 0; i < listaComida.size(); i++) {
+            sb.append("Producto: ").append(listaComida.get(i).getDescripcion()).append(" precio ").append(listaComida.get(i).getPrecio()).append(" € ").append(" x ").append(listaComida.get(i).getCantidaPpedida()).append("\n");
         }
-        for(int i=0; i<listaBebida.size();i++){
-        sb.append("Producto: ").append(listaBebida.get(i).getDescripcion()).append(" precio ").append(listaBebida.get(i).getPrecio()).append(" € ").append(" x ").append(listaBebida.get(i).getCantidadPedida()).append("\n");
+        for (int i = 0; i < listaBebida.size(); i++) {
+            sb.append("Producto: ").append(listaBebida.get(i).getDescripcion()).append(" precio ").append(listaBebida.get(i).getPrecio()).append(" € ").append(" x ").append(listaBebida.get(i).getCantidadPedida()).append("\n");
         }
-        for(int i=0; i<listaPostres.size();i++){
-        sb.append("Producto: ").append(listaPostres.get(i).getDescripcion()).append(" precio ").append(listaPostres.get(i).getPrecio()).append(" € ").append(" x ").append(listaPostres.get(i).getCantidadPedida()).append("\n");
+        for (int i = 0; i < listaPostres.size(); i++) {
+            sb.append("Producto: ").append(listaPostres.get(i).getDescripcion()).append(" precio ").append(listaPostres.get(i).getPrecio()).append(" € ").append(" x ").append(listaPostres.get(i).getCantidadPedida()).append("\n");
         }
         sb.append("\n");
         sb.append(totalCarrito());
         JOptionPane.showMessageDialog(null, sb);
-        
+
     }
-    
+
     //Método para calcular totalCarrito
-    public String totalCarrito(){
-        double total=0;
-        double iva=0;
-        for(int i=0; i<listaComida.size();i++){
-            double precio=listaComida.get(i).getPrecio();
+    public String totalCarrito() {
+        double total = 0;
+        double iva = 0;
+        for (int i = 0; i < listaComida.size(); i++) {
+            double precio = listaComida.get(i).getPrecio();
             int cantidad = listaComida.get(i).getCantidaPpedida();
-            double importe = precio*cantidad;
-            total+=importe;
+            double importe = precio * cantidad;
+            total += importe;
             double IVA = listaComida.get(i).getIva().getCantidadIva();
-            iva+= importe*IVA;   
+            iva += importe * IVA;
         }
-        for(int i=0; i<listaBebida.size();i++){
-            double precio=listaBebida.get(i).getPrecio();
+        for (int i = 0; i < listaBebida.size(); i++) {
+            double precio = listaBebida.get(i).getPrecio();
             int cantidad = listaBebida.get(i).getCantidadPedida();
-            double importe = precio*cantidad;
-            total+=importe;
+            double importe = precio * cantidad;
+            total += importe;
             double IVA = listaBebida.get(i).getIva().getCantidadIva();
-            iva+= importe*IVA;   
+            iva += importe * IVA;
         }
-        for(int i=0; i<listaPostres.size();i++){
-            double precio=listaPostres.get(i).getPrecio();
+        for (int i = 0; i < listaPostres.size(); i++) {
+            double precio = listaPostres.get(i).getPrecio();
             int cantidad = listaPostres.get(i).getCantidadPedida();
-            double importe = precio*cantidad;
-            total+=importe;
+            double importe = precio * cantidad;
+            total += importe;
             double IVA = listaPostres.get(i).getIva().getCantidadIva();
-            iva+= importe*IVA;   
+            iva += importe * IVA;
         }
-        String texto= """
+        String texto = """
                       El importe total es de %.2f €
                                             (IVA %.2f €)
-                      """.formatted(total,iva);
+                      """.formatted(total, iva);
         return texto;
     }
 }
