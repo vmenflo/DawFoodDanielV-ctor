@@ -13,6 +13,7 @@ import daw.productos.Postres;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
@@ -179,6 +180,8 @@ public class TPV {
         //Carga de datos Productos
         ListasProductos productos = MetodosProductos.datosProductos();
         //Creación de carrito
+        //Con Map COMENTAR CON DANI
+        Carrito carro = new Carrito();
         ListasProductos carrito = new ListasProductos();
         //Creación de Lista de ventas (Tickets)
         //Ventas ventas = new Ventas();
@@ -208,6 +211,7 @@ public class TPV {
                                 if (comidaElegida != null) {
                                     int cantidad = carrito.preguntarPorCantidadComidaCarrito(comidaElegida);
                                     carrito.añadirUnElementoCarrito(comidaElegida, cantidad);
+                                   // carro.añadirAlCarrito(comidaElegida, cantidad); COMENTAR CON DANI
                                 }
 
                             }
