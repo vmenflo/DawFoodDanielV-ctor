@@ -12,104 +12,42 @@ import javax.swing.JOptionPane;
  *
  * @author danielnavasborjas
  */
-public class Postres {
+final public class Postres extends Productos{
     //Creamos atributos encapsulados
-    private int id;
-    private String descripcion;
-    private double precio;
-    private Iva iva;
-    private int stock = 0;
-    private int cantidadPedida=0;
+    private String tipoPostre;
 
-    //Creamos constructor parametrizado
-    public Postres(int id, String descripcion, double precio, Iva iva, int stock) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.iva = iva;
-        this.stock = stock;
+    //insertamos constructor parametrizado y sin parametrizar
+    public Postres(String tipoPostre, int id, String descripcion, double precio, Iva iva, int stock) {
+        super(id, descripcion, precio, iva, stock);
+        this.tipoPostre = tipoPostre;
     }
-    
-    //Creamos constructor vacío
     public Postres() {
     }
     
-        
-    //Insertamos los getter y los setters
-     public int getCantidadPedida() {
-        return cantidadPedida;
+    //insertamos getter y setter
+    public String getTipoPostre() {
+        return tipoPostre;
     }
 
-    public void setCantidadPedida(int cantidadPedida) {
-        if(cantidadPedida<stock){
-        this.cantidadPedida = cantidadPedida;
-        }else {JOptionPane.showMessageDialog(null, 
-                "Lo sentimos no podemos servirle cantidad. Nuestro stock es de: "+stock);}
-        
+    public void setTipoPostre(String tipoPostre) {
+        this.tipoPostre = tipoPostre;
     }
     
-    public int getId() {
-        return id;
-    }
+    //insertamos toString
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public Iva getIva() {
-        return iva;
-    }
-
-    public void setIva(Iva iva) {
-        this.iva = iva;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    //Añadimos el método toString
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(descripcion);
-        sb.append("  ").append(precio + " €");
-        return sb.toString();
+        return super.toString() + "Postres{" + "tipoPostre=" + tipoPostre + '}';
     }
     
-    //Añadimos el hashcode
+    //insertamos equals y hashcode
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + this.id;
-        hash = 61 * hash + Objects.hashCode(this.descripcion);
-        hash = 61 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
-        hash = 61 * hash + Objects.hashCode(this.iva);
-        hash = 61 * hash + this.stock;
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.tipoPostre);
         return hash;
     }
 
-    //Añadimos el equals
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -122,19 +60,7 @@ public class Postres {
             return false;
         }
         final Postres other = (Postres) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.precio) != Double.doubleToLongBits(other.precio)) {
-            return false;
-        }
-        if (this.stock != other.stock) {
-            return false;
-        }
-        if (!Objects.equals(this.descripcion, other.descripcion)) {
-            return false;
-        }
-        return this.iva == other.iva;
+        return Objects.equals(this.tipoPostre, other.tipoPostre);
     }
     
 }

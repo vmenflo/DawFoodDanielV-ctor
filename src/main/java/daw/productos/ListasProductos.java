@@ -23,12 +23,14 @@ public class ListasProductos {
     private ArrayList<Comida> listaComida;
     private ArrayList<Bebida> listaBebida;
     private ArrayList<Postres> listaPostres;
+    private ArrayList<Productos> listaProductos;
 
     //Creamos constructor por defecto
     public ListasProductos() {
         this.listaComida = new ArrayList<>();
         this.listaBebida = new ArrayList<>();
         this.listaPostres = new ArrayList<>();
+        this.listaProductos = new ArrayList<>();
     }
 
     //Insertamos los getters y setter
@@ -84,6 +86,10 @@ public class ListasProductos {
     public void añadirUnElemento(Postres postresAGuardar) {
         listaPostres.add(postresAGuardar);
     }
+    
+    public void añadirUnElemento(Productos productoAGuardar) {
+        listaProductos.add(productoAGuardar);
+    }
 
     //Hacemos 3 métodos para poder añadir productos a Carrito:
     public void añadirUnElementoCarrito(Comida comidaAGuardar, int cantidad) {
@@ -99,6 +105,11 @@ public class ListasProductos {
     public void añadirUnElementoCarrito(Postres postresAGuardar, int cantidad) {
         postresAGuardar.setCantidadPedida(cantidad);
         listaPostres.add(postresAGuardar);
+    }
+    
+    public void añadirUnElementoCarrito(Productos productoAGuardar, int cantidad) {
+        productoAGuardar.setCantidadPedida(cantidad);
+        listaProductos.add(productoAGuardar);
     }
 
     //Método para para que cuando escoja entre una de las categorias muestre dichas

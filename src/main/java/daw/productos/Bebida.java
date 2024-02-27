@@ -10,56 +10,19 @@ import java.util.Objects;
  *
  * @author daniel
  */
-public class Bebida {
+final public class Bebida extends Productos {
     //Creación de atributos encapsulados
-    private int id;
-    private String descripcion;
     private SubCategoriaBebida subBebida;
-    private double precio;
-    private Iva iva;
-    private int stock = 0;
-    private int cantidadPedida=0;
     
-    //Creamos constructor parametrizado
-    public Bebida(int id, String descripcion, SubCategoriaBebida subBebida, double precio, Iva iva, int stock) {
-        this.id = id;
-        this.descripcion = descripcion;
+    //insertamos constructor parametrizado y sin parametrizar
+    public Bebida(SubCategoriaBebida subBebida, int id, String descripcion, double precio, Iva iva, int stock) {
+        super(id, descripcion, precio, iva, stock);
         this.subBebida = subBebida;
-        this.precio = precio;
-        this.iva = iva;
-        this.stock = stock;
     }
-    
-    //Creamos constructor vacío
     public Bebida() {
     }
     
-        
-    //Insertamos los getters y los setters
-     public int getCantidadPedida() {
-        return cantidadPedida;
-    }
-
-    public void setCantidadPedida(int cantidadPedida) {
-        this.cantidadPedida = cantidadPedida;
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
+    //insertamos getter y setter
     public SubCategoriaBebida getSubBebida() {
         return subBebida;
     }
@@ -67,56 +30,22 @@ public class Bebida {
     public void setSubBebida(SubCategoriaBebida subBebida) {
         this.subBebida = subBebida;
     }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public Iva getIva() {
-        return iva;
-    }
-
-    public void setIva(Iva iva) {
-        this.iva = iva;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
     
-    
-    //Insertamos el toString
+    //insertamos toString
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(descripcion);
-        sb.append("  ").append(precio + " €");
-        return sb.toString();
+        return super.toString() + "Bebida{" + "subBebida=" + subBebida + '}';
     }
     
-    //insertamos el hashcode
+    //insertamos equals y hashcode
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.descripcion);
-        hash = 53 * hash + Objects.hashCode(this.subBebida);
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
-        hash = 53 * hash + Objects.hashCode(this.iva);
-        hash = 53 * hash + this.stock;
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.subBebida);
         return hash;
     }
 
-    //insertamos el equals
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -129,24 +58,7 @@ public class Bebida {
             return false;
         }
         final Bebida other = (Bebida) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.precio) != Double.doubleToLongBits(other.precio)) {
-            return false;
-        }
-        if (this.stock != other.stock) {
-            return false;
-        }
-        if (!Objects.equals(this.descripcion, other.descripcion)) {
-            return false;
-        }
-        if (this.subBebida != other.subBebida) {
-            return false;
-        }
-        return this.iva == other.iva;
+        return this.subBebida == other.subBebida;
     }
-
-       
     
 }
