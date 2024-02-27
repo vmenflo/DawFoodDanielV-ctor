@@ -86,7 +86,7 @@ public class ListasProductos {
     public void añadirUnElemento(Postres postresAGuardar) {
         listaPostres.add(postresAGuardar);
     }
-    
+
     public void añadirUnElemento(Productos productoAGuardar) {
         listaProductos.add(productoAGuardar);
     }
@@ -106,7 +106,7 @@ public class ListasProductos {
         postresAGuardar.setCantidadPedida(cantidad);
         listaPostres.add(postresAGuardar);
     }
-    
+
     public void añadirUnElementoCarrito(Productos productoAGuardar, int cantidad) {
         productoAGuardar.setCantidadPedida(cantidad);
         listaProductos.add(productoAGuardar);
@@ -273,6 +273,32 @@ public class ListasProductos {
         if (seleccion != null) {
             //Hacemos un casting para devolver un objeto de Postres
             return (Postres) seleccion;
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningún elemento",
+                    "Ninguna Selección", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+    }
+
+    //método para que elija un producto
+    public Productos elegirProducto() {
+        //convertimos la lista en un array y lo guardamos en una variable
+        //de tipo object
+        Object[] opciones = listaProductos.toArray();
+
+        //Mostramos el cuadro de diálogo para que el usurio elija que elemento
+        //de la lista quiere modificar
+        Object seleccion = JOptionPane.showInputDialog(null,
+                "Selecciona un producto:",
+                "Selección de productos",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+
+        //Verificar si el usuario seleccionó algo o no y devolver 
+        //el elemento seleccionado
+        if (seleccion != null) {
+            //Hacemos un casting para devolver un objeto de Productos
+            return (Productos) seleccion;
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún elemento",
                     "Ninguna Selección", JOptionPane.WARNING_MESSAGE);
@@ -522,6 +548,60 @@ public class ListasProductos {
         return id;
     }
 
+    //Método para ver que un id no se repita en una bebida
+    public int comprobarIdUnicoProducto() {
+        //Inicializamos variables
+        int id = 0;
+        int posicionABuscar = 0;
+        //ordenamos por id para luego hacer una búsqueda binaria, para que si
+        //encuentra dicho número, se repita
+        Collections.sort(listaProductos, (e1, e2) -> e1.getId() - e2.getId());
+        do {
+            //le preguntamos al usuario que id quiere introducir
+            id = Integer.parseInt(JOptionPane.showInputDialog("Introduce el id"));
+
+            //Hacemos un for para ver en productos de qué tipo es
+            // y en función del tipo que sea se hace una busqueda binaria
+            // a ese producto en concreto
+            for (Productos listaProducto : listaProductos) {
+                //si listaProducto es de tipo comida hace busqueda binaria en
+                //comida
+                if (listaProducto instanceof Comida) {
+                    Comida x = new Comida();
+                    x.setId(id);
+
+                    //Comprobamos y guardamos en una variable si ha encontrado 
+                    // el id introducido
+                    posicionABuscar = Collections.binarySearch(listaProductos,
+                            x, (e1, e2) -> e1.getId() - e2.getId());
+                }
+                //si listaProducto es de tipo bebida hace busqueda binaria en
+                //bebida
+                if (listaProducto instanceof Bebida) {
+                    Bebida x = new Bebida();
+                    x.setId(id);
+
+                    //Comprobamos y guardamos en una variable si ha encontrado 
+                    // el id introducido
+                    posicionABuscar = Collections.binarySearch(listaProductos,
+                            x, (e1, e2) -> e1.getId() - e2.getId());
+                }
+                //si listaProducto es de tipo postre hace busqueda binaria en
+                //postre
+                if (listaProducto instanceof Postres) {
+                    Postres x = new Postres();
+                    x.setId(id);
+
+                    //Comprobamos y guardamos en una variable si ha encontrado 
+                    // el id introducido
+                    posicionABuscar = Collections.binarySearch(listaProductos,
+                            x, (e1, e2) -> e1.getId() - e2.getId());
+                }
+            }
+        } while (posicionABuscar >= 0);
+        return id;
+    }
+
     //Método para dar de altas nueva comida
     public void nuevaComida() {
         //Inicializamos variables
@@ -692,7 +772,7 @@ public class ListasProductos {
                         "¿Qué cantidad quieres añadir?"));
                 if (cantidad > 0 && cantidad <= comida.getStock()) {
                     okey = true;
-                    comida.setStock(comida.getStock()-cantidad);
+                    comida.setStock(comida.getStock() - cantidad);
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "Los siento, nuestro stock es de " + comida.getStock());
@@ -716,7 +796,7 @@ public class ListasProductos {
                         "¿Qué cantidad quieres añadir?"));
                 if (cantidad > 0 && cantidad <= bebida.getStock()) {
                     okey = true;
-                    bebida.setStock(bebida.getStock()-cantidad);
+                    bebida.setStock(bebida.getStock() - cantidad);
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "Los siento, nuestro stock es de " + bebida.getStock());
@@ -740,7 +820,7 @@ public class ListasProductos {
                         "¿Qué cantidad quieres añadir?"));
                 if (cantidad > 0 && cantidad <= postre.getStock()) {
                     okey = true;
-                    postre.setStock(postre.getStock()-cantidad);
+                    postre.setStock(postre.getStock() - cantidad);
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "Los siento, nuestro stock es de " + postre.getStock());
@@ -756,7 +836,7 @@ public class ListasProductos {
 
     //Método para mostrar lista de carrito
     public void verCarrito() {
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("                    CARRITO\n");
         sb.append("\n");
