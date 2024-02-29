@@ -58,6 +58,14 @@ public class ListasProductos {
         this.listaPostres = listaPostres;
     }
 
+    public ArrayList<Productos> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(ArrayList<Productos> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+
     //Insertamos el método toString
     @Override
     public String toString() {
@@ -121,11 +129,15 @@ public class ListasProductos {
         switch (elegirSub) {
             case POLLO -> {
                 //Bucle para que vaya añadiendo las comidas de subcategoria pollo
-                for (int i = 0; i < listaComida.size(); i++) {
-                    //con esta lógica conseguimos que se vaya añadiendo
-                    //todos los elementos que tengan una subcategoria de pollo
-                    if (listaComida.get(i).getSubComida().equals(SubCategoriaComida.POLLO)) {
-                        comidaAMostrar.add(listaComida.get(i));
+                for (int i = 0; i < listaProductos.size(); i++) {
+                    //con en el instanceof miramos que el producto en concreto
+                    //de tipo Comida
+                    if (listaProductos.get(i) instanceof Comida) {
+                        //con esta lógica conseguimos que se vaya añadiendo
+                        //todos los elementos que tengan una subcategoria de pollo
+                        if (((Comida) listaProductos.get(i)).getSubComida().equals(SubCategoriaComida.POLLO)) {
+                            comidaAMostrar.add((Comida) listaProductos.get(i));
+                        }
                     }
                 }
             }
@@ -162,25 +174,33 @@ public class ListasProductos {
         switch (elegirSub) {
             case AGUA -> {
                 //Bucle para que vaya añadiendo las bebidas de subcategoria agua
-                for (int i = 0; i < listaComida.size(); i++) {
-                    //con esta lógica conseguimos que se vaya añadiendo
-                    //todos los elementos que tengan una subcategoria de agua
-                    if (listaBebida.get(i).getSubBebida().equals(SubCategoriaBebida.AGUA)) {
-                        bebidaAMostrar.add(listaBebida.get(i));
+                for (int i = 0; i < listaProductos.size(); i++) {
+                    //con en el instanceof miramos que el producto en concreto
+                    //de tipo bebida
+                    if (listaProductos.get(i) instanceof Bebida) {
+                        //con esta lógica conseguimos que se vaya añadiendo
+                        //todos los elementos que tengan una subcategoria de agua
+                        if (((Bebida) listaProductos.get(i)).getSubBebida().equals(SubCategoriaBebida.AGUA)) {
+                            bebidaAMostrar.add((Bebida) listaProductos.get(i));
+                        }
                     }
                 }
             }
             case CERVEZA -> {
-                int eresMayorOMenor = MetodosProductos.eresMayorA18();
+                int eresMayorOMenor = Bebida.eresMayorA18();
                 //Lógica para que si es mayor de edad (llamaremos al método a la
                 // hora de llamar al método) pueda elegir alguna bebida alcohólica
                 if (eresMayorOMenor == 0) {
                     //Bucle para que vaya añadiendo las bebidas de subcategoria cerveza
-                    for (int i = 0; i < listaComida.size(); i++) {
-                        //con esta lógica conseguimos que se vaya añadiendo
-                        //todos los elementos que tengan una subcategoria de cerveza
-                        if (listaBebida.get(i).getSubBebida().equals(SubCategoriaBebida.CERVEZA)) {
-                            bebidaAMostrar.add(listaBebida.get(i));
+                    for (int i = 0; i < listaProductos.size(); i++) {
+                        //con en el instanceof miramos que el producto en concreto
+                        //de tipo bebida
+                        if (listaProductos.get(i) instanceof Bebida) {
+                            //con esta lógica conseguimos que se vaya añadiendo
+                            //todos los elementos que tengan una subcategoria de cerveza
+                            if (((Bebida) listaProductos.get(i)).getSubBebida().equals(SubCategoriaBebida.CERVEZA)) {
+                                bebidaAMostrar.add((Bebida) listaProductos.get(i));
+                            }
                         }
                     }
                 } else {
@@ -192,11 +212,15 @@ public class ListasProductos {
             }
             case ZUMONARANZA -> {
                 //Bucle para que vaya añadiendo las Bebidas de subcategoria zumo de naranja
-                for (int i = 0; i < listaComida.size(); i++) {
-                    //con esta lógica conseguimos que se vaya añadiendo
-                    //todos los elementos que tengan una subcategoria de zumo de naranja
-                    if (listaBebida.get(i).getSubBebida().equals(SubCategoriaBebida.ZUMONARANZA)) {
-                        bebidaAMostrar.add(listaBebida.get(i));
+                for (int i = 0; i < listaProductos.size(); i++) {
+                    //con en el instanceof miramos que el producto en concreto
+                    //de tipo bebida
+                    if (listaProductos.get(i) instanceof Bebida) {
+                        //con esta lógica conseguimos que se vaya añadiendo
+                        //todos los elementos que tengan una subcategoria de zumo de naranja
+                        if (((Bebida) listaProductos.get(i)).getSubBebida().equals(SubCategoriaBebida.ZUMONARANZA)) {
+                            bebidaAMostrar.add((Bebida) listaProductos.get(i));
+                        }
                     }
                 }
             }
@@ -209,7 +233,7 @@ public class ListasProductos {
         //Convertimos la lista en un array y lo guardamos en una variable de
         //tipo object
         Object[] opciones = filtrarPorSubCategoriaComida(
-                MetodosProductos.elegirSubCategoríaComida()).toArray();
+                Comida.elegirSubCategoríaComida()).toArray();
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
@@ -235,7 +259,7 @@ public class ListasProductos {
         //Convertimos la lista en un array y lo guardamos en una variable de
         //tipo object
         Object[] opciones = filtrarPorSubCategoriaBebida(
-                MetodosProductos.elegirSubCategoríaBebida()).toArray();
+                Bebida.elegirSubCategoríaBebida()).toArray();
 
         //Mostramos el cuadro de diálogo para que el usurio elija que elemento
         //de la lista quiere modificar
@@ -281,22 +305,64 @@ public class ListasProductos {
     }
 
     //método para que elija un producto
-    public Productos elegirProducto() {
+    public Productos elegirProducto(String eleccion) {
         //convertimos la lista en un array y lo guardamos en una variable
         //de tipo object
-        Object[] opciones = listaProductos.toArray();
+        Object[] opciones;
+        ArrayList<Productos> optionList = new ArrayList<>();
+        Object seleccion = 0;
 
-        //Mostramos el cuadro de diálogo para que el usurio elija que elemento
-        //de la lista quiere modificar
-        Object seleccion = JOptionPane.showInputDialog(null,
-                "Selecciona un producto:",
-                "Selección de productos",
-                JOptionPane.QUESTION_MESSAGE, null,
-                opciones, opciones[0]);
+        switch (eleccion) {
+            case "Comida" -> {
+                //en el caso de que fuese comida llamamos al método
+                //filtrarPorSubCategoriaComida(), este métod ya comprueba
+                //que sea de tipo comida con el instanceof
+                opciones = filtrarPorSubCategoriaComida(
+                        Comida.elegirSubCategoríaComida()).toArray();
+
+                //Mostramos el cuadro de diálogo para que el usurio elija que elemento
+                //de la lista quiere modificar
+                seleccion = JOptionPane.showInputDialog(null,
+                        "Selecciona una comida:",
+                        "Selección de comida",
+                        JOptionPane.QUESTION_MESSAGE, null,
+                        opciones, opciones[0]);
+            }
+            case "Bebida" -> {
+                //en el caso de que fuese Bebida llamamos al método
+                //filtrarPorSubCategoriaBebida(), este método ya comprueba
+                //que sea de tipo bebida con el instanceof
+                opciones = filtrarPorSubCategoriaBebida(Bebida.elegirSubCategoríaBebida()).toArray();
+
+                //Mostramos el cuadro de diálogo para que el usurio elija que elemento
+                //de la lista quiere modificar
+                seleccion = JOptionPane.showInputDialog(null,
+                        "Selecciona una bebida:",
+                        "Selección de bebida",
+                        JOptionPane.QUESTION_MESSAGE, null,
+                        opciones, opciones[0]);
+
+            }
+            case "Postre" -> {
+                //hacemos un bucle for para reccorrer todos los elementos
+                //de la lista de productos
+                for (int i = 0; i < listaProductos.size(); i++) {
+                    //hacemos un if con un instanceof para saber si 
+                    //es de tipo postre
+                    if (listaProductos.get(i) instanceof Postres) {
+                        //vamos añadiendo al ArrayList creado con anterioridad
+                        //todos los objetos de tipo Postre
+                        optionList.add(listaProductos.get(i));
+                    }
+                }
+                //Al array de tipo Object le metemos la lista anterior
+                opciones = optionList.toArray();
+            }
+        }
 
         //Verificar si el usuario seleccionó algo o no y devolver 
         //el elemento seleccionado
-        if (seleccion != null) {
+        if (seleccion != null && seleccion != (Object) 0) {
             //Hacemos un casting para devolver un objeto de Productos
             return (Productos) seleccion;
         } else {

@@ -5,6 +5,7 @@
 package daw.productos;
 import daw.Iva;
 import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,6 +59,25 @@ final public class Comida extends Productos{
         }
         final Comida other = (Comida) obj;
         return this.subComida == other.subComida;
+    }
+    
+    //Método para mostrar un desplegable de subcategoría comida
+    public static SubCategoriaComida elegirSubCategoríaComida() {
+        //Creamos un array de String para hacer un desplegable y que elija qué
+        //es lo que quiere cambiar
+        Object[] opciones = SubCategoriaComida.values();
+        SubCategoriaComida eleccion;
+
+        //Hacemos un bucle para que tenga que elegir sí o sí una subcategoría
+        do {
+            eleccion = (SubCategoriaComida) JOptionPane.showInputDialog(null,
+                    "Elige la subcategoría",
+                    "Selección de subcategoría",
+                    JOptionPane.QUESTION_MESSAGE, null,
+                    opciones, opciones[0]);
+        } while (eleccion == null);
+
+        return eleccion;
     }
     
 }

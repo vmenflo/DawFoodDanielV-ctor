@@ -6,6 +6,7 @@ package daw.productos;
 
 import daw.Iva;
 import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,14 +15,15 @@ import java.util.Objects;
 //la ponemos como abstract ya que no se va a poder crear objetos de esta clase,
 //las hijas heredarán todo y las hijas si se podrán crear
 public abstract class Productos {
-     //Creamos atributos encapsulados
+    //Creamos atributos encapsulados
+
     private int id;
     private String descripcion;
     private double precio;
     private Iva iva;
     private int stock = 0;
-    private int cantidadPedida=0;
-    
+    private int cantidadPedida = 0;
+
     //insertamos constructor parametrizado y sin parametrizar
     public Productos(int id, String descripcion, double precio, Iva iva, int stock) {
         this.id = id;
@@ -30,9 +32,10 @@ public abstract class Productos {
         this.iva = iva;
         this.stock = stock;
     }
+
     public Productos() {
     }
-    
+
     //insertamos getter y setter
     public int getId() {
         return id;
@@ -81,7 +84,7 @@ public abstract class Productos {
     public void setCantidadPedida(int cantidadPedida) {
         this.cantidadPedida = cantidadPedida;
     }
-    
+
     //insertamos toString
     @Override
     public String toString() {
@@ -96,7 +99,7 @@ public abstract class Productos {
         sb.append('}');
         return sb.toString();
     }
-    
+
     //insertamos equals y hashcode 
     @Override
     public int hashCode() {
@@ -139,5 +142,60 @@ public abstract class Productos {
         }
         return this.iva == other.iva;
     }
+
+    //Método para que elija qué quiere modificar de la comida
+    //En el TPV habra un switch y depende de lo que coja
+    final public static String elegirQueCambiar() {
+        //Creamos un array de String para hacer un desplegable y que elija qué
+        //es lo que quiere cambiar
+        String[] opciones = {"Descripción", "Subcategoría", "Precio", "Iva", "stock"};
+
+        String eleccion = (String) JOptionPane.showInputDialog(null,
+                "Elige el campo que quiere modificar:",
+                "Seleccione para modificar",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+
+        if (eleccion == null) {
+            JOptionPane.showMessageDialog(null,
+                    "Debes elegir entre las opciones", "Aviso",
+                    JOptionPane.WARNING_MESSAGE, null);
+            return null;
+        }
+
+        return eleccion;
+    }
+
+    //Método para que elija entre las categorías que hay
+    final public static String elegirCategorias() {
+        //Creamos un array de String para hacer un desplegable y que elija 
+        //la categoría
+        String[] opciones = {"Comida", "Bebida", "Postres"};
+
+        String eleccion = (String) JOptionPane.showInputDialog(null,
+                "Elige la categoría:",
+                "Seleccione Categoría",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+
+        if (eleccion != null) {
+            return eleccion;
+        } else {
+            return eleccion = "salir";
+        }
+    }
     
+    //Método para mostrar un desplegable de Iva comida
+    final public static Iva elegirIva() {
+        //Creamos un array de String para hacer un desplegable y que elija qué
+        //es lo que quiere cambiar
+        Iva[] opciones = Iva.values();
+
+        Iva eleccion = (Iva) JOptionPane.showInputDialog(null,
+                "Elige el IVA",
+                "Selección de IVA",
+                JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+        return eleccion;
+    }
 }
