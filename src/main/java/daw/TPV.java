@@ -210,7 +210,7 @@ public class TPV {
                                 //comida se vuelva al inicio sin preguntar cantidad
                                 //ni añadiéndolo al carrito
                                 if (comidaElegida != null) {
-                                    int cantidad = carrito.preguntarPorCantidadComidaCarrito(comidaElegida);
+                                    int cantidad = carrito.preguntarPorCantidadProductoCarrito(comidaElegida);
                                     carrito.añadirUnElementoCarrito(comidaElegida, cantidad);
                                    // carro.añadirAlCarrito(comidaElegida, cantidad); COMENTAR CON DANI
                                 }
@@ -224,7 +224,7 @@ public class TPV {
                                 //bebida se vuelva al inicio sin preguntar cantidad
                                 //ni añadiéndolo al carrito
                                 if (bebidaElegida != null) {
-                                    int cantidad = carrito.preguntarPorCantidadBebidaCarrito(bebidaElegida);
+                                    int cantidad = carrito.preguntarPorCantidadProductoCarrito(bebidaElegida);
                                     carrito.añadirUnElementoCarrito(bebidaElegida, cantidad);
                                 }
                             }
@@ -235,7 +235,7 @@ public class TPV {
                                 //postre se vuelva al inicio sin preguntar cantidad
                                 //ni añadiéndolo al carrito
                                 if (postreElegida != null) {
-                                    int cantidad = carrito.preguntarPorCantidadPostreCarrito(postreElegida);
+                                    int cantidad = carrito.preguntarPorCantidadProductoCarrito(postreElegida);
                                     carrito.añadirUnElementoCarrito(postreElegida, cantidad);
                                 }
 
@@ -346,19 +346,19 @@ public class TPV {
                                         case "Comida" -> {
                                             //llamamos al método para que modifique
                                             //alguna comida
-                                            productos.editarProducto(productos.elegirProducto(eleccion),
+                                            productos.editarProducto(productos.elegirProducto(categoria),
                                                     Productos.elegirQueCambiar());
                                         }
                                         case "Bebida" -> {
                                             //llamamos al método para que modifique
                                             //alguna bebida
-                                            productos.editarProducto(productos.elegirProducto(eleccion),
+                                            productos.editarProducto(productos.elegirProducto(categoria),
                                                     Productos.elegirQueCambiar());
                                         }
                                         case "Postres" -> {
                                             //llamamos al método para que modifique
                                             //algun postre
-                                            productos.editarProducto(productos.elegirProducto(eleccion),
+                                            productos.editarProducto(productos.elegirProducto(categoria),
                                                     Productos.elegirQueCambiar());
                                         }
                                         case "salir" -> {
@@ -375,15 +375,15 @@ public class TPV {
                                     switch (categoria) {
                                         case "Comida" -> {
                                             //llamamos al método para que cree una comida
-                                            productos.nuevaProducto(eleccion);
+                                            productos.nuevaProducto(categoria);
                                         }
                                         case "Bebida" -> {
                                             //llamamos al método para que cree una bebida
-                                            productos.nuevaProducto(eleccion);
+                                            productos.nuevaProducto(categoria);
                                         }
                                         case "Postres" -> {
                                             //llamamos al método para que cree un postre
-                                            productos.nuevaProducto(eleccion);
+                                            productos.nuevaProducto(categoria);
                                         }
                                         case "salir" -> {
                                             retroceso = true;

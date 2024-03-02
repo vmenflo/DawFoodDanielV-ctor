@@ -170,7 +170,7 @@ public abstract class Productos {
     final public static String elegirCategorias() {
         //Creamos un array de String para hacer un desplegable y que elija 
         //la categoría
-        String[] opciones = {"Comida", "Bebida", "Postres"};
+        String[] opciones = {"Comida", "Bebida", "Postres", "Salir"};
 
         String eleccion = (String) JOptionPane.showInputDialog(null,
                 "Elige la categoría:",
