@@ -205,7 +205,7 @@ public class TPV {
                         switch (eleccion) {
                             case "Comida" -> { //Opcion Comidas
                                 //Añadimos al carrito una comida
-                                Comida comidaElegida = productos.elegirComida();
+                                Comida comidaElegida = (Comida)productos.elegirProducto(eleccion);
                                 //Lógica para que si no ha elegido ninguna
                                 //comida se vuelva al inicio sin preguntar cantidad
                                 //ni añadiéndolo al carrito
@@ -218,7 +218,7 @@ public class TPV {
                             }
                             case "Bebida" -> { //Opcion Bebidas
                                 //Añadimos al carrito una bebida
-                                Bebida bebidaElegida = productos.elegirBebida();
+                                Bebida bebidaElegida = (Bebida)productos.elegirProducto(eleccion);
                                 
                                 //Lógica para que si no ha elegido ninguna
                                 //bebida se vuelva al inicio sin preguntar cantidad
@@ -230,7 +230,7 @@ public class TPV {
                             }
                             case "Postre" -> { //Opcion Postres
                                 //Añadimos al carrito un postre
-                                Postres postreElegida = productos.elegirPostres();
+                                Postres postreElegida = (Postres)productos.elegirProducto(eleccion);
                                 //Lógica para que si no ha elegido ningún
                                 //postre se vuelva al inicio sin preguntar cantidad
                                 //ni añadiéndolo al carrito
@@ -248,9 +248,7 @@ public class TPV {
                                         switch (seleccion) {
                                             case "Ver Carrito" -> {
                                                 //Controlar si el carrito está vacío
-                                                if (carrito.getListaComida().isEmpty()
-                                                        && carrito.getListaBebida().isEmpty()
-                                                        && carrito.getListaPostres().isEmpty()) {
+                                                if (carrito.getListaProductos().isEmpty()) {
                                                     JOptionPane.showMessageDialog(null,
                                                             "El carrito está vacío");
                                                     break;
@@ -265,9 +263,7 @@ public class TPV {
                                             }
                                             case "Pagar" -> {
                                                 //Controlar si el carrito está vacío
-                                                if (carrito.getListaComida().isEmpty()
-                                                        && carrito.getListaBebida().isEmpty()
-                                                        && carrito.getListaPostres().isEmpty()) {
+                                                if (carrito.getListaProductos().isEmpty()) {
                                                     JOptionPane.showMessageDialog(null,
                                                             "El carrito está vacío");
                                                     break;
@@ -345,25 +341,25 @@ public class TPV {
                         switch (eleccion) {
                             case "Modificar datos productos" -> {
                                 do {
-                                    String categoria = MetodosProductos.elegirCategorias();
+                                    String categoria = Productos.elegirCategorias();
                                     switch (categoria) {
                                         case "Comida" -> {
                                             //llamamos al método para que modifique
                                             //alguna comida
-                                            productos.editarComida(productos.elegirComida(),
-                                                    MetodosProductos.elegirQueCambiar());
+                                            productos.editarProducto(productos.elegirProducto(eleccion),
+                                                    Productos.elegirQueCambiar());
                                         }
                                         case "Bebida" -> {
                                             //llamamos al método para que modifique
                                             //alguna bebida
-                                            productos.editarBebida(productos.elegirBebida(),
-                                                    MetodosProductos.elegirQueCambiar());
+                                            productos.editarProducto(productos.elegirProducto(eleccion),
+                                                    Productos.elegirQueCambiar());
                                         }
                                         case "Postres" -> {
                                             //llamamos al método para que modifique
                                             //algun postre
-                                            productos.editarPostres(productos.elegirPostres(),
-                                                    MetodosProductos.elegirQueCambiar());
+                                            productos.editarProducto(productos.elegirProducto(eleccion),
+                                                    Productos.elegirQueCambiar());
                                         }
                                         case "salir" -> {
                                             retroceso = true;
@@ -375,19 +371,19 @@ public class TPV {
                             case "Crear producto" -> {
                                 retroceso = false;
                                 do {
-                                    String categoria = MetodosProductos.elegirCategorias();
+                                    String categoria = Productos.elegirCategorias();
                                     switch (categoria) {
                                         case "Comida" -> {
                                             //llamamos al método para que cree una comida
-                                            productos.nuevaComida();
+                                            productos.nuevaProducto(eleccion);
                                         }
                                         case "Bebida" -> {
                                             //llamamos al método para que cree una bebida
-                                            productos.nuevaBebida();
+                                            productos.nuevaProducto(eleccion);
                                         }
                                         case "Postres" -> {
                                             //llamamos al método para que cree un postre
-                                            productos.nuevoPostre();
+                                            productos.nuevaProducto(eleccion);
                                         }
                                         case "salir" -> {
                                             retroceso = true;
@@ -397,7 +393,7 @@ public class TPV {
 
                             }
                             case "Borrar producto" -> {
-                                String categoria = MetodosProductos.elegirCategorias();
+                                String categoria = Productos.elegirCategorias();
                                 productos.borrarProductos(categoria);
                             }
                             case "Consultar ventas" -> {

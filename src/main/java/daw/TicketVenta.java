@@ -88,14 +88,8 @@ public class TicketVenta {
         sb.append("\nNúmero de pedido=").append(numeroPedido);
         sb.append("\nFecha de la compra=").append(fechaCompra);
         sb.append("\nProductos comprados:\n");
-        for (int i = 0; i < productosComprados.getListaComida().size(); i++) {
-            sb.append(productosComprados.getListaComida().get(i).getDescripcion()).append(" x ").append(productosComprados.getListaComida().get(i).getCantidaPpedida()).append(" - ").append(productosComprados.getListaComida().get(i).getPrecio()).append(" €/unid\n");
-        }
-        for (int i = 0; i < productosComprados.getListaBebida().size(); i++) {
-            sb.append(productosComprados.getListaBebida().get(i).getDescripcion()).append(" x ").append(productosComprados.getListaBebida().get(i).getCantidadPedida()).append(" - ").append(productosComprados.getListaBebida().get(i).getPrecio()).append(" €/unid\n");
-        }
-        for (int i = 0; i < productosComprados.getListaPostres().size(); i++) {
-            sb.append(productosComprados.getListaPostres().get(i).getDescripcion()).append(" x ").append(productosComprados.getListaPostres().get(i).getCantidadPedida()).append(" - ").append(productosComprados.getListaPostres().get(i).getPrecio()).append(" €/unid\n");
+        for (int i = 0; i < productosComprados.getListaProductos().size(); i++) {
+            sb.append(productosComprados.getListaProductos().get(i).getDescripcion()).append(" x ").append(productosComprados.getListaProductos().get(i).getCantidadPedida()).append(" - ").append(productosComprados.getListaProductos().get(i).getPrecio()).append(" €/unid\n");
         }
         sb.append("Total importe= ").append(TotalImporte).append(" €");
         sb.append("\nTotal (IVA)= ").append(TotalIVA).append(" €");
@@ -145,19 +139,9 @@ public class TicketVenta {
     public static double calcularImporteTotal(ListasProductos lista) {
         double importe = 0;
 
-        for (int i = 0; i < lista.getListaComida().size(); i++) {
-            importe += (lista.getListaComida().get(i).getPrecio())
-                    * (lista.getListaComida().get(i).getCantidaPpedida());
-        }
-
-        for (int i = 0; i < lista.getListaBebida().size(); i++) {
-            importe += (lista.getListaBebida().get(i).getPrecio())
-                    * (lista.getListaBebida().get(i).getCantidadPedida());
-        }
-
-        for (int i = 0; i < lista.getListaPostres().size(); i++) {
-            importe += (lista.getListaPostres().get(i).getPrecio())
-                    * (lista.getListaPostres().get(i).getCantidadPedida());
+        for (int i = 0; i < lista.getListaProductos().size(); i++) {
+            importe += (lista.getListaProductos().get(i).getPrecio())
+                    * (lista.getListaProductos().get(i).getCantidadPedida());
         }
 
         return importe;
@@ -166,21 +150,10 @@ public class TicketVenta {
     public static double calcularIVATotal(ListasProductos lista) {
         double importe = 0;
 
-        for (int i = 0; i < lista.getListaComida().size(); i++) {
-            importe += (lista.getListaComida().get(i).getPrecio())
-                    * (lista.getListaComida().get(i).getIva().getCantidadIva());
+        for (int i = 0; i < lista.getListaProductos().size(); i++) {
+            importe += (lista.getListaProductos().get(i).getPrecio())
+                    * (lista.getListaProductos().get(i).getIva().getCantidadIva());
         }
-
-        for (int i = 0; i < lista.getListaBebida().size(); i++) {
-            importe += (lista.getListaBebida().get(i).getPrecio())
-                    * (lista.getListaBebida().get(i).getIva().getCantidadIva());
-        }
-
-        for (int i = 0; i < lista.getListaPostres().size(); i++) {
-            importe += (lista.getListaPostres().get(i).getPrecio())
-                    * (lista.getListaPostres().get(i).getIva().getCantidadIva());
-        }
-
         return importe;
     }
 }

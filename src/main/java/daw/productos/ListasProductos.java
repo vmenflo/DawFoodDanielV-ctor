@@ -83,36 +83,8 @@ public class ListasProductos {
     //Insertamos los métodos que vamos a usar sobre estas listas para poder 
     //trabajar con ellas
     //Hacemos 3 métodos para poder añadir productos a cada una de las lista:
-    public void añadirUnElemento(Comida comidaAGuardar) {
-        listaComida.add(comidaAGuardar);
-    }
-
-    public void añadirUnElemento(Bebida bebidaAGuardar) {
-        listaBebida.add(bebidaAGuardar);
-    }
-
-    public void añadirUnElemento(Postres postresAGuardar) {
-        listaPostres.add(postresAGuardar);
-    }
-
     public void añadirUnElemento(Productos productoAGuardar) {
         listaProductos.add(productoAGuardar);
-    }
-
-    //Hacemos 3 métodos para poder añadir productos a Carrito:
-    public void añadirUnElementoCarrito(Comida comidaAGuardar, int cantidad) {
-        comidaAGuardar.setCantidadPedida(cantidad);
-        listaComida.add(comidaAGuardar);
-    }
-
-    public void añadirUnElementoCarrito(Bebida bebidaAGuardar, int cantidad) {
-        bebidaAGuardar.setCantidadPedida(cantidad);
-        listaBebida.add(bebidaAGuardar);
-    }
-
-    public void añadirUnElementoCarrito(Postres postresAGuardar, int cantidad) {
-        postresAGuardar.setCantidadPedida(cantidad);
-        listaPostres.add(postresAGuardar);
     }
 
     public void añadirUnElementoCarrito(Productos productoAGuardar, int cantidad) {
@@ -143,21 +115,29 @@ public class ListasProductos {
             }
             case PESCADO -> {
                 //Bucle para que vaya añadiendo las comidas de subcategoria pescado
-                for (int i = 0; i < listaComida.size(); i++) {
-                    //con esta lógica conseguimos que se vaya añadiendo
-                    //todos los elementos que tengan una subcategoria de pescado
-                    if (listaComida.get(i).getSubComida().equals(SubCategoriaComida.PESCADO)) {
-                        comidaAMostrar.add(listaComida.get(i));
+                for (int i = 0; i < listaProductos.size(); i++) {
+                    //con en el instanceof miramos que el producto en concreto
+                    //de tipo Comida
+                    if (listaProductos.get(i) instanceof Comida) {
+                        //con esta lógica conseguimos que se vaya añadiendo
+                        //todos los elementos que tengan una subcategoria de pescado
+                        if (((Comida) listaProductos.get(i)).getSubComida().equals(SubCategoriaComida.PESCADO)) {
+                            comidaAMostrar.add((Comida) listaProductos.get(i));
+                        }
                     }
                 }
             }
             case TERNERA -> {
                 //Bucle para que vaya añadiendo las comidas de subcategoria ternera
-                for (int i = 0; i < listaComida.size(); i++) {
-                    //con esta lógica conseguimos que se vaya añadiendo
-                    //todos los elementos que tengan una subcategoria de ternera
-                    if (listaComida.get(i).getSubComida().equals(SubCategoriaComida.TERNERA)) {
-                        comidaAMostrar.add(listaComida.get(i));
+                for (int i = 0; i < listaProductos.size(); i++) {
+                    //con en el instanceof miramos que el producto en concreto
+                    //de tipo Comida
+                    if (listaProductos.get(i) instanceof Comida) {
+                        //con esta lógica conseguimos que se vaya añadiendo
+                        //todos los elementos que tengan una subcategoria de ternera
+                        if (((Comida) listaProductos.get(i)).getSubComida().equals(SubCategoriaComida.TERNERA)) {
+                            comidaAMostrar.add((Comida) listaProductos.get(i));
+                        }
                     }
                 }
             }
@@ -332,7 +312,8 @@ public class ListasProductos {
                 //en el caso de que fuese Bebida llamamos al método
                 //filtrarPorSubCategoriaBebida(), este método ya comprueba
                 //que sea de tipo bebida con el instanceof
-                opciones = filtrarPorSubCategoriaBebida(Bebida.elegirSubCategoríaBebida()).toArray();
+                opciones = filtrarPorSubCategoriaBebida(
+                        Bebida.elegirSubCategoríaBebida()).toArray();
 
                 //Mostramos el cuadro de diálogo para que el usurio elija que elemento
                 //de la lista quiere modificar
@@ -357,19 +338,39 @@ public class ListasProductos {
                 }
                 //Al array de tipo Object le metemos la lista anterior
                 opciones = optionList.toArray();
+
+                //Mostramos el cuadro de diálogo para que el usurio elija que elemento
+                //de la lista quiere modificar
+                seleccion = JOptionPane.showInputDialog(null,
+                        "Selecciona un postre:",
+                        "Selección de postre",
+                        JOptionPane.QUESTION_MESSAGE, null,
+                        opciones, opciones[0]);
             }
         }
 
         //Verificar si el usuario seleccionó algo o no y devolver 
         //el elemento seleccionado
-        if (seleccion != null && seleccion != (Object) 0) {
-            //Hacemos un casting para devolver un objeto de Productos
-            return (Productos) seleccion;
+        if (seleccion != null) {
+            //hacemos un instanceof para saber que objeto devolver
+            if (seleccion instanceof Comida) {
+                //Hacemos un casting para devolver un objeto de Comida
+                return (Comida) seleccion;
+            }
+            if (seleccion instanceof Bebida) {
+                //Hacemos un casting para devolver un objeto de Comida
+                return (Bebida) seleccion;
+            }
+            if (seleccion instanceof Postres) {
+                //Hacemos un casting para devolver un objeto de Comida
+                return (Postres) seleccion;
+            }
+
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún elemento",
                     "Ninguna Selección", JOptionPane.WARNING_MESSAGE);
-            return null;
         }
+        return null;
     }
 
     //Método para modificar una comida en concreto
@@ -383,7 +384,7 @@ public class ListasProductos {
                     comidaAModificar.setDescripcion(descripcionNueva);
                 }
                 case "Subcategoría" -> {
-                    comidaAModificar.setSubComida(MetodosProductos.elegirSubCategoríaComida());
+
                 }
                 case "Precio" -> {
                     double precioNuevo;
@@ -410,7 +411,7 @@ public class ListasProductos {
                     }
                 }
                 case "Iva" -> {
-                    comidaAModificar.setIva(MetodosProductos.elegirIva());
+
                 }
                 case "stock" -> {
 
@@ -441,8 +442,7 @@ public class ListasProductos {
                     bebidaAModificar.setDescripcion(descripcionNueva);
                 }
                 case "Subcategoría" -> {
-                    bebidaAModificar.setSubBebida(
-                            MetodosProductos.elegirSubCategoríaBebida());
+
                 }
                 case "Precio" -> {
                     double precioNuevo;
@@ -469,7 +469,7 @@ public class ListasProductos {
                     }
                 }
                 case "Iva" -> {
-                    bebidaAModificar.setIva(MetodosProductos.elegirIva());
+
                 }
                 case "stock" -> {
 
@@ -523,7 +523,7 @@ public class ListasProductos {
                     }
                 }
                 case "Iva" -> {
-                    postreAModificar.setIva(MetodosProductos.elegirIva());
+
                 }
                 case "stock" -> {
 
@@ -542,6 +542,74 @@ public class ListasProductos {
         }
     }
 
+    //Método para modificar una producto en concreto
+    public void editarProducto(Productos productosAModificar, String queCambiar) {
+        //Hacemos una condición por si es null que no se edite la comida
+        if (productosAModificar != null && queCambiar != null) {
+            switch (queCambiar) {
+                case "Descripción" -> {
+                    String descripcionNueva = JOptionPane.showInputDialog(
+                            "Introduce la nueva descripción");
+                    productosAModificar.setDescripcion(descripcionNueva);
+                }
+                case "Subcategoría" -> {
+                    if (productosAModificar instanceof Comida) {
+                        ((Comida) productosAModificar).setSubComida(Comida.elegirSubCategoríaComida());
+                    }
+                    if (productosAModificar instanceof Bebida) {
+                        ((Bebida) productosAModificar).setSubBebida(Bebida.elegirSubCategoríaBebida());
+                    }
+                    if (productosAModificar instanceof Postres) {
+                        JOptionPane.showMessageDialog(null,
+                                "Postre no tiene Subcategorías",
+                                "Alerta", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+                case "Precio" -> {
+                    double precioNuevo;
+                    try {
+                        //Le preguntamos al usuario en una variable String
+                        //para poder controlar la excepción
+                        String nuevo = JOptionPane.showInputDialog(
+                                "Introduce el nuevo precio");
+
+                        //Lógica para controlar excepción
+                        if (nuevo != null) {
+                            precioNuevo = Double.parseDouble(nuevo);
+                            //Modificamos el precio
+                            productosAModificar.setPrecio(precioNuevo);
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Debes elegir entre las opciones", "Aviso",
+                                    JOptionPane.WARNING_MESSAGE, null);
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null,
+                                "Debes Introducir el precio con números",
+                                "Alerta", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+                case "Iva" -> {
+                    productosAModificar.setIva(Productos.elegirIva());
+                }
+                case "stock" -> {
+
+                    int stockNuevo = 0;
+                    try {
+                        stockNuevo = Integer.parseInt(JOptionPane.showInputDialog(
+                                "Introduce el nuevo stock"));
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null,
+                                "Debes Introducir el stock con números",
+                                "Alerta", JOptionPane.WARNING_MESSAGE);
+                    }
+                    productosAModificar.setStock(stockNuevo);
+                }
+            }
+        }
+
+    }
+    
     //Método para ver que un id no se repita en una comida
     public int comprobarIdUnicoComida() {
         //Inicializamos variables
@@ -618,7 +686,7 @@ public class ListasProductos {
     public int comprobarIdUnicoProducto() {
         //Inicializamos variables
         int id = 0;
-        int posicionABuscar = 0;
+        int posicionABuscar = -1;
         //ordenamos por id para luego hacer una búsqueda binaria, para que si
         //encuentra dicho número, se repita
         Collections.sort(listaProductos, (e1, e2) -> e1.getId() - e2.getId());
@@ -664,7 +732,12 @@ public class ListasProductos {
                             x, (e1, e2) -> e1.getId() - e2.getId());
                 }
             }
-        } while (posicionABuscar >= 0);
+            if (posicionABuscar > -1) {
+                JOptionPane.showMessageDialog(null,
+                        "El id ya existe",
+                        "Alerta", JOptionPane.WARNING_MESSAGE);
+            }
+        } while (posicionABuscar > -1);
         return id;
     }
 
@@ -706,9 +779,6 @@ public class ListasProductos {
         } while (repetir);
 
         //Añadimos el nuevo producto creado
-        añadirUnElemento(new Comida(id, descripcion,
-                MetodosProductos.elegirSubCategoríaComida(), precio,
-                MetodosProductos.elegirIva(), stock));
     }
 
     //Método para dar de altas nueva bebida
@@ -749,9 +819,6 @@ public class ListasProductos {
         } while (repetir);
 
         //Añadimos el nuevo producto creado
-        añadirUnElemento(new Bebida(id, descripcion,
-                MetodosProductos.elegirSubCategoríaBebida(), precio,
-                MetodosProductos.elegirIva(), stock));
     }
 
     //Método para dar de altas nuevos postres
@@ -792,8 +859,66 @@ public class ListasProductos {
         } while (repetir);
 
         //Añadimos el nuevo producto creado
-        añadirUnElemento(new Postres(id, descripcion, precio,
-                MetodosProductos.elegirIva(), stock));
+    }
+
+    //Método para dar de altas nueva comida
+    //eleccion es para que en el switch del main escoja si es de tipo comida
+    //o de tipo bebida o de tipo postre
+    public void nuevaProducto(String eleccion) {
+        //Inicializamos variables
+        int id = 0;
+        String descripcion = "";
+        double precio = 0;
+        int stock = 0;
+        //esta variable es para que se repita el proceso hasta que
+        //ponga bien los datos
+        boolean repetir;
+
+        //Bucle para que se repita el programa hasta ponga bien los datos
+        do {
+            //Controlamos las excepciones
+            try {
+                id = comprobarIdUnicoProducto();
+
+                //Añadimos al nuevo producto nueva descripción
+                descripcion = JOptionPane.showInputDialog(
+                        "Introduce nueva descripción de " + eleccion);
+
+                //Añadimos un precio al producto nuevo
+                precio = Double.parseDouble(JOptionPane.showInputDialog(
+                        "Introduce un precio a la nueva " + eleccion));
+
+                //Añadimos un stock al nuevo producto
+                stock = Integer.parseInt(JOptionPane.showInputDialog(
+                        "Introduce el stock"));
+                repetir = false;
+            } catch (NumberFormatException j) {
+                JOptionPane.showMessageDialog(null,
+                        "Debes rellenar los campos bien", "Aviso",
+                        JOptionPane.WARNING_MESSAGE, null);
+                repetir = true;
+            }
+        } while (repetir);
+
+        //Añadimos el nuevo producto creado
+        //hacemos un switch para si la eleccion es de tipo comida, bebida o postre
+        //se guarde el tipo correctamente
+        switch (eleccion) {
+            case "Comida" -> {
+                añadirUnElemento(new Comida(id, descripcion,
+                        Comida.elegirSubCategoríaComida(),
+                        precio, Productos.elegirIva(), stock));
+            }
+            case "Bebida" -> {
+                añadirUnElemento(new Bebida(id, descripcion,
+                        Bebida.elegirSubCategoríaBebida(), precio,
+                        Productos.elegirIva(), stock));
+            }
+            case "Postres" -> {
+                añadirUnElemento(new Postres(id, descripcion, precio,
+                        Productos.elegirIva(), stock));
+            }
+        }
     }
 
     //Método para borrar productos existentes
@@ -806,19 +931,19 @@ public class ListasProductos {
                     //llamamos al metodo elegirComida para que nos muestre cuál
                     //quiere borrar
                     Comida comidaABorrar = elegirComida();
-                    this.listaComida.remove(comidaABorrar);
+                    this.listaProductos.remove(comidaABorrar);
                 }
                 case "Bebida" -> {
                     //llamamos al metodo elegirComida para que nos muestre cuál
                     //quiere borrar
                     Bebida bebidaABorrar = elegirBebida();
-                    this.listaBebida.remove(bebidaABorrar);
+                    this.listaProductos.remove(bebidaABorrar);
                 }
                 case "Postres" -> {
                     //llamamos al metodo elegirComida para que nos muestre cuál
                     //quiere borrar
                     Postres postreABorrar = elegirPostres();
-                    this.listaPostres.remove(postreABorrar);
+                    this.listaProductos.remove(postreABorrar);
                 }
                 case "salir" -> {
                     retroceso = true;
@@ -900,20 +1025,38 @@ public class ListasProductos {
         return cantidad;
     }
 
+    //Método para preguntar qué cantidad quiere de Postres
+    public int preguntarPorCantidadProductoCarrito(Productos prodcutos) {
+        boolean okey = false;
+        int cantidad = 0;
+        do {
+            try {
+                cantidad = Integer.parseInt(JOptionPane.showInputDialog(
+                        "¿Qué cantidad quieres añadir?"));
+                if (cantidad > 0 && cantidad <= prodcutos.getStock()) {
+                    okey = true;
+                    prodcutos.setStock(prodcutos.getStock() - cantidad);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Los siento, nuestro stock es de " + prodcutos.getStock());
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,
+                        "Error al introducir la cantidad" + e);
+            }
+        } while (!okey);
+        return cantidad;
+    }
+
     //Método para mostrar lista de carrito
     public void verCarrito() {
 
         StringBuilder sb = new StringBuilder();
         sb.append("                    CARRITO\n");
         sb.append("\n");
-        for (int i = 0; i < listaComida.size(); i++) {
-            sb.append("Producto: ").append(listaComida.get(i).getDescripcion()).append(" precio ").append(listaComida.get(i).getPrecio()).append(" € ").append(" x ").append(listaComida.get(i).getCantidaPpedida()).append("\n");
-        }
-        for (int i = 0; i < listaBebida.size(); i++) {
-            sb.append("Producto: ").append(listaBebida.get(i).getDescripcion()).append(" precio ").append(listaBebida.get(i).getPrecio()).append(" € ").append(" x ").append(listaBebida.get(i).getCantidadPedida()).append("\n");
-        }
-        for (int i = 0; i < listaPostres.size(); i++) {
-            sb.append("Producto: ").append(listaPostres.get(i).getDescripcion()).append(" precio ").append(listaPostres.get(i).getPrecio()).append(" € ").append(" x ").append(listaPostres.get(i).getCantidadPedida()).append("\n");
+        for (int i = 0; i < listaProductos.size(); i++) {
+            sb.append("Producto: ").append(listaProductos.get(i).getDescripcion()).append(" precio ").append(listaProductos.get(i).getPrecio()).append(" € ").append(" x ").append(listaProductos.get(i).getCantidadPedida()).append("\n");
         }
         sb.append("\n");
         sb.append(totalCarrito());
@@ -925,28 +1068,12 @@ public class ListasProductos {
     public String totalCarrito() {
         double total = 0;
         double iva = 0;
-        for (int i = 0; i < listaComida.size(); i++) {
-            double precio = listaComida.get(i).getPrecio();
-            int cantidad = listaComida.get(i).getCantidaPpedida();
+        for (int i = 0; i < listaProductos.size(); i++) {
+            double precio = listaProductos.get(i).getPrecio();
+            int cantidad = listaProductos.get(i).getCantidadPedida();
             double importe = precio * cantidad;
             total += importe;
-            double IVA = listaComida.get(i).getIva().getCantidadIva();
-            iva += precio * IVA;
-        }
-        for (int i = 0; i < listaBebida.size(); i++) {
-            double precio = listaBebida.get(i).getPrecio();
-            int cantidad = listaBebida.get(i).getCantidadPedida();
-            double importe = precio * cantidad;
-            total += importe;
-            double IVA = listaBebida.get(i).getIva().getCantidadIva();
-            iva += precio * IVA;
-        }
-        for (int i = 0; i < listaPostres.size(); i++) {
-            double precio = listaPostres.get(i).getPrecio();
-            int cantidad = listaPostres.get(i).getCantidadPedida();
-            double importe = precio * cantidad;
-            total += importe;
-            double IVA = listaPostres.get(i).getIva().getCantidadIva();
+            double IVA = listaProductos.get(i).getIva().getCantidadIva();
             iva += precio * IVA;
         }
         String texto = """

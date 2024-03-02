@@ -144,15 +144,11 @@ public class MetodosTPV {
     //Método borrar carrito
     public static void borrarCarrito(ListasProductos carrito) {
         //Si no hay nada en el carrito no hace nada
-        if (carrito.getListaComida().isEmpty()
-                && carrito.getListaBebida().isEmpty()
-                && carrito.getListaPostres().isEmpty()) {
+        if (carrito.getListaProductos().isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "No tienes nada en Carrito");
         } else {
-            carrito.getListaComida().clear(); //Borra los elementos
-            carrito.getListaBebida().clear();//Borra los elementos
-            carrito.getListaPostres().clear();//Borra los elementos
+            carrito.getListaProductos().clear();//Borra los productos
             JOptionPane.showMessageDialog(null,
                     "Ahora el Carrito esta vacío");
         }
@@ -168,9 +164,7 @@ public class MetodosTPV {
     //Método borrar carrito despues de comprar
     public static void vaciarCarrito(ListasProductos carrito) {
         //Limpia todas las listas que contiene mi carrito
-        carrito.getListaComida().clear(); //Borra los elementos
-        carrito.getListaBebida().clear();//Borra los elementos
-        carrito.getListaPostres().clear();//Borra los elementos
+        carrito.getListaProductos().clear(); //Borra los elementos
 
     }
 }

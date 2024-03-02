@@ -16,7 +16,7 @@ final public class Comida extends Productos{
     private SubCategoriaComida subComida;
     
     //insertamos constructor parametrizado y sin parametrizar
-    public Comida(SubCategoriaComida subComida, int id, String descripcion, double precio, Iva iva, int stock) {
+    public Comida(int id, String descripcion, SubCategoriaComida subComida, double precio, Iva iva, int stock) {
         super(id, descripcion, precio, iva, stock);
         this.subComida = subComida;
     }
