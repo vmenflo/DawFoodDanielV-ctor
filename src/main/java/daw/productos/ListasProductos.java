@@ -40,7 +40,7 @@ public class ListasProductos {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ListasProductos{");
+        sb.append("ListasProductos{ ");
         sb.append("listaProductos=").append(listaProductos);
         sb.append('}');
         return sb.toString();
