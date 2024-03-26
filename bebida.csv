@@ -1,0 +1,14 @@
+﻿id;descripcion;tipo;precio;iva;stock
+1;Coca-Cola;refrescos;1.5;0.21;50
+2;Fanta-Limon;refrescos;1.6;0.21;50
+3;Fanta-Naranja;refrescos;1.7;0.21;50
+4;Pepsi;refrescos;1.8;0.21;50
+5;Cruzcampo;cerveza;3.5;0.21;50
+6;San Miguel;cerveza;3.6;0.21;50
+7;Estrella;cerveza;3.7;0.21;50
+8;IPA;cerveza;3.8;0.21;50
+9;Agua;Otros;2.5;0.1;50
+10;Zumo Piña;Otros;2.6;0.1;50
+11;Zumo Naranja;Otros;2.7;0.1;50
+12;Café;Otros;2.8;0.1;50
+13;Expresso;Otros;2.9;0.1;50

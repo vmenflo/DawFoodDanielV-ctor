@@ -117,7 +117,7 @@ public class ListasProductos {
 
         //Depende de la subcategoría se ejecutará una de estas lógicas
         switch (elegirSub) {
-            case AGUA -> {
+            case REFRESCOS -> {
                 //Bucle para que vaya añadiendo las bebidas de subcategoria agua
                 for (int i = 0; i < listaProductos.size(); i++) {
                     //con en el instanceof miramos que el producto en concreto
@@ -125,7 +125,7 @@ public class ListasProductos {
                     if (listaProductos.get(i) instanceof Bebida) {
                         //con esta lógica conseguimos que se vaya añadiendo
                         //todos los elementos que tengan una subcategoria de agua
-                        if (((Bebida) listaProductos.get(i)).getSubBebida().equals(SubCategoriaBebida.AGUA)) {
+                        if (((Bebida) listaProductos.get(i)).getSubBebida().equals(SubCategoriaBebida.REFRESCOS)) {
                             bebidaAMostrar.add((Bebida) listaProductos.get(i));
                         }
                     }
@@ -155,7 +155,7 @@ public class ListasProductos {
                 }
 
             }
-            case ZUMONARANZA -> {
+            case OTROS -> {
                 //Bucle para que vaya añadiendo las Bebidas de subcategoria zumo de naranja
                 for (int i = 0; i < listaProductos.size(); i++) {
                     //con en el instanceof miramos que el producto en concreto
@@ -163,7 +163,7 @@ public class ListasProductos {
                     if (listaProductos.get(i) instanceof Bebida) {
                         //con esta lógica conseguimos que se vaya añadiendo
                         //todos los elementos que tengan una subcategoria de zumo de naranja
-                        if (((Bebida) listaProductos.get(i)).getSubBebida().equals(SubCategoriaBebida.ZUMONARANZA)) {
+                        if (((Bebida) listaProductos.get(i)).getSubBebida().equals(SubCategoriaBebida.OTROS)) {
                             bebidaAMostrar.add((Bebida) listaProductos.get(i));
                         }
                     }

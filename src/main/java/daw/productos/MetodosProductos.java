@@ -59,6 +59,8 @@ public class MetodosProductos {
 //        listaDeProductos.añadirUnElemento(p2);
 //        listaDeProductos.añadirUnElemento(p3);
         LecturaFicheros.generarListaDeComida(listaDeProductos);
+        LecturaFicheros.generarListaDeBebida(listaDeProductos);
+        LecturaFicheros.generarListaDePostre(listaDeProductos);
 
         return listaDeProductos;
     }

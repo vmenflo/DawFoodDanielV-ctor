@@ -9,9 +9,9 @@ package daw.productos;
  * @author daniel
  */
 public enum SubCategoriaBebida {
-    AGUA("Agua"), 
+    REFRESCOS("Refrescos"), 
     CERVEZA("Cerveza"), 
-    ZUMONARANZA("Zumo de naranja");
+    OTROS("Otros");
     
     private String subcategoria;
     

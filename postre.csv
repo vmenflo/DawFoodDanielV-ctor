@@ -1,0 +1,10 @@
+﻿id;descripcion;precio;iva;stock;
+1;MilkShake;4.5;0.21;50;
+2;Gofre Chocolate;5.7;0.21;50;
+3;Donuts;4.7;0.21;50;
+4;Helado de Fresa;4.8;0.21;50;
+5;Helado de coco;4.9;0.21;50;
+6;Brownie;4.10;0.21;50;
+7;Manzana;1.5;0.21;50;
+8;Arroz con leche;2.5;0.21;50;
+9;Tarta de Queso;3.5;0.21;50;
