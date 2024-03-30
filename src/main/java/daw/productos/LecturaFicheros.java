@@ -5,6 +5,7 @@
 package daw.productos;
 
 import daw.Iva;
+import daw.TarjetaBanco;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -120,6 +121,24 @@ public class LecturaFicheros {
                     iva, Integer.parseInt(datos[5]));
             //Añadimos a la lista
             listaProductos.añadirUnElemento(temporal);
+        }
+    }
+    
+    //Método para generar objetos de postre a partir del fichero a la lista productos
+    public static void generarListaTarjetas(ArrayList<TarjetaBanco> lista) {
+        //En esta lista almacenamos los datos del fichero
+        List<String> listaTarjetas = extraerDatos("tarjetas.csv");
+
+        //Bucle para recorrer los datos y convertislos en Personas
+        // y almacenarlso en la lista de personas
+        for (int i = 0; i < listaTarjetas.size() - 1; i++) {
+            //Extraigo los datos y lo almaceno en la array de String
+            String datos[] = listaTarjetas.get(i).split(";");
+
+            //Creamos una variable temporal de Persona para almacenarla
+            TarjetaBanco temporal = new TarjetaBanco(datos[0], datos[1], Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]), Double.parseDouble(datos[5]));
+            //Añadimos a la lista
+            lista.add(temporal);
         }
     }
 }

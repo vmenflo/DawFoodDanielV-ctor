@@ -4,6 +4,7 @@
  */
 package daw;
 
+import daw.productos.LecturaFicheros;
 import daw.productos.ListasProductos;
 import java.time.LocalDate;
 import java.time.Month;
@@ -23,16 +24,9 @@ public class MetodosTarjetaBanco {
         //Creamos array que devolveremos con el método
         ArrayList<TarjetaBanco> tarjetas = new ArrayList<>();
         //Creamos varias tarjetas
-        TarjetaBanco tarjetaUno = new TarjetaBanco("ES98549623584239",
-                "VICTOR MENA FLORES", 2025, 11, 919, 500);
-        TarjetaBanco tarjetaDos = new TarjetaBanco("ES98549623588745",
-                "DANIEL NAVAS BORJA", 2025, 11, 971, 1000);
-        TarjetaBanco tarjetaTres = new TarjetaBanco("ES98549623583652",
-                "RAMÓN TIESO", 2025, 11, 856, 10);
-        //Las añadimos
-        tarjetas.add(tarjetaUno);
-        tarjetas.add(tarjetaDos);
-        tarjetas.add(tarjetaTres);
+        //Llamamos al método para leer desde el fichero tarjetas.csv y rellenamos la lista
+        LecturaFicheros.generarListaTarjetas(tarjetas);
+        
         return tarjetas;
     }
     //Método para pedir al usuario que introduzca datos tarjeta
