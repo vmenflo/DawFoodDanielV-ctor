@@ -276,8 +276,10 @@ public class TPV {
                                                 if (ok) {
                                                     TicketVenta ticket
                                                             = new TicketVenta(carrito);
-
+                                                    //Lo añadimos a la lista ventas
                                                     ventas.add(ticket);
+                                                    //Lo vamos a meter en un fichero que se llame ventas
+                                                    EscrituraFicheros.añadirTicketAlFichero(ticket);
                                                     JOptionPane.showMessageDialog(null, ticket.toString());
                                                     MetodosTPV.vaciarCarrito(carrito);
                                                     break;

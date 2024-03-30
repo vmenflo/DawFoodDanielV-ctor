@@ -1,0 +1,18 @@
+
+{Ticket:  ff1ef39f-8dec-447d-b217-60d90567780f
+Número de pedido=1
+Fecha de la compra=2024-03-30
+Productos comprados:
+Bocata Pollo a la plancha x 1 - 13.5 €/unid
+Bocata Pollo a la plancha x 1 - 13.5 €/unid
+Total importe= 27.0 €
+Total (IVA)= 2.7 €}
+**********************
+{Ticket:  07c72396-6fb9-4033-9155-989260f47792
+Número de pedido=2
+Fecha de la compra=2024-03-30
+Productos comprados:
+MilkShake x 5 - 4.5 €/unid
+Total importe= 22.5 €
+Total (IVA)= 0.45 €}
+**********************

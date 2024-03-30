@@ -124,13 +124,13 @@ public class LecturaFicheros {
         }
     }
     
-    //Método para generar objetos de postre a partir del fichero a la lista productos
+    //Método para generar objetos de tarjeta a partir del fichero a la lista de tarjetas
     public static void generarListaTarjetas(ArrayList<TarjetaBanco> lista) {
         //En esta lista almacenamos los datos del fichero
         List<String> listaTarjetas = extraerDatos("tarjetas.csv");
 
-        //Bucle para recorrer los datos y convertislos en Personas
-        // y almacenarlso en la lista de personas
+        //Bucle para recorrer los datos y convertislos en TarjetasBanco
+        // y almacenarlso en la lista de tarjetas
         for (int i = 0; i < listaTarjetas.size() - 1; i++) {
             //Extraigo los datos y lo almaceno en la array de String
             String datos[] = listaTarjetas.get(i).split(";");
